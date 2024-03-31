@@ -76,7 +76,10 @@ namespace HealthSupportSystem.Controllers
 
         public ActionResult ChangePassword()
         {
-
+            if (Session["UserID"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
             return View();
         }
 
