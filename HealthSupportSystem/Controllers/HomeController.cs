@@ -54,7 +54,45 @@ namespace HealthSupportSystem.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.message = "User Name and Password is incorrect!";
+            user = db.UserTables.Where(u => u.Email == email && u.Password == password && u.IsVerified == false).FirstOrDefault();
+            if (user != null)
+            {
+                ViewBag.Message = "Email Already Registered, Please Enter Profile Details!";
+
+                Session["User"] = user;
+                if (user.UserTypeID == 2) // Doctor
+                {
+                    var doc = db.DoctorTables.Where(u => u.UserID == user.UserID).FirstOrDefault();
+                    if (doc == null)
+                    {
+                        return RedirectToAction("AddDoctor");
+                    }
+                    ViewBag.Message = "Account is Under Review!";
+                }
+                else if (user.UserTypeID == 3) // Lab
+                {
+                    var lab = db.LabTables.Where(u => u.UserID == user.UserID).FirstOrDefault();
+                    if (lab == null)
+                    {
+                        return RedirectToAction("AddLab");
+                    }
+                    return RedirectToAction("AddLab");
+                }
+                else if (user.UserTypeID == 4) // Patient
+                {
+                    var patient = db.PatientTables.Where(u => u.UserID == user.UserID).FirstOrDefault();
+                    if (patient == null)
+                    {
+                        return RedirectToAction("AddPatient");
+                    }
+                    ViewBag.Message = "Account is Under Review!";
+                }
+            }
+            else
+            {
+                ViewBag.message = "User Name and Password is incorrect!";
+            }
+
             LogOut();
             return View("Login");
         }
@@ -156,6 +194,7 @@ namespace HealthSupportSystem.Controllers
                             db.UserTables.Add(user);
                             db.SaveChanges();
 
+                            Session["User"] = user;
 
                             if (user.UserTypeID == 2) // Doctor
                             {
@@ -173,26 +212,50 @@ namespace HealthSupportSystem.Controllers
                             {
                                 ViewBag.Message = "Account is Under Review!";
                             }
-
-                            Session["User"] = user;
-                        }
-                        else
-                        {
-                            ViewBag.Message = "Account is Under Review!";
                         }
                     }
                     else
                     {
-                        ViewBag.Message = "Email Already Registered!";
+                        ViewBag.Message = "Email Already Registered, Please Enter Profile Details!";
+
+                        Session["User"] = finduser;
+                        if (finduser.UserTypeID == 2) // Doctor
+                        {
+                            var doc = db.DoctorTables.Where(u => u.UserID == finduser.UserID).FirstOrDefault();
+                            if (doc == null)
+                            {
+                                return RedirectToAction("AddDoctor");
+                            }
+                            ViewBag.Message = "Account is Under Review!";
+                        }
+                        else if (finduser.UserTypeID == 3) // Lab
+                        {
+                            var lab = db.LabTables.Where(u => u.UserID == finduser.UserID).FirstOrDefault();
+                            if (lab == null)
+                            {
+                                return RedirectToAction("AddLab");
+                            }
+                            return RedirectToAction("AddLab");
+                        }
+                        else if (finduser.UserTypeID == 4) // Patient
+                        {
+                            var patient = db.PatientTables.Where(u => u.UserID == finduser.UserID).FirstOrDefault();
+                            if (patient == null)
+                            {
+                                return RedirectToAction("AddPatient");
+                            }
+                            ViewBag.Message = "Account is Under Review!";
+                        }
                     }
                 }
-                else { }
+            }
+            else
+            {
+                ViewBag.Message = "Please Provide Correct Details!";
             }
 
-            ViewBag.Message = "Please Provide Correct Details!";
             ViewBag.UserTypeID = new SelectList(db.UserTypeTables.Where(u => u.UserTypeID != 1/* && u.UserTypeID != 3*/), "UserTypeID", "UserType", "0");
-
-            return View();
+            return View("CreateUser");
         }
 
         public ActionResult AddDoctor()
@@ -216,7 +279,7 @@ namespace HealthSupportSystem.Controllers
                     {
                         db.DoctorTables.Add(doctor);
                         db.SaveChanges();
-                        if (doctor.LogoFile != null)
+                        if (doctor.LogoFile != null && doctor.DocumentFile != null)
                         {
                             var folder = "~/Content/DoctorImages";
                             var file = string.Format("{0}.png", doctor.DoctorID);
@@ -225,26 +288,22 @@ namespace HealthSupportSystem.Controllers
                             {
                                 var pic = string.Format("{0}/{1}", folder, file);
                                 doctor.Photo = pic;
+                            }
+
+                            var docfolder = "~/Content/DoctorDocuments";
+                            var docfile = string.Format("{0}.png", doctor.DoctorID);
+                            var docresponse = FileHelpers.UploadDocument(doctor.DocumentFile, docfolder, docfile);
+                            if (docresponse)
+                            {
+                                var pic = string.Format("{0}/{1}", docfolder, docfile);
+                                doctor.SupportiveDocument = pic;
+                            }
+
+                            if (doctor.LogoFile != null && doctor.DocumentFile != null)
+                            {
                                 db.Entry(doctor).State = EntityState.Modified;
                                 db.SaveChanges();
                                 return View("UnderReview");
-                            }
-                        }
-
-                        // Upload Supportive Document
-                        if (doctor.DocumentFile != null)
-                        {
-                            var docFolder = "~/Content/DoctorDocuments";
-                            // Determine the file extension based on the uploaded file type
-                            var docExtension = Path.GetExtension(doctor.DocumentFile.FileName);
-                            var docFileName = $"{doctor.DoctorID}_document{docExtension}";
-                            var docResponse = FileHelpers.UploadDocument(doctor.DocumentFile, docFolder, docFileName);
-                            if (docResponse)
-                            {
-                                var docPath = $"{docFolder}/{docFileName}";
-                                doctor.SupportiveDocument = docPath;
-                                db.Entry(doctor).State = EntityState.Modified;
-                                db.SaveChanges();
                             }
                         }
                     }
@@ -347,6 +406,7 @@ namespace HealthSupportSystem.Controllers
                                 db.SaveChanges();
                             }
                         }
+                        return RedirectToAction("Login");
                     }
                     else
                     {

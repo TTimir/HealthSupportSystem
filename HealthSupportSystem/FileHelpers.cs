@@ -38,9 +38,9 @@ namespace HealthSupportSystem
             }
         }
 
-        public static bool UploadDocument(HttpPostedFileBase file, string folder, string name)
+        public static bool UploadDocument(HttpPostedFileBase file, string docfolder, string name)
         {
-            if (file == null || string.IsNullOrEmpty(name) || string.IsNullOrWhiteSpace(folder))
+            if (file == null || string.IsNullOrEmpty(name) || string.IsNullOrWhiteSpace(docfolder))
             {
                 return false;
             }
@@ -51,12 +51,9 @@ namespace HealthSupportSystem
 
                 if (file != null)
                 {
-                    path = Path.Combine(HttpContext.Current.Server.MapPath(folder), name);
+                    path = Path.Combine(HttpContext.Current.Server.MapPath(docfolder), name);
+                    file.SaveAs(path); // Save the file directly without processing
 
-                    WebImage img = new WebImage(file.InputStream);
-                    if (img.Width > 300)
-                        img.Resize(300, 300);
-                    img.Save(path);
                 }
 
                 return true;
@@ -65,6 +62,7 @@ namespace HealthSupportSystem
             {
                 return false;
             }
+
         }
     }
 }
