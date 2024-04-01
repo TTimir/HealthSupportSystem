@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -16,10 +17,6 @@ namespace HealthSupportSystem.Controllers
 
         public ActionResult StartTemplate()
         {
-            if(string.IsNullOrEmpty(Convert.ToString(Session["UserName"]))) 
-            {
-                return RedirectToAction("Login", "Home"); 
-            }
             return View();
         }
 
@@ -43,7 +40,7 @@ namespace HealthSupportSystem.Controllers
             }
 
             var user = db.UserTables.Where(u => u.Email == email && u.Password == password && u.IsVerified == true).FirstOrDefault();
-            
+
             if (user != null)
             {
                 Session["UserID"] = user.UserID;
@@ -57,7 +54,7 @@ namespace HealthSupportSystem.Controllers
                 return RedirectToAction("Index");
             }
 
-
+            ViewBag.message = "User Name and Password is incorrect!";
             LogOut();
             return View("Login");
         }
@@ -116,6 +113,258 @@ namespace HealthSupportSystem.Controllers
                 return View("ChangePassword");
             }
 
+            return View();
+        }
+
+        public ActionResult CreateUser()
+        {
+            ViewBag.UserTypeID = new SelectList(db.UserTypeTables.Where(u => u.UserTypeID != 1/* && u.UserTypeID != 3*/), "UserTypeID", "UserType", "0");
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult CreateUser(UserTable user)
+        {
+            if (user != null)
+            {
+                if (ModelState.IsValid)
+                {
+                    var finduser = db.UserTables.Where(u => u.Email == user.Email).FirstOrDefault();
+                    if (finduser == null)
+                    {
+                        finduser = db.UserTables.Where(u => u.Email == user.Email && u.IsVerified == false).FirstOrDefault();
+                        if (finduser == null)
+                        {
+                            if (user.UserTypeID == 2) // Doctor
+                            {
+                                user.IsVerified = false;
+                            }
+                            else if (user.UserTypeID == 3) // Lab
+                            {
+                                user.IsVerified = false;
+                            }
+                            else if (user.UserTypeID == 4) // Patient
+                            {
+                                user.IsVerified = true;
+                            }
+                            else if (user.UserTypeID == 1) // Admin
+                            {
+                                user.IsVerified = false;
+                            }
+
+                            db.UserTables.Add(user);
+                            db.SaveChanges();
+
+
+                            if (user.UserTypeID == 2) // Doctor
+                            {
+                                return RedirectToAction("AddDoctor");
+                            }
+                            else if (user.UserTypeID == 3) // Lab
+                            {
+                                return RedirectToAction("AddLab");
+                            }
+                            else if (user.UserTypeID == 4) // Patient
+                            {
+                                return RedirectToAction("AddPatient");
+                            }
+                            else if (user.UserTypeID == 1) // Admin
+                            {
+                                ViewBag.Message = "Account is Under Review!";
+                            }
+
+                            Session["User"] = user;
+                        }
+                        else
+                        {
+                            ViewBag.Message = "Account is Under Review!";
+                        }
+                    }
+                    else
+                    {
+                        ViewBag.Message = "Email Already Registered!";
+                    }
+                }
+                else { }
+            }
+
+            ViewBag.Message = "Please Provide Correct Details!";
+            ViewBag.UserTypeID = new SelectList(db.UserTypeTables.Where(u => u.UserTypeID != 1/* && u.UserTypeID != 3*/), "UserTypeID", "UserType", "0");
+
+            return View();
+        }
+
+        public ActionResult AddDoctor()
+        {
+            ViewBag.GenderID = new SelectList(db.GenderTables.ToList(), "GenderID", "Name", "0");
+            ViewBag.AccountTypeID = new SelectList(db.AccountTypeTables.ToList(), "AccountTypeID", "Name", "0");
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddDoctor(DoctorTable doctor)
+        {
+            if (Session["User"] != null)
+            {
+                var user = (UserTable)Session["User"];
+                doctor.UserID = user.UserID;
+                if (ModelState.IsValid)
+                {
+                    var finddoctor = db.DoctorTables.Where(d => d.EmailAddress == doctor.EmailAddress).FirstOrDefault();
+                    if (finddoctor == null)
+                    {
+                        db.DoctorTables.Add(doctor);
+                        db.SaveChanges();
+                        if (doctor.LogoFile != null)
+                        {
+                            var folder = "~/Content/DoctorImages";
+                            var file = string.Format("{0}.png", doctor.DoctorID);
+                            var response = FileHelpers.UploadPhoto(doctor.LogoFile, folder, file);
+                            if (response)
+                            {
+                                var pic = string.Format("{0}/{1}", folder, file);
+                                doctor.Photo = pic;
+                                db.Entry(doctor).State = EntityState.Modified;
+                                db.SaveChanges();
+                                return View("UnderReview");
+                            }
+                        }
+
+                        // Upload Supportive Document
+                        if (doctor.DocumentFile != null)
+                        {
+                            var docFolder = "~/Content/DoctorDocuments";
+                            // Determine the file extension based on the uploaded file type
+                            var docExtension = Path.GetExtension(doctor.DocumentFile.FileName);
+                            var docFileName = $"{doctor.DoctorID}_document{docExtension}";
+                            var docResponse = FileHelpers.UploadDocument(doctor.DocumentFile, docFolder, docFileName);
+                            if (docResponse)
+                            {
+                                var docPath = $"{docFolder}/{docFileName}";
+                                doctor.SupportiveDocument = docPath;
+                                db.Entry(doctor).State = EntityState.Modified;
+                                db.SaveChanges();
+                            }
+                        }
+                    }
+                    else
+                    {
+                        ViewBag.Message = "Email Already Registered!";
+                    }
+                }
+            }
+            else
+            {
+                return RedirectToAction("Login");
+            }
+
+            ViewBag.GenderID = new SelectList(db.GenderTables.ToList(), "GenderID", "Name", doctor.GenderID);
+            ViewBag.AccountTypeID = new SelectList(db.AccountTypeTables.ToList(), "AccountTypeID", "Name", doctor.AccountTypeID);
+            return View(doctor);
+        }
+
+        public ActionResult AddLab()
+        {
+            ViewBag.AccountTypeID = new SelectList(db.AccountTypeTables.ToList(), "AccountTypeID", "Name", "0");
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddLab(LabTable lab)
+        {
+            if (Session["User"] != null)
+            {
+                var user = (UserTable)Session["User"];
+                lab.UserID = user.UserID;
+                if (ModelState.IsValid)
+                {
+                    var findlab = db.LabTables.Where(d => d.EmailAddress == lab.EmailAddress).FirstOrDefault();
+                    if (findlab == null)
+                    {
+                        db.LabTables.Add(lab);
+                        db.SaveChanges();
+                        if (lab.LogoFile != null)
+                        {
+                            var folder = "~/Content/LabImages";
+                            var file = string.Format("{0}.png", lab.LabID);
+                            var response = FileHelpers.UploadPhoto(lab.LogoFile, folder, file);
+                            if (response)
+                            {
+                                var pic = string.Format("{0}/{1}", folder, file);
+                                lab.Photo = pic;
+                                db.Entry(lab).State = EntityState.Modified;
+                                db.SaveChanges();
+                                return View("UnderReview");
+                            }
+                        }
+                    }
+                    else
+                    {
+                        ViewBag.Message = "Email Already Registered!";
+                    }
+                }
+            }
+            else
+            {
+                return RedirectToAction("Login");
+            }
+
+            ViewBag.AccountTypeID = new SelectList(db.AccountTypeTables.ToList(), "AccountTypeID", "Name", lab.AccountTypeID);
+            return View(lab);
+        }
+
+        public ActionResult AddPatient()
+        {
+            ViewBag.AccountTypeID = new SelectList(db.AccountTypeTables.ToList(), "AccountTypeID", "Name", "0");
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddPatient(PatientTable patient)
+        {
+            if (Session["User"] != null)
+            {
+                var user = (UserTable)Session["User"];
+                patient.UserID = user.UserID;
+                if (ModelState.IsValid)
+                {
+                    var findpatient = db.PatientTables.Where(d => d.Email == patient.Email).FirstOrDefault();
+                    if (findpatient == null)
+                    {
+                        db.PatientTables.Add(patient);
+                        db.SaveChanges();
+                        if (patient.LogoFile != null)
+                        {
+                            var folder = "~/Content/PatientImages";
+                            var file = string.Format("{0}.png", patient.PatientID);
+                            var response = FileHelpers.UploadPhoto(patient.LogoFile, folder, file);
+                            if (response)
+                            {
+                                var pic = string.Format("{0}/{1}", folder, file);
+                                patient.Photo = pic;
+                                db.Entry(patient).State = EntityState.Modified;
+                                db.SaveChanges();
+                            }
+                        }
+                    }
+                    else
+                    {
+                        ViewBag.Message = "Email Already Registered!";
+                    }
+                }
+            }
+            else
+            {
+                return RedirectToAction("Login");
+            }
+
+            ViewBag.AccountTypeID = new SelectList(db.AccountTypeTables.ToList(), "AccountTypeID", "Name", patient.GenderID);
+            return View();
+        }
+
+        public ActionResult UnderReview()
+        {
             return View();
         }
 

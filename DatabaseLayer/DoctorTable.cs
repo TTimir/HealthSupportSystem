@@ -12,6 +12,8 @@ namespace DatabaseLayer
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Web;
 
     public partial class DoctorTable
     {
@@ -52,9 +54,13 @@ namespace DatabaseLayer
         [Required(ErrorMessage = "*Required!")]
         public string AccountNo { get; set; }
         [Required(ErrorMessage = "*Required!")]
-        public Nullable<int> GanderID { get; set; }
+        public Nullable<int> GenderID { get; set; }
         public string SupportiveDocument { get; set; }
-    
+        [NotMapped]
+        public HttpPostedFileBase LogoFile { get; set; }
+        [NotMapped]
+        public HttpPostedFileBase DocumentFile { get; set; }
+
         public virtual AccountTypeTable AccountTypeTable { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DoctorAppointTable> DoctorAppointTables { get; set; }

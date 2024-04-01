@@ -130,6 +130,7 @@
     <Compile Include="Controllers\AccountTypeTablesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserTypeTablesController.cs" />
+    <Compile Include="FileHelpers.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -423,6 +424,8 @@
     <Content Include="Content\LoginTemplate\vendor\select2\select2.js" />
     <Content Include="Content\LoginTemplate\vendor\select2\select2.min.css" />
     <Content Include="Content\LoginTemplate\vendor\select2\select2.min.js" />
+    <Content Include="Content\toastr.css" />
+    <Content Include="Content\toastr.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -666,6 +669,8 @@
     <Content Include="Content\AdminTemplate\fonts\fontawesome-webfont.woff" />
     <Content Include="Content\AdminTemplate\fonts\FontAwesome.otf" />
     <Content Include="Content\AdminTemplate\img\Thumbs.db" />
+    <Content Include="Content\toastr.scss" />
+    <Content Include="Content\toastr.less" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -677,6 +682,8 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\toastr.js" />
+    <Content Include="Scripts\toastr.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -704,9 +711,18 @@
     <Content Include="Views\AccountTypeTables\Edit.cshtml" />
     <Content Include="Views\AccountTypeTables\Index.cshtml" />
     <Content Include="Views\Home\ChangePassword.cshtml" />
+    <Content Include="Views\Home\CreateUser.cshtml" />
+    <Content Include="Views\Home\AddDoctor.cshtml" />
+    <Content Include="Views\Home\AddLab.cshtml" />
+    <Content Include="Views\Home\AddPatient.cshtml" />
+    <Content Include="Views\Home\UnderReview.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\DoctorDocuments\" />
+    <Folder Include="Content\DoctorImages\" />
+    <Folder Include="Content\LabImages\" />
+    <Folder Include="Content\PatientImages\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

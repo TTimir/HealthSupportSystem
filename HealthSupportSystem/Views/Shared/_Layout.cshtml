@@ -30,7 +30,6 @@
     <!-- Style -->
     <link rel="stylesheet" href="~/Content/DashboardTemplate/css/style.css">
 
-    <title>Sidebar #1</title>
 </head>
 <body>
 
@@ -50,30 +49,15 @@
                 <span class="logo-text">HealMate</span>
             </div>
 
-            <div class="search-form">
-                <form action="#">
-                    <span class="wrap-icon">
-                        <span class="icon-search2"></span>
-                    </span>
-                    <input type="text" class="form-control" placeholder="Search...">
-                </form>
-            </div>
             <div class="nav-menu">
                 <ul>
                     <li style="background-color: #0051D2; color: #fff;" class="nav-welcome"><a href="#!welcome" class="d-flex align-items-center"><span class="bi bi-emoji-smile mr-3"></span><span class="menu-text">Welcome</span></a></li>
+            </ul></div>
+            <div class="nav-menu">
+                <ul>
                     @*<li class="active"> @Html.ActionLink("Account Type", "Index", "AccountTypeTables", null, null) </li>*@
-                    <li class="active">
-                        <a href="@Url.Action("Index", "AccountTypeTables")" class="d-flex align-items-center">
-                            <span class="wrap-icon icon-home2 mr-3"></span>
-                            <span class="menu-text">Account Type</span>
-                        </a>
-                    </li>
-                    <li class="active">
-                        <a href="@Url.Action("ChangePassword", "Home")" class="d-flex align-items-center">
-                            <span class="wrap-icon icon-home2 mr-3"></span>
-                            <span class="menu-text">Change Password</span>
-                        </a>
-                    </li>
+                    <li><a href="@Url.Action("Index", "AccountTypeTables")" class="d-flex align-items-center"><span class="wrap-icon icon-home2 mr-3"></span><span class="menu-text">Account</span></a></li>
+                    <li><a href="@Url.Action("ChangePassword", "Home")" class="d-flex align-items-center"><span class="wrap-icon icon-home2 mr-3"></span><span class="menu-text">Change Password</span></a></li>
 
 
                     <li><a href="#" class="d-flex align-items-center"><span class="wrap-icon icon-videocam mr-3"></span><span class="menu-text">Videos</span></a></li>
@@ -94,11 +78,9 @@
                     <div id="main-wrapper">
                         <div class="main-content">
                             <section id="welcome">
-                                <hr />
                                 <div class="content-header">
                                     <h1>HealMate Health Solution</h1>
                                 </div>
-                                <hr />
                                 @RenderBody()
                             </section>
                         </div>

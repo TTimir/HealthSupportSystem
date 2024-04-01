@@ -46,7 +46,7 @@
           <Property Name="Photo" Type="nvarchar" MaxLength="300" />
           <Property Name="AccountTypeID" Type="int" Nullable="false" />
           <Property Name="AccountNo" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="GanderID" Type="int" />
+          <Property Name="GenderID" Type="int" />
           <Property Name="SupportiveDocument" Type="nvarchar" MaxLength="300" />
         </EntityType>
         <EntityType Name="DoctorTimeSlotTable">
@@ -237,7 +237,7 @@
               <PropertyRef Name="GenderID" />
             </Principal>
             <Dependent Role="DoctorTable">
-              <PropertyRef Name="GanderID" />
+              <PropertyRef Name="GenderID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -600,7 +600,7 @@
           <Property Name="Photo" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
           <Property Name="AccountTypeID" Type="Int32" Nullable="false" />
           <Property Name="AccountNo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="GanderID" Type="Int32" />
+          <Property Name="GenderID" Type="Int32" />
           <NavigationProperty Name="AccountTypeTable" Relationship="Self.FK_DoctorTable_AccountTypeTable" FromRole="DoctorTable" ToRole="AccountTypeTable" />
           <NavigationProperty Name="DoctorAppointTables" Relationship="Self.FK_DoctorAppointTable_DoctorTable" FromRole="DoctorTable" ToRole="DoctorAppointTable" />
           <NavigationProperty Name="GenderTable" Relationship="Self.FK_DoctorTable_GenderTable" FromRole="DoctorTable" ToRole="GenderTable" />
@@ -842,7 +842,7 @@
               <PropertyRef Name="GenderID" />
             </Principal>
             <Dependent Role="DoctorTable">
-              <PropertyRef Name="GanderID" />
+              <PropertyRef Name="GenderID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1192,7 +1192,7 @@
                 <ScalarProperty Name="Photo" ColumnName="Photo" />
                 <ScalarProperty Name="AccountTypeID" ColumnName="AccountTypeID" />
                 <ScalarProperty Name="AccountNo" ColumnName="AccountNo" />
-                <ScalarProperty Name="GanderID" ColumnName="GanderID" />
+                <ScalarProperty Name="GenderID" ColumnName="GenderID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

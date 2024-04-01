@@ -12,6 +12,8 @@ namespace DatabaseLayer
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Web;
 
     public partial class LabTable
     {
@@ -45,7 +47,9 @@ namespace DatabaseLayer
         public int AccountTypeID { get; set; }
         [Required(ErrorMessage = "*Required!")]
         public string AccountNo { get; set; }
-    
+        [NotMapped]
+        public HttpPostedFileBase LogoFile { get; set; }
+
         public virtual AccountTypeTable AccountTypeTable { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LabAppointTable> LabAppointTables { get; set; }

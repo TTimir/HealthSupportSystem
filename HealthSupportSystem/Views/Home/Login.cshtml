@@ -45,7 +45,7 @@
                         Login to continue
                     </span>
 
-
+                    <h2><p class="text-danger">@ViewBag.message</p></h2>
                     <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
                         <input class="input100" type="text" name="email" id="email">
                         <span class="focus-input100"></span>
@@ -69,7 +69,7 @@
 
                         <div>
                             <a href="#" class="txt1">
-                                Forgot Password?
+                                Lost your password?
                             </a>
                         </div>
                     </div>
@@ -84,7 +84,7 @@
 
                     <div class="text-center p-t-46 p-b-20">
                         <span class="txt2">
-                            or Create Account
+                            or @Html.ActionLink("Create Account", "CreateUser", "Home")
                         </span>
                     </div>
 
