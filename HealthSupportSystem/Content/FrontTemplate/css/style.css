@@ -388,7 +388,7 @@ ul {
   top: 80px; }
 
 .feature-section {
-  background: url(../img/banner/pattern_bg.jpg) no-repeat center;
+  background: url(../img/banner/pattern_bg_2.png) no-repeat center;
   background-size: cover;
   padding: 60px 0; }
   @media (max-width: 767px) {
@@ -442,7 +442,7 @@ ul {
 /* 5. Banner */
 .banner-area {
   min-height: 800px;
-  background-image: url("../img/banner/home-banner.jpg");
+  background-image: url("../img/banner/home-banner-2.png");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -2988,7 +2988,7 @@ h6 {
 ============================================================================================ */
 .testimonial {
   background: #f7f7f7;
-  background-image: url("../img/background/bg_2.png");
+  background-image: url("../img/background/bg_4.png");
   background-size: cover;
   padding: 460px 0 95px 0;
   position: relative;
@@ -3114,7 +3114,7 @@ h6 {
 ============================================================================================ */
 .hotline-area {
   color: #fff;
-  background-image: url("../img/background/bg1.jpg");
+  background-image: url("../img/background/bg2.png");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -3246,13 +3246,14 @@ h6 {
 ============================================================================================ */
 .about-area {
   background: #f7f7f7;
-  background-image: url(../img/background/bg_1.png);
+  background-image: url(../img/background/bg_3.png);
   background-size: cover;
   background-repeat: no-repeat;
   position: relative;
   padding-top: 400px;
   padding-bottom: 110px;
-  margin-top: -180px; }
+  margin-top: -180px; 
+}
   @media (max-width: 991px) {
     .about-area {
       padding-top: 250px; } }
@@ -3262,7 +3263,7 @@ h6 {
     left: 0;
     width: 50%;
     top: 0;
-    background: url(../img/banner/about1.png);
+    background: url(../img/banner/about3.png);
     backgroundsize: auto;
     z-index: 11;
     height: 100%;

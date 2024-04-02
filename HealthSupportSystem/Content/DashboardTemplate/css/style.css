@@ -93,10 +93,10 @@ aside {
       width: 100%;
       float: left; }
       aside .side-inner .logo-wrap .logo {
-        width: 50px;
+        width: 70px;
         float: left;
         height: 50px;
-        background: #007bff;
+        /*background: #007bff;*/
         border-radius: 50%;
         position: relative;
         -webkit-transition: .3s margin ease;
@@ -116,7 +116,7 @@ aside {
           transform: translate(-50%, -50%); }
       aside .side-inner .logo-wrap .logo-text {
         position: absolute;
-        top: 10px;
+        top: 24px;
         font-size: 20px;
         margin-left: 10px;
         -webkit-transition: .3s all ease;
