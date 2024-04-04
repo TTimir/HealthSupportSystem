@@ -1,0 +1,90 @@
+﻿@model IEnumerable<DatabaseLayer.LabTable>
+
+@{
+    ViewBag.Title = "Labs";
+}
+
+<h2>All Labs</h2>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <img src="https://cdn-icons-png.flaticon.com/128/6998/6998021.png" alt="Lab Logo" style="float:left; margin-right: 10px; height: 52px; width: 52px;">
+        <input type="text" id="search" name="search" class="form-control col-md-3" style="float:right;" placeholder="🔍 Search here" />
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-hover" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>
+                            Lab
+                        </th>
+                        <th>
+                            Photo
+                        </th>
+                        <th>
+                            Contact No
+                        </th>
+                        <th>
+                            Phone No
+                        </th>
+                        <th>
+                            Email Address
+                        </th>
+                        <th>
+                            About Lab
+                        </th>
+                        <th>Action's</th>
+                    </tr>
+                </thead>
+                <tbody id="searchValue">
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                @{ if (!string.IsNullOrEmpty(item.Photo))
+                                    {
+                                        <img src="@Url.Content(item.Photo)" alt="Image" style="width:50px;height:50px;max-width:100%;height:auto;" />
+                                    }
+                                }
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ContactNo)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PhoneNo)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.EmailAddress)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.AboutLab)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Appointment", "LabAppointement", new { id = item.LabID }, new { @class = "genric-btn primary" })
+                                @*@Html.ActionLink("Details", "Details", new { id=item.LabID }) |
+                                    @Html.ActionLink("Delete", "Delete", new { id=item.LabID })*@
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#search").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("#searchValue tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+            });
+        });
+    });
+</script>

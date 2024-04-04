@@ -128,7 +128,13 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountTypeTablesController.cs" />
+    <Compile Include="Controllers\DoctorTimeSlotTablesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LabAppointmentController.cs" />
+    <Compile Include="Controllers\LabSettingController.cs" />
+    <Compile Include="Controllers\LabTimeSlotTablesController.cs" />
+    <Compile Include="Controllers\PatientAppointmentController.cs" />
+    <Compile Include="Controllers\UserTablesController.cs" />
     <Compile Include="Controllers\UserTypeTablesController.cs" />
     <Compile Include="FileHelpers.cs" />
     <Compile Include="Global.asax.cs">
@@ -393,6 +399,7 @@
     <Content Include="Content\FrontTemplate\vendors\owl-carousel\assets\owl.carousel.css" />
     <Content Include="Content\FrontTemplate\vendors\owl-carousel\owl.carousel.min.css" />
     <Content Include="Content\FrontTemplate\vendors\owl-carousel\owl.carousel.min.js" />
+    <Content Include="Content\LabImages\11.jpg" />
     <Content Include="Content\LoginTemplate\css\main.css" />
     <Content Include="Content\LoginTemplate\css\util.css" />
     <Content Include="Content\LoginTemplate\fonts\font-awesome-4.7.0\css\font-awesome.css" />
@@ -729,14 +736,37 @@
     <Content Include="Views\Home\AddLab.cshtml" />
     <Content Include="Views\Home\AddPatient.cshtml" />
     <Content Include="Views\Home\UnderReview.cshtml" />
+    <Content Include="Views\UserTables\Create.cshtml" />
+    <Content Include="Views\UserTables\Delete.cshtml" />
+    <Content Include="Views\UserTables\Details.cshtml" />
+    <Content Include="Views\UserTables\Edit.cshtml" />
+    <Content Include="Views\UserTables\Index.cshtml" />
+    <Content Include="Views\LabSetting\LabAllTest.cshtml" />
+    <Content Include="Views\LabSetting\AddTest.cshtml" />
+    <Content Include="Views\LabSetting\TestDetails.cshtml" />
+    <Content Include="Views\LabSetting\AddTestDetails.cshtml" />
+    <Content Include="Views\LabSetting\EditTest.cshtml" />
+    <Content Include="Views\LabSetting\EditTestDetails.cshtml" />
+    <Content Include="Views\LabTimeSlotTables\Create.cshtml" />
+    <Content Include="Views\LabTimeSlotTables\Delete.cshtml" />
+    <Content Include="Views\LabTimeSlotTables\Details.cshtml" />
+    <Content Include="Views\LabTimeSlotTables\Edit.cshtml" />
+    <Content Include="Views\LabTimeSlotTables\Index.cshtml" />
+    <Content Include="Views\DoctorTimeSlotTables\Create.cshtml" />
+    <Content Include="Views\DoctorTimeSlotTables\Delete.cshtml" />
+    <Content Include="Views\DoctorTimeSlotTables\Details.cshtml" />
+    <Content Include="Views\DoctorTimeSlotTables\Edit.cshtml" />
+    <Content Include="Views\DoctorTimeSlotTables\Index.cshtml" />
+    <Content Include="Views\PatientAppointment\GetAllDoctors.cshtml" />
+    <Content Include="Views\PatientAppointment\GetAllLabs.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\DoctorDocuments\" />
     <Folder Include="Content\DoctorImages\" />
-    <Folder Include="Content\LabImages\" />
     <Folder Include="Content\PatientImages\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\LabAppointment\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />

@@ -10,21 +10,23 @@ using DatabaseLayer;
 
 namespace HealthSupportSystem.Controllers
 {
-    public class UserTypeTablesController : Controller
+    public class DoctorTimeSlotTablesController : Controller
     {
         private HealthSupportSysdbEntities db = new HealthSupportSysdbEntities();
 
-        // GET: UserTypeTables
+        // GET: DoctorTimeSlotTables
         public ActionResult Index()
         {
             if (string.IsNullOrEmpty(Convert.ToString(Session["UserName"])))
             {
                 return RedirectToAction("Login", "Home");
             }
-            return View(db.UserTypeTables.ToList());
+            var doc = (DoctorTable)Session["Doctor"];
+            var doctorTimeSlotTables = db.DoctorTimeSlotTables.Include(d => d.DoctorTable).Where(d => d.DoctorID == doc.DoctorID);
+            return View(doctorTimeSlotTables.ToList());
         }
 
-        // GET: UserTypeTables/Details/5
+        // GET: DoctorTimeSlotTables/Details/5
         public ActionResult Details(int? id)
         {
             if (string.IsNullOrEmpty(Convert.ToString(Session["UserName"])))
@@ -35,46 +37,59 @@ namespace HealthSupportSystem.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            UserTypeTable userTypeTable = db.UserTypeTables.Find(id);
-            if (userTypeTable == null)
+            DoctorTimeSlotTable doctorTimeSlotTable = db.DoctorTimeSlotTables.Find(id);
+            if (doctorTimeSlotTable == null)
             {
                 return HttpNotFound();
             }
-            return View(userTypeTable);
+            return View(doctorTimeSlotTable);
         }
 
-        // GET: UserTypeTables/Create
+        // GET: DoctorTimeSlotTables/Create
         public ActionResult Create()
         {
             if (string.IsNullOrEmpty(Convert.ToString(Session["UserName"])))
             {
                 return RedirectToAction("Login", "Home");
             }
+            //ViewBag.DoctorID = new SelectList(db.DoctorTables, "DoctorID", "Name");
             return View();
         }
 
-        // POST: UserTypeTables/Create
+        // POST: DoctorTimeSlotTables/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "UserTypeID,UserType")] UserTypeTable userTypeTable)
+        public ActionResult Create(DoctorTimeSlotTable doctorTimeSlotTable)
         {
             if (string.IsNullOrEmpty(Convert.ToString(Session["UserName"])))
             {
                 return RedirectToAction("Login", "Home");
             }
+            var doc = (DoctorTable)Session["Doctor"];
+            doctorTimeSlotTable.DoctorID = doc.DoctorID;
+
             if (ModelState.IsValid)
             {
-                db.UserTypeTables.Add(userTypeTable);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                var finddoc = db.DoctorTimeSlotTables.Where(t => t.DoctorID == doc.DoctorID && t.FromTime == doctorTimeSlotTable.FromTime && t.ToTime == doctorTimeSlotTable.ToTime).FirstOrDefault();
+                if (finddoc == null)
+                {
+                    db.DoctorTimeSlotTables.Add(doctorTimeSlotTable);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ViewBag.Message = "Already in List, Please Check!";
+                }
             }
 
-            return View(userTypeTable);
+            //ViewBag.DoctorID = new SelectList(db.DoctorTables, "DoctorID", "Name", doctorTimeSlotTable.DoctorID);
+            return View(doctorTimeSlotTable);
         }
 
-        // GET: UserTypeTables/Edit/5
+        // GET: DoctorTimeSlotTables/Edit/5
         public ActionResult Edit(int? id)
         {
             if (string.IsNullOrEmpty(Convert.ToString(Session["UserName"])))
@@ -85,35 +100,46 @@ namespace HealthSupportSystem.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            UserTypeTable userTypeTable = db.UserTypeTables.Find(id);
-            if (userTypeTable == null)
+            DoctorTimeSlotTable doctorTimeSlotTable = db.DoctorTimeSlotTables.Find(id);
+            if (doctorTimeSlotTable == null)
             {
                 return HttpNotFound();
             }
-            return View(userTypeTable);
+            ViewBag.DoctorID = new SelectList(db.DoctorTables, "DoctorID", "Name", doctorTimeSlotTable.DoctorID);
+            return View(doctorTimeSlotTable);
         }
 
-        // POST: UserTypeTables/Edit/5
+        // POST: DoctorTimeSlotTables/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "UserTypeID,UserType")] UserTypeTable userTypeTable)
+        public ActionResult Edit(DoctorTimeSlotTable doctorTimeSlotTable)
         {
             if (string.IsNullOrEmpty(Convert.ToString(Session["UserName"])))
             {
                 return RedirectToAction("Login", "Home");
             }
+            
             if (ModelState.IsValid)
             {
-                db.Entry(userTypeTable).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                var finddoc = db.DoctorTimeSlotTables.Where(t => t.DoctorID == doctorTimeSlotTable.DoctorID && t.FromTime == doctorTimeSlotTable.FromTime && t.ToTime == doctorTimeSlotTable.ToTime && t.DoctorTimeSlotID != doctorTimeSlotTable.DoctorTimeSlotID).FirstOrDefault();
+                if (finddoc == null)
+                {
+                    db.Entry(doctorTimeSlotTable).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ViewBag.Message = "Already in List, Please Check!";
+                }
             }
-            return View(userTypeTable);
+            ViewBag.DoctorID = new SelectList(db.DoctorTables, "DoctorID", "Name", doctorTimeSlotTable.DoctorID);
+            return View(doctorTimeSlotTable);
         }
 
-        // GET: UserTypeTables/Delete/5
+        // GET: DoctorTimeSlotTables/Delete/5
         public ActionResult Delete(int? id)
         {
             if (string.IsNullOrEmpty(Convert.ToString(Session["UserName"])))
@@ -124,15 +150,15 @@ namespace HealthSupportSystem.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            UserTypeTable userTypeTable = db.UserTypeTables.Find(id);
-            if (userTypeTable == null)
+            DoctorTimeSlotTable doctorTimeSlotTable = db.DoctorTimeSlotTables.Find(id);
+            if (doctorTimeSlotTable == null)
             {
                 return HttpNotFound();
             }
-            return View(userTypeTable);
+            return View(doctorTimeSlotTable);
         }
 
-        // POST: UserTypeTables/Delete/5
+        // POST: DoctorTimeSlotTables/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -141,8 +167,8 @@ namespace HealthSupportSystem.Controllers
             {
                 return RedirectToAction("Login", "Home");
             }
-            UserTypeTable userTypeTable = db.UserTypeTables.Find(id);
-            db.UserTypeTables.Remove(userTypeTable);
+            DoctorTimeSlotTable doctorTimeSlotTable = db.DoctorTimeSlotTables.Find(id);
+            db.DoctorTimeSlotTables.Remove(doctorTimeSlotTable);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

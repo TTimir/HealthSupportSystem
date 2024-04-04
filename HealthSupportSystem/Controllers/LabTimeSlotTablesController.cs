@@ -10,21 +10,23 @@ using DatabaseLayer;
 
 namespace HealthSupportSystem.Controllers
 {
-    public class UserTypeTablesController : Controller
+    public class LabTimeSlotTablesController : Controller
     {
         private HealthSupportSysdbEntities db = new HealthSupportSysdbEntities();
 
-        // GET: UserTypeTables
+        // GET: LabTimeSlotTables
         public ActionResult Index()
         {
             if (string.IsNullOrEmpty(Convert.ToString(Session["UserName"])))
             {
                 return RedirectToAction("Login", "Home");
             }
-            return View(db.UserTypeTables.ToList());
+            var lab = (LabTable)Session["Lab"];
+            var labTimeSlotTables = db.LabTimeSlotTables.Include(l => l.LabTable).Where(l => l.LabID == lab.LabID);
+            return View(labTimeSlotTables.ToList());
         }
 
-        // GET: UserTypeTables/Details/5
+        // GET: LabTimeSlotTables/Details/5
         public ActionResult Details(int? id)
         {
             if (string.IsNullOrEmpty(Convert.ToString(Session["UserName"])))
@@ -35,46 +37,58 @@ namespace HealthSupportSystem.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            UserTypeTable userTypeTable = db.UserTypeTables.Find(id);
-            if (userTypeTable == null)
+            LabTimeSlotTable labTimeSlotTable = db.LabTimeSlotTables.Find(id);
+            if (labTimeSlotTable == null)
             {
                 return HttpNotFound();
             }
-            return View(userTypeTable);
+            return View(labTimeSlotTable);
         }
 
-        // GET: UserTypeTables/Create
+        // GET: LabTimeSlotTables/Create
         public ActionResult Create()
         {
             if (string.IsNullOrEmpty(Convert.ToString(Session["UserName"])))
             {
                 return RedirectToAction("Login", "Home");
             }
+            ViewBag.LabID = new SelectList(db.LabTables, "LabID", "Name");
             return View();
         }
 
-        // POST: UserTypeTables/Create
+        // POST: LabTimeSlotTables/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "UserTypeID,UserType")] UserTypeTable userTypeTable)
+        public ActionResult Create(LabTimeSlotTable labTimeSlotTable)
         {
             if (string.IsNullOrEmpty(Convert.ToString(Session["UserName"])))
             {
                 return RedirectToAction("Login", "Home");
             }
+            var lab = (LabTable)Session["Lab"];
+            labTimeSlotTable.LabID = lab.LabID;
             if (ModelState.IsValid)
             {
-                db.UserTypeTables.Add(userTypeTable);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                var findtiemslot = db.LabTimeSlotTables.Where(t => t.LabID == lab.LabID && t.FromTime == labTimeSlotTable.FromTime && t.ToTime == labTimeSlotTable.ToTime).FirstOrDefault();
+                if (findtiemslot == null)
+                {
+                    db.LabTimeSlotTables.Add(labTimeSlotTable);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ViewBag.Message = "Already in List, Please Check!";
+                }
             }
 
-            return View(userTypeTable);
+            ViewBag.LabID = new SelectList(db.LabTables, "LabID", "Name", labTimeSlotTable.LabID);
+            return View(labTimeSlotTable);
         }
 
-        // GET: UserTypeTables/Edit/5
+        // GET: LabTimeSlotTables/Edit/5
         public ActionResult Edit(int? id)
         {
             if (string.IsNullOrEmpty(Convert.ToString(Session["UserName"])))
@@ -85,20 +99,21 @@ namespace HealthSupportSystem.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            UserTypeTable userTypeTable = db.UserTypeTables.Find(id);
-            if (userTypeTable == null)
+            LabTimeSlotTable labTimeSlotTable = db.LabTimeSlotTables.Find(id);
+            if (labTimeSlotTable == null)
             {
                 return HttpNotFound();
             }
-            return View(userTypeTable);
+            ViewBag.LabID = new SelectList(db.LabTables, "LabID", "Name", labTimeSlotTable.LabID);
+            return View(labTimeSlotTable);
         }
 
-        // POST: UserTypeTables/Edit/5
+        // POST: LabTimeSlotTables/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "UserTypeID,UserType")] UserTypeTable userTypeTable)
+        public ActionResult Edit(LabTimeSlotTable labTimeSlotTable)
         {
             if (string.IsNullOrEmpty(Convert.ToString(Session["UserName"])))
             {
@@ -106,14 +121,23 @@ namespace HealthSupportSystem.Controllers
             }
             if (ModelState.IsValid)
             {
-                db.Entry(userTypeTable).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                var findtiemslot = db.LabTimeSlotTables.Where(t => t.LabID == labTimeSlotTable.LabID && t.FromTime == labTimeSlotTable.FromTime && t.ToTime == labTimeSlotTable.ToTime && labTimeSlotTable.LabTimeSlotID != labTimeSlotTable.LabTimeSlotID).FirstOrDefault();
+                if (findtiemslot == null)
+                {
+                    db.Entry(labTimeSlotTable).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ViewBag.Message = "Already in List, Please Check!";
+                }
             }
-            return View(userTypeTable);
+            ViewBag.LabID = new SelectList(db.LabTables, "LabID", "Name", labTimeSlotTable.LabID);
+            return View(labTimeSlotTable);
         }
 
-        // GET: UserTypeTables/Delete/5
+        // GET: LabTimeSlotTables/Delete/5
         public ActionResult Delete(int? id)
         {
             if (string.IsNullOrEmpty(Convert.ToString(Session["UserName"])))
@@ -124,15 +148,15 @@ namespace HealthSupportSystem.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            UserTypeTable userTypeTable = db.UserTypeTables.Find(id);
-            if (userTypeTable == null)
+            LabTimeSlotTable labTimeSlotTable = db.LabTimeSlotTables.Find(id);
+            if (labTimeSlotTable == null)
             {
                 return HttpNotFound();
             }
-            return View(userTypeTable);
+            return View(labTimeSlotTable);
         }
 
-        // POST: UserTypeTables/Delete/5
+        // POST: LabTimeSlotTables/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -141,8 +165,8 @@ namespace HealthSupportSystem.Controllers
             {
                 return RedirectToAction("Login", "Home");
             }
-            UserTypeTable userTypeTable = db.UserTypeTables.Find(id);
-            db.UserTypeTables.Remove(userTypeTable);
+            LabTimeSlotTable labTimeSlotTable = db.LabTimeSlotTables.Find(id);
+            db.LabTimeSlotTables.Remove(labTimeSlotTable);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

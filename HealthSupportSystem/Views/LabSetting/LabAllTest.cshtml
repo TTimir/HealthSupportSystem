@@ -1,15 +1,14 @@
-﻿@model IEnumerable<DatabaseLayer.AccountTypeTable>
+﻿@model IEnumerable<DatabaseLayer.LabTestTable>
 
 @{
-    ViewBag.Title = "Account types";
+    ViewBag.Title = "LabAllTest";
 }
 
-<h4>Account types</h4>
 <script src="~/Scripts/jquery-3.4.1.min.js"></script>
 
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        @Html.ActionLink("Add Account type", "Create", "AccountTypeTables", new { @style = "float:left;", @class = "genric-btn primary" })
+        @Html.ActionLink("New Test", "AddTest", "LabSetting", new { @style = "float:left;", @class = "genric-btn primary" })
         <input type="text" id="search" name="search" class="form-control col-md-3" style="float:right;" placeholder="🔍 Search here" />
     </div>
     <div class="card-body">
@@ -18,9 +17,12 @@
                 <thead>
                     <tr>
                         <th>
-                            Account Type
+                            Test Name
                         </th>
-                        <th></th>
+                        <th>
+                            Cost
+                        </th>
+                        <th>Action''s</th>
                     </tr>
                 </thead>
                 <tbody id="searchValue">
@@ -31,8 +33,15 @@
                                 @Html.DisplayFor(modelItem => item.Name)
                             </td>
                             <td>
-                                @Html.ActionLink("Edit", "Edit", new { id = item.AccountTypeID }, new { @class = "genric-btn success" })
-                                @Html.ActionLink("Delete", "Delete", new { id = item.AccountTypeID }, new { @class = "genric-btn danger" })
+                                @String.Format("₹{0:N2}", item.Cost)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.LabTable.Name)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "EditTest", new { id = item.LabTestID }, new { @class = "genric-btn success" })
+                                @Html.ActionLink("Test Details", "TestDetails", new { id = item.LabTestID }, new { @class = "genric-btn info" })
+                                @Html.ActionLink("Delete", "Delete", new { id = item.LabTestID }, new { @class = "genric-btn danger" })
                             </td>
                         </tr>
                     }

@@ -51,6 +51,22 @@ namespace HealthSupportSystem.Controllers
                 Session["ContactNo"] = user.ContactNo;
                 Session["Description"] = user.Description;
                 Session["IsVerified"] = user.IsVerified;
+
+                if (user.UserTypeID == 2) // Doctor
+                {
+                    var doc = db.DoctorTables.Where(u => u.UserID == user.UserID).FirstOrDefault();
+                    Session["Doctor"] = doc;
+                }
+                else if (user.UserTypeID == 3) // Lab
+                {
+                    var lab = db.LabTables.Where(u => u.UserID == user.UserID).FirstOrDefault();
+                    Session["Lab"] = lab;
+                }
+                else if (user.UserTypeID == 4) // Patient
+                {
+                    var patient = db.PatientTables.Where(u => u.UserID == user.UserID).FirstOrDefault();
+                    Session["Patient"] = patient;
+                }
                 return RedirectToAction("Index");
             }
 
@@ -419,13 +435,21 @@ namespace HealthSupportSystem.Controllers
                 return RedirectToAction("Login");
             }
 
-            ViewBag.AccountTypeID = new SelectList(db.AccountTypeTables.ToList(), "AccountTypeID", "Name", patient.GenderID);
+            ViewBag.GenderID = new SelectList(db.GenderTables.ToList(), "GenderID", "Name", patient.GenderID);
+            //ViewBag.AccountTypeID = new SelectList(db.AccountTypeTables.ToList(), "AccountTypeID", "Name", patient.GenderID);
             return View();
         }
 
         public ActionResult UnderReview()
         {
             return View();
+        }
+
+        public ActionResult UserLogOut()
+        {
+            LogOut();
+            Session.Clear();
+            return RedirectToAction("StartTemplate");
         }
 
         public ActionResult About()
