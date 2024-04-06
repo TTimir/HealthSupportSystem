@@ -4721,32 +4721,26 @@
 }
 
 .icon-lab:before {
-    margin-left: 5px;
     content: "\029D6";
 }
 
 .icon-doc:before {
-    margin-left: 5px;
     content: "\029D7";
 }
 
 .icon-alldoc:before {
-    margin-left: 6px;
     content: "\2624";
 }
 
 .icon-alllab:before {
-    margin-left: 6px;
     content: "\2622";
 }
 
 .icon-allpat:before {
-    margin-left: 6px;
     content: "\2661";
 }
 
 .icon-logout:before {
-    margin-left: 6px;
     content: "\23CE";
 }
 
@@ -4756,6 +4750,10 @@
 
 .icon-listtest:before {
     content: "\1F5B9";
+}
+
+.icon-labapp:before {
+    content: "\1F5D3";
 }
 
 .icon-capp:before {

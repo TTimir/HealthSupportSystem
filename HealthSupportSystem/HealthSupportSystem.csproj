@@ -215,6 +215,7 @@
     <Content Include="Content\DashboardTemplate\css\bootstrap.min.css" />
     <Content Include="Content\DashboardTemplate\css\bootstrap\mixins\_lists.css" />
     <Content Include="Content\DashboardTemplate\css\owl.carousel.min.css" />
+    <Content Include="Content\DashboardTemplate\css\Sidebar.css" />
     <Content Include="Content\DashboardTemplate\css\style.css" />
     <Content Include="Content\DashboardTemplate\fonts\icomoon\demo-files\demo.css" />
     <Content Include="Content\DashboardTemplate\fonts\icomoon\demo-files\demo.js" />
@@ -222,6 +223,10 @@
     <Content Include="Content\DashboardTemplate\fonts\icomoon\fonts\icomoon.svg" />
     <Content Include="Content\DashboardTemplate\fonts\icomoon\Read Me.txt" />
     <Content Include="Content\DashboardTemplate\fonts\icomoon\style.css" />
+    <Content Include="Content\DashboardTemplate\images\doc_v.jpg" />
+    <Content Include="Content\DashboardTemplate\images\doc_v2.jpg" />
+    <Content Include="Content\DashboardTemplate\images\lab_v.jpg" />
+    <Content Include="Content\DashboardTemplate\images\pat_v.png" />
     <Content Include="Content\DashboardTemplate\images\person_1.jpg" />
     <Content Include="Content\DashboardTemplate\images\person_2.jpg" />
     <Content Include="Content\DashboardTemplate\images\person_3.jpg" />
@@ -361,6 +366,7 @@
     <Content Include="Content\FrontTemplate\img\project\4.jpg" />
     <Content Include="Content\FrontTemplate\img\sub_logo.png" />
     <Content Include="Content\FrontTemplate\img\sub_logo_text.png" />
+    <Content Include="Content\FrontTemplate\img\sub_logo_text_white.png" />
     <Content Include="Content\FrontTemplate\img\team\1.jpg" />
     <Content Include="Content\FrontTemplate\img\team\2.jpg" />
     <Content Include="Content\FrontTemplate\img\team\3.jpg" />
@@ -759,6 +765,9 @@
     <Content Include="Views\DoctorTimeSlotTables\Index.cshtml" />
     <Content Include="Views\PatientAppointment\GetAllDoctors.cshtml" />
     <Content Include="Views\PatientAppointment\GetAllLabs.cshtml" />
+    <Content Include="Views\PatientAppointment\DoctorAppointment.cshtml" />
+    <Content Include="Views\PatientAppointment\DoctorProfile.cshtml" />
+    <Content Include="Views\PatientAppointment\DoctorPendingAppoint.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

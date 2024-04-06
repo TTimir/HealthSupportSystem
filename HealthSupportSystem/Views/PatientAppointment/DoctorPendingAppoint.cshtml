@@ -1,15 +1,14 @@
-﻿@model IEnumerable<DatabaseLayer.LabTable>
+﻿@model IEnumerable<DatabaseLayer.DoctorAppointTable>
 
 @{
-    ViewBag.Title = "Labs";
+    ViewBag.Title = "Doctor Pending Appointments";
 }
 
-<h2>All Labs</h2>
+<h2>Doctor Pending Appointments</h2>
 <script src="~/Scripts/jquery-3.4.1.min.js"></script>
 
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <img src="~/Content/DashboardTemplate/images/lab_v.jpg" alt="Lab Logo" style="float:left; margin-right: 10px; height: 52px; width: 52px;">
         <input type="text" id="search" name="search" class="form-control col-md-3" style="float:right;" placeholder="🔍 Search here" />
     </div>
     <div class="card-body">
@@ -18,24 +17,30 @@
                 <thead>
                     <tr>
                         <th>
-                            Lab
+                            Patient Name
                         </th>
                         <th>
-                            Photo
+                            Doctor Name
                         </th>
                         <th>
-                            Contact No
+                            Time Slot
                         </th>
                         <th>
-                            Phone No
+                            Appointment Date
                         </th>
                         <th>
-                            Email Address
+                            Fee Status
                         </th>
                         <th>
-                            About Lab
+                            Transection No
                         </th>
-                        <th>Action's</th>
+                        <th>
+                            Description
+                        </th>
+                        <th>
+                            Doctor Comment
+                        </th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody id="searchValue">
@@ -43,35 +48,31 @@
                     {
                         <tr>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Name)
+                                @Html.DisplayFor(modelItem => item.PatientTable.Name)
                             </td>
                             <td>
-                                @{ if (!string.IsNullOrEmpty(item.Photo))
-                                    {
-                                        <img src="@Url.Content(item.Photo)" alt="Image" style="width:50px;height:50px;max-width:100%;height:auto;" />
-                                    }
-                                }
+                                @Html.DisplayFor(modelItem => item.DoctorTable.Name)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.ContactNo)
+                                @Html.DisplayFor(modelItem => item.DoctorTimeSlotTable.Name)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.PhoneNo)
+                                @Html.DisplayFor(modelItem => item.AppointDate)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.EmailAddress)
+                                @Html.DisplayFor(modelItem => item.IsFeeSubmit)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.AboutLab)
+                                @Html.DisplayFor(modelItem => item.TransectionNo)
                             </td>
                             <td>
-                                @Html.ActionLink("Appointment", "LabAppointement", new { id = item.LabID }, new { @class = "genric-btn primary" })
-                                @*@Html.ActionLink("Details", "Details", new { id=item.LabID }) |
-                                    @Html.ActionLink("Delete", "Delete", new { id=item.LabID })*@
+                                @Html.DisplayFor(modelItem => item.Description)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DoctorComment)
                             </td>
                         </tr>
                     }
-
                 </tbody>
             </table>
         </div>

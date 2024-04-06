@@ -137,21 +137,16 @@ section p {
     color: #fff;
 }
 
-
 #main-wrapper {
     float: left;
     margin-left: 6%;
     width: 82%;
 }
-
-@media only screen and (min-width: 920px) {
+@media (min-width: 920px) {
     #main-wrapper {
-        float: left;
-        margin-left: 6%;
-        width: 1100px;
+        width: 100%; /* Increase width for screens above 920px */
     }
 }
-
 .content-header {
     border-bottom: 1px solid #ddd;
     border-top: 1px solid #ddd;

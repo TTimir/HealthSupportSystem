@@ -27,7 +27,6 @@ namespace HealthSupportSystem.Controllers
 
         public ActionResult Login()
         {
-
             return View();
         }
 
@@ -391,7 +390,7 @@ namespace HealthSupportSystem.Controllers
 
         public ActionResult AddPatient()
         {
-            ViewBag.AccountTypeID = new SelectList(db.AccountTypeTables.ToList(), "AccountTypeID", "Name", "0");
+            ViewBag.GenderID = new SelectList(db.GenderTables.ToList(), "GenderID", "Name", "0");
             return View();
         }
 
@@ -436,8 +435,7 @@ namespace HealthSupportSystem.Controllers
             }
 
             ViewBag.GenderID = new SelectList(db.GenderTables.ToList(), "GenderID", "Name", patient.GenderID);
-            //ViewBag.AccountTypeID = new SelectList(db.AccountTypeTables.ToList(), "AccountTypeID", "Name", patient.GenderID);
-            return View();
+            return View(patient);
         }
 
         public ActionResult UnderReview()

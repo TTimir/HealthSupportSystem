@@ -1,11 +1,15 @@
 ﻿<!doctype html>
 <html lang="en">
 <head>
+
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Healmate Health Support</title>
     <link rel="icon" href="~/Content/FrontTemplate/img/sub_logo.png" type="image/png">
+
+    <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+    <link href="~/Content/DashboardTemplate/css/Sidebar.css" rel="stylesheet" />
 
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500&display=swap" rel="stylesheet">
@@ -49,119 +53,195 @@
 </head>
 <body>
 
+    <form id="form1" runat="server">
 
-    <aside class="sidebar">
-        <div class="toggle">
-            <a href="#" class="burger js-menu-toggle" data-toggle="collapse" data-target="#main-navbar">
-                <span></span>
-            </a>
-        </div>
-        <div class="side-inner">
+        <div class="wrapper">
+            <div class="sidebar">
+                <div class="bg_shadow"></div>
+                <div class="sidebar_inner">
+                    <div class="close">
+                        <i class="fas fa-times"></i>
+                    </div>
 
-            <div class="logo-wrap">
-                <div class="logo">
-                    <span>
-                        <a class="navbar-brand logo_h" href="index.html"><img src="~/Content/FrontTemplate/img/sub_logo.png" alt=""></a>
-                    </span>
-                </div>
-                <span class="logo-text">
-                    <a class="navbar-brand logo_h" href="index.html"><img src="~/Content/FrontTemplate/img/sub_logo_text.png" alt=""></a>
-                </span>
-            </div>
+                    <div class="profile_info">
+                        <div class="profile_img">
+                            <span>
+                                <a class="navbar-brand logo_h" href="index.html"><img src="~/Content/FrontTemplate/img/sub_logo.png" alt=""></a>
+                            </span>
+                        </div>
+                        <span class="profile_data">
+                            <a class="navbar-brand logo_h" href="index.html"><img src="~/Content/FrontTemplate/img/sub_logo_text_white.png" alt=""></a>
+                        </span>
+                    </div>
 
-            <div class="nav-menu">
-                <ul>
-                    <li style="background-color: #0051D2; color: #fff;" class="nav-welcome"><a href="#!welcome" class="d-flex align-items-center"><span class="bi bi-emoji-smile mr-3"></span><span class="menu-text">Welcome</span></a></li>
-                </ul>
-            </div>
-            <div class="nav-menu">
-                <ul>
-                    <li><a href="@Url.Action("ChangePassword", "Home")" class="d-flex align-items-center"><span class="wrap-icon icon-pass mr-3"></span><span class="menu-text">Change Password</span></a></li>
-                    @{
-                        if (Session["UserTypeID"] != null)
-                        {
-                            var usertype = Convert.ToString(Session["UserTypeID"]);
-                            int value = Convert.ToInt32(usertype.Trim());
+                    <ul class="siderbar_menu">
+                        <li style="background-color: #0051D2; color: #fff;" class="nav-welcome"><a href="#!welcome" class="d-flex align-items-center"><span class="bi bi-emoji-smile mr-3"></span><span class="menu-text">Welcome</span></a></li>
+                        <li><a href="@Url.Action("ChangePassword", "Home")" class="d-flex align-items-center"><span class="wrap-icon icon-pass mr-3"></span><span class="menu-text">Change Password</span></a></li>
 
-                            if (value == 1)
+                        @{
+                            if (Session["UserTypeID"] != null)
                             {
-                                <li><a href="@Url.Action("Index", "AccountTypeTables")" class="d-flex align-items-center"><span class="wrap-icon icon-account mr-3"></span><span class="menu-text">Account Type</span></a></li>
-                                <li><a href="@Url.Action("Index", "UserTables")" class="d-flex align-items-center"><span class="wrap-icon icon-user mr-3"></span><span class="menu-text">All Users</span></a></li>
-                                <li><a href="@Url.Action("Index", "UserTables")" class="d-flex align-items-center"><span class="wrap-icon icon-lab mr-3"></span><span class="menu-text">Pending(Lab) Request</span></a></li>
-                                <li><a href="@Url.Action("Index", "UserTables")" class="d-flex align-items-center"><span class="wrap-icon icon-doc mr-3"></span><span class="menu-text">Pending(Doctor) Request</span></a></li>
-                                <li><a href="@Url.Action("Index", "UserTables")" class="d-flex align-items-center"><span class="wrap-icon icon-alldoc mr-3"></span><span class="menu-text">All Doctors</span></a></li>
-                                <li><a href="@Url.Action("Index", "UserTables")" class="d-flex align-items-center"><span class="wrap-icon icon-alllab mr-3"></span><span class="menu-text">All Labs</span></a></li>
-                                <li><a href="@Url.Action("Index", "UserTables")" class="d-flex align-items-center"><span class="wrap-icon icon-allpat mr-3"></span><span class="menu-text">All Patients</span></a></li>
-                            }
+                                var usertype = Convert.ToString(Session["UserTypeID"]);
+                                int value = Convert.ToInt32(usertype.Trim());
 
-                            else if (value == 3)
-                            {
-                                //Lab User Access
-                                <li><a href="@Url.Action("Index", "LabTimeSlotTables")" class="d-flex align-items-center"><span class="wrap-icon icon-timeslot mr-3"></span><span class="menu-text">Time Slot</span></a></li>
-                                <li><a href="@Url.Action("LabAllTest", "LabSetting")" class="d-flex align-items-center"><span class="wrap-icon icon-labtest mr-3"></span><span class="menu-text">All Test</span></a></li>
-                                <li><a href="@Url.Action("AddTest", "LabSetting")" class="d-flex align-items-center"><span class="wrap-icon icon-listtest mr-3"></span><span class="menu-text">Add Test</span></a></li>
-                                <li><a href="@Url.Action("CurrentAppointment", "LabAppointment")" class="d-flex align-items-center"><span class="wrap-icon icon-capp mr-3"></span><span class="menu-text">Current Appointment</span></a></li>
-                                <li><a href="@Url.Action("PendingAppointment", "LabAppointment")" class="d-flex align-items-center"><span class="wrap-icon icon-papp mr-3"></span><span class="menu-text">Pending Appointment</span></a></li>
-                                <li><a href="@Url.Action("CancelAppointment", "LabAppointment")" class="d-flex align-items-center"><span class="wrap-icon icon-canapp mr-3"></span><span class="menu-text">Cancel Appointment</span></a></li>
-                                <li><a href="@Url.Action("ComplateAppointment", "LabAppointment")" class="d-flex align-items-center"><span class="wrap-icon icon-comapp mr-3"></span><span class="menu-text">Complate Appointment</span></a></li>
-                                <li><a href="@Url.Action("AllAppointment", "LabAppointment")" class="d-flex align-items-center"><span class="wrap-icon icon-allapp mr-3"></span><span class="menu-text">All Appointment</span></a></li>
-                                <li><a href="@Url.Action("AppointmentReport", "LabAppointment")" class="d-flex align-items-center"><span class="wrap-icon icon-repo mr-3"></span><span class="menu-text">Appointment Report</span></a></li>
-                            }
+                                if (value == 1)
+                                {
+                                    <li>
+                                        <a href="#!">
+                                            <div class="icon"><i class="icon-alllab"></i></div>
+                                            <div class="s-title">Lab</div>
+                                            <div class="arrow"><i class="fas fa-chevron-down"></i></div>
+                                        </a>
+                                        <ul class="accordion">
+                                            <li><a href="@Url.Action("Index", "UserTables")" class="d-flex align-items-center"><span class="wrap-icon icon-lab mr-3"></span><span class="menu-text">Pending(Lab) Request</span></a></li>
+                                            <li><a href="@Url.Action("Index", "UserTables")" class="d-flex align-items-center"><span class="wrap-icon icon-alllab mr-3"></span><span class="menu-text">All Labs</span></a></li>
+                                        </ul>
+                                    </li>
 
-                            else if (value == 2)
-                            {
-                                //Doctor User Access
-                                <li><a href="@Url.Action("Index", "DoctorTimeSlotTables")" class="d-flex align-items-center"><span class="wrap-icon icon-timeslot mr-3"></span><span class="menu-text">Time Slot</span></a></li>
-                                <li><a href="@Url.Action("CurrentAppointment", "DoctorAppointment")" class="d-flex align-items-center"><span class="wrap-icon icon-capp mr-3"></span><span class="menu-text">Current Appointment</span></a></li>
-                                <li><a href="@Url.Action("PendingAppointment", "DoctorAppointment")" class="d-flex align-items-center"><span class="wrap-icon icon-papp mr-3"></span><span class="menu-text">Pending Appointment</span></a></li>
-                                <li><a href="@Url.Action("CancelAppointment", "DoctorAppointment")" class="d-flex align-items-center"><span class="wrap-icon icon-canapp mr-3"></span><span class="menu-text">Cancel Appointment</span></a></li>
-                                <li><a href="@Url.Action("ComplateAppointment", "DoctorAppointment")" class="d-flex align-items-center"><span class="wrap-icon icon-comapp mr-3"></span><span class="menu-text">Complate Appointment</span></a></li>
-                                <li><a href="@Url.Action("AllAppointment", "DoctorAppointment")" class="d-flex align-items-center"><span class="wrap-icon icon-allapp mr-3"></span><span class="menu-text">All Appointment</span></a></li>
-                                <li><a href="@Url.Action("AppointmentReport", "DoctorAppointment")" class="d-flex align-items-center"><span class="wrap-icon icon-repo mr-3"></span><span class="menu-text">Appointment Report</span></a></li>
-                            }
+                                    <li>
+                                        <a href="#!">
+                                            <div class="icon"><i class="icon-alldoc"></i></div>
+                                            <div class="s-title">Doctor</div>
+                                            <div class="arrow"><i class="fas fa-chevron-down"></i></div>
+                                        </a>
+                                        <ul class="accordion">
+                                            <li><a href="@Url.Action("Index", "UserTables")" class="d-flex align-items-center"><span class="wrap-icon icon-doc mr-3"></span><span class="menu-text">Pending(Doctor) Request</span></a></li>
+                                            <li><a href="@Url.Action("Index", "UserTables")" class="d-flex align-items-center"><span class="wrap-icon icon-alldoc mr-3"></span><span class="menu-text">All Doctors</span></a></li>
+                                        </ul>
+                                    </li>
 
-                            else if (value == 4)
-                            {
-                                //Patient User Access
-                                <li><a href="@Url.Action("GetAllLabs", "PatientAppointment")" class="d-flex align-items-center"><span class="wrap-icon icon-alllab mr-3"></span><span class="menu-text">All Labs</span></a></li>
-                                <li><a href="@Url.Action("GetAllDoctors", "PatientAppointment")" class="d-flex align-items-center"><span class="wrap-icon icon-alldoc mr-3"></span><span class="menu-text">All Doctors</span></a></li>
+                                    <li><a href="@Url.Action("Index", "AccountTypeTables")" class="d-flex align-items-center"><span class="wrap-icon icon-account mr-3"></span><span class="menu-text">Account Type</span></a></li>
+                                    <li><a href="@Url.Action("Index", "UserTables")" class="d-flex align-items-center"><span class="wrap-icon icon-user mr-3"></span><span class="menu-text">All Users</span></a></li>
+                                    <li><a href="@Url.Action("Index", "UserTables")" class="d-flex align-items-center"><span class="wrap-icon icon-allpat mr-3"></span><span class="menu-text">All Patients</span></a></li>
+                                }
 
+                                else if (value == 3)
+                                {
+                                    //Lab User Access
+                                    <li><a href="@Url.Action("Index", "LabTimeSlotTables")" class="d-flex align-items-center"><span class="wrap-icon icon-timeslot mr-3"></span><span class="menu-text">Time Slot</span></a></li>
 
+                                    <li>
+                                        <a href="#!">
+                                            <div class="icon"><i class="icon-labtest"></i></div>
+                                            <div class="s-title">Test</div>
+                                            <div class="arrow"><i class="fas fa-chevron-down"></i></div>
+                                        </a>
+                                        <ul class="accordion">
+                                            <li><a href="@Url.Action("LabAllTest", "LabSetting")" class="d-flex align-items-center"><span class="wrap-icon icon-labtest mr-3"></span><span class="menu-text">All Test</span></a></li>
+                                            <li><a href="@Url.Action("AddTest", "LabSetting")" class="d-flex align-items-center"><span class="wrap-icon icon-listtest mr-3"></span><span class="menu-text">Add Test</span></a></li>
+                                        </ul>
+                                    </li>
 
-                                <li><a href="@Url.Action("PendingAppointment", "PatientAppointment")" class="d-flex align-items-center"><span class="wrap-icon icon-papp mr-3"></span><span class="menu-text">Pending(Lab) Appointment</span></a></li>
-                                <li><a href="@Url.Action("CurrentAppointment", "PatientAppointment")" class="d-flex align-items-center"><span class="wrap-icon icon-capp mr-3"></span><span class="menu-text">Current(Lab) Appointment</span></a></li>
-                                <li><a href="@Url.Action("CancelAppointment", "PatientAppointment")" class="d-flex align-items-center"><span class="wrap-icon icon-canapp mr-3"></span><span class="menu-text">Cancel(Lab) Appointment</span></a></li>
-                                <li><a href="@Url.Action("ComplateAppointment", "PatientAppointment")" class="d-flex align-items-center"><span class="wrap-icon icon-comapp mr-3"></span><span class="menu-text">Complate(Lab) Appointment</span></a></li>
-                                <li><a href="@Url.Action("AllAppointment", "PatientAppointment")" class="d-flex align-items-center"><span class="wrap-icon icon-allapp mr-3"></span><span class="menu-text">All(Lab) Appointment</span></a></li>
-                                <li><a href="@Url.Action("AppointmentReport", "PatientAppointment")" class="d-flex align-items-center"><span class="wrap-icon icon-repo mr-3"></span><span class="menu-text">Appointment(Lab) Report</span></a></li>
+                                    <li>
+                                        <a href="#!">
+                                            <div class="icon"><i class="icon-labapp"></i></div>
+                                            <div class="s-title">Appointments</div>
+                                            <div class="arrow"><i class="fas fa-chevron-down"></i></div>
+                                        </a>
+                                        <ul class="accordion">
+                                            <li><a href="@Url.Action("CurrentAppointment", "LabAppointment")" class="d-flex align-items-center"><span class="wrap-icon icon-capp mr-3"></span><span class="menu-text">Current Appointment</span></a></li>
+                                            <li><a href="@Url.Action("PendingAppointment", "LabAppointment")" class="d-flex align-items-center"><span class="wrap-icon icon-papp mr-3"></span><span class="menu-text">Pending Appointment</span></a></li>
+                                            <li><a href="@Url.Action("CancelAppointment", "LabAppointment")" class="d-flex align-items-center"><span class="wrap-icon icon-canapp mr-3"></span><span class="menu-text">Cancel Appointment</span></a></li>
+                                            <li><a href="@Url.Action("ComplateAppointment", "LabAppointment")" class="d-flex align-items-center"><span class="wrap-icon icon-comapp mr-3"></span><span class="menu-text">Complate Appointment</span></a></li>
+                                        </ul>
+                                    </li>
 
-                                <li><a href="@Url.Action("PendingAppointment", "PatientbAppointment")" class="d-flex align-items-center"><span class="wrap-icon icon-papp mr-3"></span><span class="menu-text">Pending(Doctor) Appointment</span></a></li>
-                                <li><a href="@Url.Action("CurrentAppointment", "PatientbAppointment")" class="d-flex align-items-center"><span class="wrap-icon icon-capp mr-3"></span><span class="menu-text">Current(Doctor) Appointment</span></a></li>
-                                <li><a href="@Url.Action("CancelAppointment", "PatientbAppointment")" class="d-flex align-items-center"><span class="wrap-icon icon-canapp mr-3"></span><span class="menu-text">Cancel(Doctor) Appointment</span></a></li>
-                                <li><a href="@Url.Action("ComplateAppointment", "PatientbAppointment")" class="d-flex align-items-center"><span class="wrap-icon icon-comapp mr-3"></span><span class="menu-text">Complate(Doctor) Appointment</span></a></li>
-                                <li><a href="@Url.Action("AllAppointment", "PatientAppointment")" class="d-flex align-items-center"><span class="wrap-icon icon-allapp mr-3"></span><span class="menu-text">All(Doctor) Appointment</span></a></li>
-                                <li><a href="@Url.Action("AppointmentReport", "PatientAppointment")" class="d-flex align-items-center"><span class="wrap-icon icon-repo mr-3"></span><span class="menu-text">Appointment(Doctor) Report</span></a></li>
+                                    <li><a href="@Url.Action("AllAppointment", "LabAppointment")" class="d-flex align-items-center"><span class="wrap-icon icon-allapp mr-3"></span><span class="menu-text">All Appointment</span></a></li>
+                                    <li><a href="@Url.Action("AppointmentReport", "LabAppointment")" class="d-flex align-items-center"><span class="wrap-icon icon-repo mr-3"></span><span class="menu-text">Appointment Report</span></a></li>
+                                }
+
+                                else if (value == 2)
+                                {
+                                    //Doctor User Access
+                                    <li><a href="@Url.Action("Index", "DoctorTimeSlotTables")" class="d-flex align-items-center"><span class="wrap-icon icon-timeslot mr-3"></span><span class="menu-text">Time Slot</span></a></li>
+
+                                    <li>
+                                        <a href="#!">
+                                            <div class="icon"><i class="icon-labapp"></i></div>
+                                            <div class="s-title">Appointments</div>
+                                            <div class="arrow"><i class="fas fa-chevron-down"></i></div>
+                                        </a>
+                                        <ul class="accordion">
+                                            <li><a href="@Url.Action("CurrentAppointment", "DoctorAppointment")" class="d-flex align-items-center"><span class="wrap-icon icon-capp mr-3"></span><span class="menu-text">Current Appointment</span></a></li>
+                                            <li><a href="@Url.Action("PendingAppointment", "DoctorAppointment")" class="d-flex align-items-center"><span class="wrap-icon icon-papp mr-3"></span><span class="menu-text">Pending Appointment</span></a></li>
+                                            <li><a href="@Url.Action("CancelAppointment", "DoctorAppointment")" class="d-flex align-items-center"><span class="wrap-icon icon-canapp mr-3"></span><span class="menu-text">Cancel Appointment</span></a></li>
+                                            <li><a href="@Url.Action("ComplateAppointment", "DoctorAppointment")" class="d-flex align-items-center"><span class="wrap-icon icon-comapp mr-3"></span><span class="menu-text">Complate Appointment</span></a></li>
+                                        </ul>
+                                    </li>
+
+                                    <li><a href="@Url.Action("AllAppointment", "DoctorAppointment")" class="d-flex align-items-center"><span class="wrap-icon icon-allapp mr-3"></span><span class="menu-text">All Appointment</span></a></li>
+                                    <li><a href="@Url.Action("AppointmentReport", "DoctorAppointment")" class="d-flex align-items-center"><span class="wrap-icon icon-repo mr-3"></span><span class="menu-text">Appointment Report</span></a></li>
+                                }
+
+                                else if (value == 4)
+                                {
+                                    //Patient User Access
+                                    <li><a href="@Url.Action("GetAllLabs", "PatientAppointment")" class="d-flex align-items-center"><span class="wrap-icon icon-alllab mr-3"></span><span class="menu-text">All Labs</span></a></li>
+                                    <li><a href="@Url.Action("GetAllDoctors", "PatientAppointment")" class="d-flex align-items-center"><span class="wrap-icon icon-alldoc mr-3"></span><span class="menu-text">All Doctors</span></a></li>
+
+                                    <li>
+                                        <a href="#!">
+                                            <div class="icon"><i class="icon-labapp"></i></div>
+                                            <div class="s-title">Labs</div>
+                                            <div class="arrow"><i class="fas fa-chevron-down"></i></div>
+                                        </a>
+                                        <ul class="accordion">
+                                            <li><a href="@Url.Action("PendingAppointment", "LabPendingAppoint")" class="d-flex align-items-center"><span class="wrap-icon icon-papp mr-3"></span><span class="menu-text">Pending(Lab) Appointment</span></a></li>
+                                            <li><a href="@Url.Action("CurrentAppointment", "PatientAppointment")" class="d-flex align-items-center"><span class="wrap-icon icon-capp mr-3"></span><span class="menu-text">Current(Lab) Appointment</span></a></li>
+                                            <li><a href="@Url.Action("CancelAppointment", "PatientAppointment")" class="d-flex align-items-center"><span class="wrap-icon icon-canapp mr-3"></span><span class="menu-text">Cancel(Lab) Appointment</span></a></li>
+                                            <li><a href="@Url.Action("ComplateAppointment", "PatientAppointment")" class="d-flex align-items-center"><span class="wrap-icon icon-comapp mr-3"></span><span class="menu-text">Complate(Lab) Appointment</span></a></li>
+                                            <li><a href="@Url.Action("AllAppointment", "PatientAppointment")" class="d-flex align-items-center"><span class="wrap-icon icon-allapp mr-3"></span><span class="menu-text">All(Lab) Appointment</span></a></li>
+                                            <li><a href="@Url.Action("AppointmentReport", "PatientAppointment")" class="d-flex align-items-center"><span class="wrap-icon icon-repo mr-3"></span><span class="menu-text">Appointment(Lab) Report</span></a></li>
+                                        </ul>
+                                    </li>
+
+                                    <li>
+                                        <a href="#!">
+                                            <div class="icon"><i class="icon-labapp"></i></div>
+                                            <div class="s-title">Doctors</div>
+                                            <div class="arrow"><i class="fas fa-chevron-down"></i></div>
+                                        </a>
+                                        <ul class="accordion">
+                                            <li><a href="@Url.Action("PendingAppointment", "PatientAppointment")" class="d-flex align-items-center"><span class="wrap-icon icon-papp mr-3"></span><span class="menu-text">Pending(Doctor) Appointment</span></a></li>
+                                            <li><a href="@Url.Action("CurrentAppointment", "PatientAppointment")" class="d-flex align-items-center"><span class="wrap-icon icon-capp mr-3"></span><span class="menu-text">Current(Doctor) Appointment</span></a></li>
+                                            <li><a href="@Url.Action("CancelAppointment", "PatientAppointment")" class="d-flex align-items-center"><span class="wrap-icon icon-canapp mr-3"></span><span class="menu-text">Cancel(Doctor) Appointment</span></a></li>
+                                            <li><a href="@Url.Action("ComplateAppointment", "PatientAppointment")" class="d-flex align-items-center"><span class="wrap-icon icon-comapp mr-3"></span><span class="menu-text">Complate(Doctor) Appointment</span></a></li>
+                                            <li><a href="@Url.Action("AllAppointment", "PatientAppointment")" class="d-flex align-items-center"><span class="wrap-icon icon-allapp mr-3"></span><span class="menu-text">All(Doctor) Appointment</span></a></li>
+                                            <li><a href="@Url.Action("AppointmentReport", "PatientAppointment")" class="d-flex align-items-center"><span class="wrap-icon icon-repo mr-3"></span><span class="menu-text">Appointment(Doctor) Report</span></a></li>
+                                        </ul>
+                                    </li>
+
+                                }
                             }
                         }
-                    }
-                    @*<li class="active"> @Html.ActionLink("Account Type", "Index", "AccountTypeTables", null, null) </li>*@
-                    <li><a href="@Url.Action("UserLogOut", "Home")" class="d-flex align-items-center"><span class="wrap-icon icon-logout mr-3"></span><span class="menu-text">Log Out</span></a></li>
-                </ul>
+
+                    </ul>
+                    <div class="logout_btn">
+                        <a href="@Url.Action("UserLogOut", "Home")" class="d-flex align-items-center"><span class="wrap-icon icon-logout mr-3"></span><span class="menu-text">Log Out</span></a>
+                    </div>
+
+                </div>
             </div>
+
+
+
         </div>
 
-    </aside>
+    </form>
 
-    <main>
+    <main class="main_container">
         <div class="site-section">
             <div class="container">
                 <div class="row justify-content-center">
                     <div id="main-wrapper">
                         <div class="main-content">
                             <section id="welcome">
+                                <div class="hamburger">
+                                    <i class="fas fa-bars"></i>
+                                </div>
                                 <div class="content-header">
                                     <h1>HealMate Health Solution</h1>
-                                    @*@ViewBag.Title*@
+                                    @*@ViewBag.title*@
                                 </div>
                                 @RenderBody()
                             </section>
@@ -211,5 +291,22 @@
 
     <!-- Page Level Custome Script -->
     <script src="https://example.com/path/to/datatables.demo.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $(".siderbar_menu li").click(function () {
+                $(".siderbar_menu li").removeClass("active");
+                $(this).addClass("active");
+            });
+
+            $(".hamburger").click(function () {
+                $(".wrapper").addClass("active");
+            });
+
+            $(".close, .bg_shadow").click(function () {
+                $(".wrapper").removeClass("active");
+            });
+        });
+    </script>
 </body>
 </html>
