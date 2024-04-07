@@ -71,7 +71,7 @@
                                 @{
                                     if (item.IsChecked == true && item.IsFeeSubmit == true && item.DoctorComment.Length > 0)
                                     {
-                                        <h4 class="bold" style="color: green;">Complete</h4>
+                                        <h4 class="bold" style="color: forestgreen;">Complete</h4>
                                     }
                                     else if (item.IsChecked == false && item.IsFeeSubmit == true && item.DoctorComment.Length > 0)
                                     {
@@ -83,7 +83,7 @@
                                     }
                                     else if (item.IsChecked == false && item.IsFeeSubmit == false && item.DoctorComment.Length > 0)
                                     {
-                                        <h4 class="bold" style="color: red;">Rejected</h4>
+                                        <h4 class="bold" style="color: darkred;">Rejected</h4>
                                     }
                                 }
                             </td>

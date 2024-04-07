@@ -171,7 +171,7 @@ namespace HealthSupportSystem.Controllers
 
         public ActionResult CreateUser()
         {
-            ViewBag.UserTypeID = new SelectList(db.UserTypeTables.Where(u => u.UserTypeID != 1/* && u.UserTypeID != 3*/), "UserTypeID", "UserType", "0");
+            ViewBag.UserTypeID = new SelectList(db.UserTypeTables.Where(u => u.UserTypeID != 1 && u.UserTypeID != 3), "UserTypeID", "UserType", "0");
 
             return View();
         }
@@ -269,7 +269,7 @@ namespace HealthSupportSystem.Controllers
                 ViewBag.Message = "Please Provide Correct Details!";
             }
 
-            ViewBag.UserTypeID = new SelectList(db.UserTypeTables.Where(u => u.UserTypeID != 1/* && u.UserTypeID != 3*/), "UserTypeID", "UserType", "0");
+            ViewBag.UserTypeID = new SelectList(db.UserTypeTables.Where(u => u.UserTypeID != 1 && u.UserTypeID != 3), "UserTypeID", "UserType", "0");
             return View("CreateUser");
         }
 

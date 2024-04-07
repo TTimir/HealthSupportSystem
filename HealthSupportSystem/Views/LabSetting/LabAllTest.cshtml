@@ -42,6 +42,7 @@
                             <td>
                                 @Html.ActionLink("Edit", "EditTest", new { id = item.LabTestID }, new { @class = "genric-btn success" })
                                 @Html.ActionLink("Details", "TestDetails", new { id = item.LabTestID }, new { @class = "genric-btn info" })
+                                @Html.ActionLink("Delete", "DeleteTest", new { id = item.LabTestID }, new { @class = "genric-btn danger" })
                             </td>
                         </tr>
                     }

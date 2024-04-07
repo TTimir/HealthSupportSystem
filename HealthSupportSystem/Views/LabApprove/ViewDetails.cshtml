@@ -1,0 +1,199 @@
+﻿@model IEnumerable<DatabaseLayer.PatientTestDetailTable>
+
+@{
+    ViewBag.Title = "Report";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealMate Health Solution</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+
+    <link href="~/Content/DashboardTemplate/css/viewstyles.css" rel="stylesheet" />
+    <link href="~/Content/DashboardTemplate/css/bootstrap-invoice.min.css" rel="stylesheet" />
+    <link rel="icon" href="~/Content/FrontTemplate/img/sub_logo.png" type="image/png">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" />
+    <!-- Google Fonts Roboto -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <section id="invoice">
+        <div class="container my-4 py-4">
+            <div class="text-center">
+                <img src="~/Content/FrontTemplate/img/logo_dark.png" alt="">
+            </div>
+            <div class="text-center border-top border-bottom my-5 py-3">
+                <h4 class="display-5 fw-bold">Lab Test Report</h4>
+                <p class="m-0">Appointment No: <span class="text-black font-weight-bold">@ViewBag.AppointmentNo</span></p>
+                <p class="m-0">Appointment Date: <span class="text-black font-weight-bold">@ViewBag.AppointmentDate</span></p>
+            </div>
+
+            <div class="d-md-flex justify-content-between">
+                <div>
+                    <p class="text-primary">Lab Details</p>
+                    <img src="@Url.Content(ViewBag.LabLogo)" height="60" width="60" />
+                    <br />
+                    <p class="m-0">Lab Name: <span class="text-black font-weight-bold">@ViewBag.Lab</span></p>
+                    <p class="m-0">Lab Email: <span class="text-black font-weight-bold">@ViewBag.LabEmail</span></p>
+                    <p class="m-0">Lab Address: <span class="text-black font-weight-bold">@ViewBag.LabAddress</span></p>
+                    <ul class="list-unstyled">
+                        <li class="d-flex align-items-center">
+                            <span class="mr-2">Test Name:</span>
+                            <h5 class="text-black mb-0"> &nbsp; @ViewBag.TestName</h5>
+                        </li>
+                    </ul>
+
+                </div>
+                <div class="mt-5 mt-md-0">
+                    <p class="text-primary">Patient Details</p>
+                    <img src="@Url.Content(ViewBag.PatientLogo)" height="60" width="60" />
+                    <br />
+                    <p class="m-0">Patient Name: <span class="text-black font-weight-bold">@ViewBag.Patient</span></p>
+                    <p class="m-0">Patient Email: <span class="text-black font-weight-bold">@ViewBag.PatientEmail</span></p>
+                    <ul class="list-unstyled">
+                        <li class="text-muted"><i class="fas fa-circle" style="color:#84B0CA ;"></i> <span class="me-1 fw-bold">Status:</span><span class="badge bg-success text-white fw-bold"> Complete</span></li>
+                        <li class="d-flex align-items-center">
+                            <div id="stage">
+                                <a class="btn btn-light text-capitalize border-0" data-mdb-ripple-color="dark" onclick="window.print()"><i class="fas fa-print text-primary"></i> Print</a>
+                                &nbsp;&nbsp; <a class="btn btn-light text-capitalize" id="pdfButton" data-mdb-ripple-color="dark"><i class="far fa-file-pdf text-danger"></i> Export</a>
+                                <script>
+                                    document.getElementById('pdfButton').addEventListener('click', function () {
+                                        const element = document.body;
+                                        html2pdf()
+                                            .from(element)
+                                            .toPdf()
+                                            .get('pdf')
+                                            .then(function (pdf) {
+                                                window.open(pdf.output('bloburl'), '_blank');
+                                            });
+                                    });
+                                </script>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <h2>Report Details</h2>
+            <table class="table border my-5">
+                <thead>
+                    <tr class="bg-primary-subtle">
+                        <th>
+                            Details
+                        </th>
+                        <th>
+                            Min Value
+                        </th>
+                        <th>
+                            Max Value
+                        </th>
+                        <th>
+                            Patient Value
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr scope="row">
+                            <td>
+                                @Html.DisplayFor(modelItem => item.LabTestDetailsTable.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.LabTestDetailsTable.MinValue)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.LabTestDetailsTable.MaxValue)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PatientValue)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+            <div class="d-md-flex justify-content-between my-5">
+                <div>
+                    <h5 class="fw-bold my-4">Contact Us</h5>
+                    <ul class="list-unstyled">
+                        <li>
+                            <iconify-icon class="social-icon text-primary fs-5 me-2" icon="mdi:location"
+                                          style="vertical-align:text-bottom"></iconify-icon>JP Nagar, Bangaluru, India, 560069
+                        </li>
+                        <li>
+                            <iconify-icon class="social-icon text-primary fs-5 me-2" icon="solar:phone-bold"
+                                          style="vertical-align:text-bottom"></iconify-icon> +91 (635) 2204 102
+                        </li>
+                        <li>
+                            <iconify-icon class="social-icon text-primary fs-5 me-2" icon="ic:baseline-email"
+                                          style="vertical-align:text-bottom"></iconify-icon> <a href="mailto:advice@healmate.com">advice@healmate.com</a>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="fw-bold my-4">Payment Info</h5>
+                    <ul class="list-unstyled">
+                        <li><span class="fw-semibold">Account No: </span> @ViewBag.AppointmentNo</li>
+                        <li><span class="fw-semibold">Patient Name: </span> @ViewBag.Patient</li>
+                        <li><span class="fw-semibold">Branch Name: </span> N/A </li>
+
+                    </ul>
+                </div>
+
+
+            </div>
+
+            <div class="text-center my-4">
+                <p class="text-muted">
+                    <span class="fw-semibold">NOTICE: </span> This is an Online Copy Of @ViewBag.Lab Test report
+                </p>
+            </div>
+
+            <div id="footer-bottom">
+                <div class="container border-top">
+                    <div class="row mt-3">
+                        <div class="col-md-6 copyright">
+                            <p>
+                                © 2024 @ViewBag.Lab. <a href="#!" target="_blank"
+                                                        class="text-decoration-none text-black-50">Terms & Conditions</a>
+                            </p>
+                        </div>
+                        <div class="col-md-6 text-md-end">
+                            <p>
+                                Stay Safe and Healthy 💖
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+            crossorigin="anonymous"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.1/html2pdf.bundle.min.js"></script>
+
+</body>
+
+</html>

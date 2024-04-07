@@ -71,7 +71,7 @@
                                 @{
                                     if (item.IsComplete == true && item.IsFeeSubmit == true)
                                     {
-                                        <h4 class="bold" style="color: green;">Complete</h4>
+                                        <h4 class="bold" style="color: forestgreen;">Complete</h4>
                                     }
                                     else if (item.IsComplete == false && item.IsFeeSubmit == true && item.AppointDate < DateTime.Now)
                                     {
@@ -83,7 +83,7 @@
                                     }
                                     else if (item.IsComplete == false && item.IsFeeSubmit == false && item.AppointDate < DateTime.Now)
                                     {
-                                        <h4 class="bold" style="color: red;">Rejected</h4>
+                                        <h4 class="bold" style="color: darkred;">Rejected</h4>
                                     }
                                 }
                             </td>

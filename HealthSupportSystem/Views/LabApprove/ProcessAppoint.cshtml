@@ -1,0 +1,80 @@
+﻿@model IEnumerable<HealthSupportSystem.Models.PatientAppointmentReportMV>
+
+@{
+    ViewBag.Title = "Report";
+}
+
+<h2>Enter Patient Report Details: @ViewBag.TestName</h2
+<h2 class="text-danger">@ViewBag.Message</h2>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <input type="submit" class="form-control col-md-3 btn btn-success" style="float:right;" value="Submit Report Details" />
+            <h3 class="text-black">@ViewBag.TestName</h3>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th style="display:none;">
+                                LabAppointID
+                            </th>
+                            <th style="display:none;">
+
+                                LabTestDetailID
+                            </th>
+                            <th>
+                                Report Detail
+                            </th>
+                            <th>
+                                Min Value
+                            </th>
+                            <th>
+                                Max Value
+                            </th>
+                            <th>
+                                Patient Value
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td style="display:none;">
+                                    @Html.HiddenFor(modelItem => item.LabAppointID)
+                                    @Html.DisplayFor(modelItem => item.LabAppointID)
+                                </td>
+                                <td style="display:none;">
+                                    @Html.HiddenFor(modelItem => item.LabTestDetailID)
+                                    @Html.DisplayFor(modelItem => item.LabTestDetailID)
+                                </td>
+                                <td>
+                                    @Html.HiddenFor(modelItem => item.DetailName)
+                                    @Html.DisplayFor(modelItem => item.DetailName)
+                                </td>
+                                <td>
+                                    @Html.HiddenFor(modelItem => item.MinValue)
+                                    @Html.DisplayFor(modelItem => item.MinValue)
+                                </td>
+                                <td>
+                                    @Html.HiddenFor(modelItem => item.MaxValue)
+                                    @Html.DisplayFor(modelItem => item.MaxValue)
+                                </td>
+                                <td>
+                                    @Html.EditorFor(modelItem => item.PatientValue)
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+}

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI.WebControls;
@@ -200,5 +201,78 @@ namespace HealthSupportSystem.Controllers
             }
             return View(testDetails);
         }
+
+        // GET: LabSetting/Delete/5
+        public ActionResult Delete(int? id)
+        {
+            if (string.IsNullOrEmpty(Convert.ToString(Session["UserName"])))
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            LabTestDetailsTable labTestDetailsTable = db.LabTestDetailsTables.Find(id);
+            if (labTestDetailsTable == null)
+            {
+                return HttpNotFound();
+            }
+            return View(labTestDetailsTable);
+        }
+
+        // POST: LabSetting/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            if (string.IsNullOrEmpty(Convert.ToString(Session["UserName"])))
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            LabTestDetailsTable labTestDetailsTable = db.LabTestDetailsTables.Find(id);
+            db.LabTestDetailsTables.Remove(labTestDetailsTable);
+            db.SaveChanges();
+            return RedirectToAction("TestDetails", new { id = labTestDetailsTable.LabTestID });
+        }
+
+        // GET: LabSetting/DeleteTest/5
+        public ActionResult DeleteTest(int? id)
+        {
+            if (string.IsNullOrEmpty(Convert.ToString(Session["UserName"])))
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            LabTestTable labTestTable = db.LabTestTables.Find(id);
+            if (labTestTable == null)
+            {
+                return HttpNotFound();
+            }
+            return View(labTestTable);
+        }
+
+        [HttpPost, ActionName("DeleteTest")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteTestConfirmed(int id)
+        {
+            if (string.IsNullOrEmpty(Convert.ToString(Session["UserName"])))
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            LabTestTable labTestTable = db.LabTestTables.Find(id);
+            if (labTestTable == null)
+            {
+                return HttpNotFound();
+            }
+            db.LabTestTables.Remove(labTestTable);
+            db.SaveChanges();
+            return RedirectToAction("LabAllTest");
+        }
+
+
     }
 }

@@ -1,0 +1,64 @@
+/*--------------------------------------------------------------
+Styles
+--------------------------------------------------------------*/
+
+/* Fonts */
+:root {
+    --body-font: 'Poppins', sans-serif;
+}
+
+/* Bootstrap Override */
+body {
+    --bs-font-sans-serif: 'Poppins', sans-serif;
+    --bs-body-font-family: var(--bs-font-sans-serif);
+    --bs-body-font-size: 1rem;
+    --bs-body-font-weight: 400;
+    --bs-body-line-height: 2;
+    --bs-body-color: #41403E;
+    --bs-primary: #0051D2;
+    --bs-primary-rgb: 0, 112, 228;
+    --bs-border-color: #eeeeee;
+}
+
+.new-print-button {
+    background-color: #0051d2dc;
+    background-image: url(http://uploads.webflow.com/58403463926ee7da5fc95c2c/5840549e41ed56e151574a8c_print%20button%20icon%203-white.svg), url(http://uploads.webflow.com/58403463926ee7da5fc95c2c/5840549e316b850d0aa56057_print%20button%20icon%202-white.svg);
+    background-position-x: 17px, 17px;
+    background-position-y: -122%, 47%;
+    background-repeat: no-repeat;
+    background-size: 33px, 34px;
+    border-radius: 3px;
+    box-sizing: border-box;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    display: block;
+    font-family: "Open Sans", sans-serif;
+    font-size: 23px;
+    font-weight: normal;
+    height: 64px;
+    line-height: 24px;
+    margin: 0 10px 0 10px;
+    padding: 20px 40px 20px 62px;
+    text-align: center;
+    text-decoration: none;
+    text-size-adjust: 100%;
+    transition-delay: 1s, 0s, 0s, 0s, 0s, 0s;
+    transition-duration: 0.2s, 0.2s, 0.2s, 0.2s, 0.2s, 0.2s;
+    transition-property: background-color, background-position, opacity, color, text-shadow, box-shadow;
+    transition-timing-function: ease, ease, ease, ease, ease, ease;
+    width: 276.109px;
+}
+
+    .new-print-button:hover {
+        background-position: 16px 45%, 17px 218%;
+        background-color: #0051D2;
+    }
+
+/* The following code is for pen layout only */
+
+#stage {
+    height: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

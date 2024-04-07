@@ -134,6 +134,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LabAppointmentController.cs" />
     <Compile Include="Controllers\LabAppointStatusController.cs" />
+    <Compile Include="Controllers\LabApproveController.cs" />
     <Compile Include="Controllers\LabSettingController.cs" />
     <Compile Include="Controllers\LabTimeSlotTablesController.cs" />
     <Compile Include="Controllers\PatientAppointmentController.cs" />
@@ -143,6 +144,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\PatientAppointmentReportMV.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -215,11 +217,13 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\DashboardTemplate\css\bootstrap-invoice.min.css" />
     <Content Include="Content\DashboardTemplate\css\bootstrap.min.css" />
     <Content Include="Content\DashboardTemplate\css\bootstrap\mixins\_lists.css" />
     <Content Include="Content\DashboardTemplate\css\owl.carousel.min.css" />
     <Content Include="Content\DashboardTemplate\css\Sidebar.css" />
     <Content Include="Content\DashboardTemplate\css\style.css" />
+    <Content Include="Content\DashboardTemplate\css\viewstyles.css" />
     <Content Include="Content\DashboardTemplate\fonts\icomoon\demo-files\demo.css" />
     <Content Include="Content\DashboardTemplate\fonts\icomoon\demo-files\demo.js" />
     <Content Include="Content\DashboardTemplate\fonts\icomoon\demo.html" />
@@ -783,14 +787,28 @@
     <Content Include="Views\LabAppointStatus\CompleteAppointment.cshtml" />
     <Content Include="Views\LabAppointStatus\CancelAppointment.cshtml" />
     <Content Include="Views\LabAppointStatus\AllAppointment.cshtml" />
+    <Content Include="Views\DoctorApprove\PendingAppoint.cshtml" />
+    <Content Include="Views\DoctorApprove\ChangeStatus.cshtml" />
+    <Content Include="Views\DoctorApprove\CurrentAppoint.cshtml" />
+    <Content Include="Views\DoctorApprove\ProcessAppointment.cshtml" />
+    <Content Include="Views\DoctorApprove\AllAppoint.cshtml" />
+    <Content Include="Views\DoctorApprove\CompleteAppoint.cshtml" />
+    <Content Include="Views\LabApprove\ChangeStatus.cshtml" />
+    <Content Include="Views\LabApprove\PendingAppoint.cshtml" />
+    <Content Include="Views\LabApprove\CompleteAppoint.cshtml" />
+    <Content Include="Views\LabApprove\CurrentAppoint.cshtml" />
+    <Content Include="Views\LabApprove\AllAppoint.cshtml" />
+    <Content Include="Views\LabApprove\ProcessAppoint.cshtml" />
+    <Content Include="Views\LabSetting\Delete.cshtml" />
+    <Content Include="Views\LabSetting\DeleteTest.cshtml" />
+    <Content Include="Views\LabApprove\ViewDetails.cshtml" />
+    <Content Include="Views\DoctorApprove\ViewDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\DoctorDocuments\" />
     <Folder Include="Content\DoctorImages\" />
     <Folder Include="Content\PatientImages\" />
-    <Folder Include="Models\" />
-    <Folder Include="Views\DoctorApprove\" />
     <Folder Include="Views\LabAppointment\" />
   </ItemGroup>
   <ItemGroup>

@@ -1,10 +1,10 @@
-﻿@model IEnumerable<DatabaseLayer.LabAppointTable>
+﻿@model IEnumerable<DatabaseLayer.DoctorAppointTable>
 
 @{
-    ViewBag.Title = "Cancel Appointment";
+    ViewBag.Title = "Current Appointment";
 }
 
-<h2>Cancel/In-Complete Appointment's</h2>
+<h2>Current Appointment's</h2>
 <script src="~/Scripts/jquery-3.4.1.min.js"></script>
 
 <div class="card shadow mb-4">
@@ -17,19 +17,16 @@
                 <thead>
                     <tr>
                         <th>
-                            Lab
+                            Doctor
+                        </th>
+                        <th>
+                            Time Slot
                         </th>
                         <th>
                             Patient
                         </th>
                         <th>
-                            Test
-                        </th>
-                        <th>
                             Appointment Date
-                        </th>
-                        <th>
-                            Time Slot
                         </th>
                         <th>
                             Transection No
@@ -40,6 +37,7 @@
                         <th>
                             Status
                         </th>
+                        <th>Action's</th>
                     </tr>
                 </thead>
                 <tbody id="searchValue">
@@ -47,19 +45,16 @@
                     {
                         <tr>
                             <td>
-                                @Html.DisplayFor(modelItem => item.LabTable.Name)
+                                @Html.DisplayFor(modelItem => item.DoctorTable.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DoctorTimeSlotTable.Name)
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.PatientTable.Name)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.LabTestTable.Name)
-                            </td>
-                            <td>
                                 @Html.DisplayFor(modelItem => item.AppointDate)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.LabTimeSlotTable.Name)
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.TransectionNo)
@@ -68,16 +63,10 @@
                                 @Html.DisplayFor(modelItem => item.Description)
                             </td>
                             <td>
-                                @{
-                                    if (item.IsComplete == false && item.IsFeeSubmit == false && item.AppointDate > DateTime.Now)
-                                    {
-                                        <h4 class="bold" style="color: darkred;">Reject</h4>
-                                    }
-                                    else if (item.IsComplete == false && item.IsFeeSubmit == true && item.AppointDate < DateTime.Now)
-                                    {
-                                        <h4 class="bold" style="color: red;">Cancel</h4>
-                                    }
-                                }
+                                <h4 class="bold" style="color: darkorange;">Process</h4>
+                            </td>
+                            <td>
+                                @Html.ActionLink("Process", "ProcessAppointment", new { id = item.DoctorAppointID }, new { @class = "genric-btn primary" })
                             </td>
                         </tr>
                     }
