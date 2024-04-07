@@ -72,7 +72,7 @@
                                 <h4 class="bold" style="color: forestgreen;">Complete</h4>
                             </td>
                             <td>
-                                @Html.ActionLink("Print Report", "PrintReport", new { id = item.LabTestID }, new { @class = "genric-btn success" })
+                                @Html.ActionLink("Print", "ViewDetails", "LabApprove", new { id = item.LabAppointID }, new { @class = "genric-btn info" })
                             </td>
                         </tr>
                     }

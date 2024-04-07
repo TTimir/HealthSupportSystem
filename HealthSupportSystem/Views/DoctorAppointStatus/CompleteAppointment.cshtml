@@ -40,6 +40,7 @@
                         <th>
                             Status
                         </th>
+                        <th>Action's</th>
                     </tr>
                 </thead>
                 <tbody id="searchValue">
@@ -68,7 +69,10 @@
                                 @Html.DisplayFor(modelItem => item.DoctorComment)
                             </td>
                             <td>
-                                    <h4 class="bold" style="color: forestgreen;">Complete</h4>
+                                <h4 class="bold" style="color: forestgreen;">Complete</h4>
+                            </td>
+                            <td>
+                                @Html.ActionLink("Print", "ViewDetails", "DoctorApprove", new { id = item.DoctorAppointID }, new { @class = "genric-btn info" })
                             </td>
                         </tr>
                     }

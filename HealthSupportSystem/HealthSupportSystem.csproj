@@ -132,7 +132,6 @@
     <Compile Include="Controllers\DoctorApproveController.cs" />
     <Compile Include="Controllers\DoctorTimeSlotTablesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\LabAppointmentController.cs" />
     <Compile Include="Controllers\LabAppointStatusController.cs" />
     <Compile Include="Controllers\LabApproveController.cs" />
     <Compile Include="Controllers\LabSettingController.cs" />
@@ -803,13 +802,13 @@
     <Content Include="Views\LabSetting\DeleteTest.cshtml" />
     <Content Include="Views\LabApprove\ViewDetails.cshtml" />
     <Content Include="Views\DoctorApprove\ViewDetails.cshtml" />
+    <Content Include="Views\LabSetting\AllTest.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\DoctorDocuments\" />
     <Folder Include="Content\DoctorImages\" />
     <Folder Include="Content\PatientImages\" />
-    <Folder Include="Views\LabAppointment\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />

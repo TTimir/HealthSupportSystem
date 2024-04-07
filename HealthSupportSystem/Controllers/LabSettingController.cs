@@ -32,6 +32,17 @@ namespace HealthSupportSystem.Controllers
             return View(testlist);
         }
 
+        public ActionResult AllTest()
+        {
+            if (string.IsNullOrEmpty(Convert.ToString(Session["UserName"])))
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            var testlist = db.LabTestTables.ToList();
+
+            return View(testlist);
+        }
+
         public ActionResult AddTest()
         {
             if (string.IsNullOrEmpty(Convert.ToString(Session["UserName"])))
