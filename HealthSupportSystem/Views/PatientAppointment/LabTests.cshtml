@@ -1,15 +1,15 @@
 ﻿@model IEnumerable<DatabaseLayer.LabTestTable>
 
 @{
-    ViewBag.Title = " All Test";
+    ViewBag.Title = "LabTests";
 }
 
-<h2>All Test</h2>
+<h2>Select Your Test</h2>
 <script src="~/Scripts/jquery-3.4.1.min.js"></script>
 
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        @Html.ActionLink("New Test", "AddTest", "LabSetting", new { @style = "float:left;", @class = "genric-btn primary" })
+        <img src="~/Content/DashboardTemplate/images/lab_v.jpg" alt="Lab Logo" style="float:left; margin-right: 10px; height: 52px; width: 52px;">
         <input type="text" id="search" name="search" class="form-control col-md-3" style="float:right;" placeholder="🔍 Search here" />
     </div>
     <div class="card-body">
@@ -23,7 +23,7 @@
                         <th>
                             Cost
                         </th>
-                        <th>Action''s</th>
+                        <th>Action's</th>
                     </tr>
                 </thead>
                 <tbody id="searchValue">
@@ -37,14 +37,11 @@
                                 @String.Format("₹{0:N2}", item.Cost)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.LabTable.Name)
-                            </td>
-                            <td>
-                                @Html.ActionLink("Edit", "EditTest", new { id = item.LabTestID }, new { @class = "genric-btn success" })
-                                @Html.ActionLink("Details", "TestDetails", new { id = item.LabTestID }, new { @class = "genric-btn info" })
+                                @Html.ActionLink("Select", "LabAppointment", new { id = item.LabTestID }, new { @class = "genric-btn success" })
                             </td>
                         </tr>
                     }
+
                 </tbody>
             </table>
         </div>
@@ -61,4 +58,3 @@
         });
     });
 </script>
-

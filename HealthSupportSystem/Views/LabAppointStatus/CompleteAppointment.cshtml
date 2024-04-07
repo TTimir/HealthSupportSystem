@@ -1,15 +1,14 @@
-﻿@model IEnumerable<DatabaseLayer.LabTable>
+﻿@model IEnumerable<DatabaseLayer.LabAppointTable>
 
 @{
-    ViewBag.Title = "Labs";
+    ViewBag.Title = "Complete Appointment";
 }
 
-<h2>All Labs</h2>
+<h2>Complete Appointment's</h2>
 <script src="~/Scripts/jquery-3.4.1.min.js"></script>
 
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <img src="~/Content/DashboardTemplate/images/lab_v.jpg" alt="Lab Logo" style="float:left; margin-right: 10px; height: 52px; width: 52px;">
         <input type="text" id="search" name="search" class="form-control col-md-3" style="float:right;" placeholder="🔍 Search here" />
     </div>
     <div class="card-body">
@@ -21,19 +20,25 @@
                             Lab
                         </th>
                         <th>
-                            Photo
+                            Patient
                         </th>
                         <th>
-                            Contact No
+                            Test
                         </th>
                         <th>
-                            Phone No
+                            Appointment Date
                         </th>
                         <th>
-                            Email Address
+                            Time Slot
                         </th>
                         <th>
-                            About Lab
+                            Transection No
+                        </th>
+                        <th>
+                            Reason
+                        </th>
+                        <th>
+                            Status
                         </th>
                         <th>Action's</th>
                     </tr>
@@ -43,35 +48,34 @@
                     {
                         <tr>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Name)
+                                @Html.DisplayFor(modelItem => item.LabTable.Name)
                             </td>
                             <td>
-                                @{ if (!string.IsNullOrEmpty(item.Photo))
-                                    {
-                                        <img src="@Url.Content(item.Photo)" alt="Image" style="width:50px;height:50px;max-width:100%;height:auto;" />
-                                    }
-                                }
+                                @Html.DisplayFor(modelItem => item.PatientTable.Name)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.ContactNo)
+                                @Html.DisplayFor(modelItem => item.LabTestTable.Name)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.PhoneNo)
+                                @Html.DisplayFor(modelItem => item.AppointDate)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.EmailAddress)
+                                @Html.DisplayFor(modelItem => item.LabTimeSlotTable.Name)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.AboutLab)
+                                @Html.DisplayFor(modelItem => item.TransectionNo)
                             </td>
                             <td>
-                                @Html.ActionLink("Appointment", "LabTests", new { id = item.LabID }, new { @class = "genric-btn primary" })
-                                @*@Html.ActionLink("Details", "Details", new { id=item.LabID }) |
-                                    @Html.ActionLink("Delete", "Delete", new { id=item.LabID })*@
+                                @Html.DisplayFor(modelItem => item.Description)
+                            </td>
+                            <td>
+                                <h4 class="bold" style="color: blue;">Complete</h4>
+                            </td>
+                            <td>
+                                @Html.ActionLink("Print Report", "PrintReport", new { id = item.LabTestID }, new { @class = "genric-btn success" })
                             </td>
                         </tr>
                     }
-
                 </tbody>
             </table>
         </div>

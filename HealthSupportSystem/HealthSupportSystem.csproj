@@ -128,9 +128,12 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountTypeTablesController.cs" />
+    <Compile Include="Controllers\DoctorAppointStatusController.cs" />
+    <Compile Include="Controllers\DoctorApproveController.cs" />
     <Compile Include="Controllers\DoctorTimeSlotTablesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LabAppointmentController.cs" />
+    <Compile Include="Controllers\LabAppointStatusController.cs" />
     <Compile Include="Controllers\LabSettingController.cs" />
     <Compile Include="Controllers\LabTimeSlotTablesController.cs" />
     <Compile Include="Controllers\PatientAppointmentController.cs" />
@@ -768,6 +771,18 @@
     <Content Include="Views\PatientAppointment\DoctorAppointment.cshtml" />
     <Content Include="Views\PatientAppointment\DoctorProfile.cshtml" />
     <Content Include="Views\PatientAppointment\DoctorPendingAppoint.cshtml" />
+    <Content Include="Views\DoctorAppointStatus\PendingAppointment.cshtml" />
+    <Content Include="Views\DoctorAppointStatus\CurrentAppointment.cshtml" />
+    <Content Include="Views\DoctorAppointStatus\CompleteAppointment.cshtml" />
+    <Content Include="Views\DoctorAppointStatus\CancelAppointment.cshtml" />
+    <Content Include="Views\DoctorAppointStatus\AllAppointment.cshtml" />
+    <Content Include="Views\PatientAppointment\LabAppointment.cshtml" />
+    <Content Include="Views\PatientAppointment\LabTests.cshtml" />
+    <Content Include="Views\LabAppointStatus\PendingAppointment.cshtml" />
+    <Content Include="Views\LabAppointStatus\CurrentAppointment.cshtml" />
+    <Content Include="Views\LabAppointStatus\CompleteAppointment.cshtml" />
+    <Content Include="Views\LabAppointStatus\CancelAppointment.cshtml" />
+    <Content Include="Views\LabAppointStatus\AllAppointment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -775,6 +790,7 @@
     <Folder Include="Content\DoctorImages\" />
     <Folder Include="Content\PatientImages\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\DoctorApprove\" />
     <Folder Include="Views\LabAppointment\" />
   </ItemGroup>
   <ItemGroup>
