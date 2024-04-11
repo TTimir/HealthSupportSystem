@@ -11,7 +11,6 @@ namespace DatabaseLayer
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Web;
 
@@ -22,23 +21,21 @@ namespace DatabaseLayer
         {
             this.DoctorAppointTables = new HashSet<DoctorAppointTable>();
             this.LabAppointTables = new HashSet<LabAppointTable>();
+            this.quiz_Result = new HashSet<quiz_Result>();
         }
     
         public int PatientID { get; set; }
         public int UserID { get; set; }
-        [Required(ErrorMessage = "*Required!")]
         public string Name { get; set; }
-        [Required(ErrorMessage = "*Required!")]
         public string ContactNo { get; set; }
-        [Required(ErrorMessage = "*Required!")]
-        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
         public string Description { get; set; }
         public string Photo { get; set; }
-        [Required(ErrorMessage = "*Required!")]
         public Nullable<int> GenderID { get; set; }
         [NotMapped]
         public HttpPostedFileBase LogoFile { get; set; }
+        [NotMapped]
+        public HttpPostedFileBase DocumentFile { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DoctorAppointTable> DoctorAppointTables { get; set; }
@@ -46,5 +43,7 @@ namespace DatabaseLayer
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LabAppointTable> LabAppointTables { get; set; }
         public virtual UserTable UserTable { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<quiz_Result> quiz_Result { get; set; }
     }
 }

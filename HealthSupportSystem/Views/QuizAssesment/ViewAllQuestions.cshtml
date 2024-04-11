@@ -1,0 +1,70 @@
+﻿@model IEnumerable<DatabaseLayer.quiz_Questions>
+
+@{
+    ViewBag.Title = "ViewAllQuestions";
+}
+
+<div class="col-12">
+    <div class="bg-secondary opacity-75 bg-gradient p-3 text-center mb-2 text-white fw-bolder fs-3">
+        All Questions
+    </div>
+    <hr>
+</div>
+
+<table class="table table-responsive">
+    <tr>
+        <th>
+            Question
+        </th>
+        <th>
+            Option A
+        </th>
+        <th>
+            Option B
+        </th>
+        <th>
+            Option C
+        </th>
+        <th>
+            Option D
+        </th>
+        <th>
+            Correct Option
+        </th>
+        <th>
+            Category Name
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.q_text)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QA)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QB)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QC)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QD)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QCorrectAns)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.quiz_Category.Cat_name)
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "Delete", new { id = item.q_id }, new { @class = "genric-btn danger" })
+            </td>
+        </tr>
+    }
+
+</table>

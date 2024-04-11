@@ -12,14 +12,15 @@ namespace DatabaseLayer
     using System;
     using System.Collections.Generic;
     
-    public partial class PatientTestDetailTable
+    public partial class quiz_Result
     {
-        public int LabAppointDetailID { get; set; }
-        public int LabAppointID { get; set; }
-        public int LabTestDetailID { get; set; }
-        public int PatientValue { get; set; }
+        public int ExamId { get; set; }
+        public Nullable<System.DateTime> Exam_Date { get; set; }
+        public Nullable<int> Exam_fk_stud { get; set; }
+        public string Exam_name { get; set; }
+        public Nullable<int> Patient_Score { get; set; }
+        public string Patient_name { get; set; }
     
-        public virtual LabAppointTable LabAppointTable { get; set; }
-        public virtual LabTestDetailsTable LabTestDetailsTable { get; set; }
+        public virtual PatientTable PatientTable { get; set; }
     }
 }

@@ -1,0 +1,50 @@
+﻿@model IEnumerable<DatabaseLayer.quiz_Result>
+
+@{
+    ViewBag.Title = "Report";
+}
+
+
+<div class="col-12">
+    <div class="bg-secondary opacity-75 bg-gradient p-3 text-center mb-2 text-white fw-bolder fs-3">
+        Patient Self-Assesment Report
+    </div>
+    <hr>
+</div>
+<table class="table p-4">
+    <tr>
+        <th>
+            Patient Name
+        </th>
+        <th>
+            Exam Name
+        </th>
+        <th>
+            Exam Date
+        </th>
+        <th>
+            Patient Score
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Patient_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Exam_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Exam_Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Patient_Score)
+            </td>
+        </tr>
+    }
+
+</table>

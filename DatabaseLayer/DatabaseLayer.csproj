@@ -103,6 +103,15 @@
       <DependentUpon>HealthSupportSystemModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="quiz_Category.cs">
+      <DependentUpon>HealthSupportSystemModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="quiz_Questions.cs">
+      <DependentUpon>HealthSupportSystemModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="quiz_Result.cs">
+      <DependentUpon>HealthSupportSystemModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="sysdiagram.cs">
       <DependentUpon>HealthSupportSystemModel.tt</DependentUpon>
     </Compile>

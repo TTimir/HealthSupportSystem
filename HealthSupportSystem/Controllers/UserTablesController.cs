@@ -25,6 +25,40 @@ namespace HealthSupportSystem.Controllers
             return View(userTables.ToList());
         }
 
+        public ActionResult DoctorList()
+        {
+            if (string.IsNullOrEmpty(Convert.ToString(Session["UserName"])))
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            // Filter users based on UserTypeID
+            var doctorList = db.UserTables.Where(u => u.UserTypeID == 2).ToList();
+            return View(doctorList);
+        }
+
+        public ActionResult PendingRequests()
+        {
+            if (string.IsNullOrEmpty(Convert.ToString(Session["UserName"])))
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            // Filter doctors based on UserTypeID and IsVerified status
+            var pendingDoctors = db.UserTables.Where(u => u.UserTypeID == 2 && u.IsVerified == false).ToList();
+            return View(pendingDoctors);
+        }
+
+        public ActionResult PatientList()
+        {
+            if (string.IsNullOrEmpty(Convert.ToString(Session["UserName"])))
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            // Filter patients based on UserTypeID
+            var patientList = db.UserTables.Where(u => u.UserTypeID == 4).ToList();
+            return View(patientList);
+        }
+
+
         // GET: UserTables/Details/5
         public ActionResult Details(int? id)
         {

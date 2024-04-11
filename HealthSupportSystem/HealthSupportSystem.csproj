@@ -137,12 +137,14 @@
     <Compile Include="Controllers\LabSettingController.cs" />
     <Compile Include="Controllers\LabTimeSlotTablesController.cs" />
     <Compile Include="Controllers\PatientAppointmentController.cs" />
+    <Compile Include="Controllers\QuizAssesmentController.cs" />
     <Compile Include="Controllers\UserTablesController.cs" />
     <Compile Include="Controllers\UserTypeTablesController.cs" />
     <Compile Include="FileHelpers.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CryptMV.cs" />
     <Compile Include="Models\PatientAppointmentReportMV.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -229,6 +231,8 @@
     <Content Include="Content\DashboardTemplate\fonts\icomoon\fonts\icomoon.svg" />
     <Content Include="Content\DashboardTemplate\fonts\icomoon\Read Me.txt" />
     <Content Include="Content\DashboardTemplate\fonts\icomoon\style.css" />
+    <Content Include="Content\DashboardTemplate\images\dbg.jpg" />
+    <Content Include="Content\DashboardTemplate\images\dbg2.png" />
     <Content Include="Content\DashboardTemplate\images\doc_v.jpg" />
     <Content Include="Content\DashboardTemplate\images\doc_v2.jpg" />
     <Content Include="Content\DashboardTemplate\images\lab_v.jpg" />
@@ -238,11 +242,14 @@
     <Content Include="Content\DashboardTemplate\images\person_3.jpg" />
     <Content Include="Content\DashboardTemplate\images\person_4.jpg" />
     <Content Include="Content\DashboardTemplate\images\person_profile.jpg" />
+    <Content Include="Content\DashboardTemplate\images\quizbg.png" />
     <Content Include="Content\DashboardTemplate\js\bootstrap.min.js" />
     <Content Include="Content\DashboardTemplate\js\jquery-3.3.1.min.js" />
     <Content Include="Content\DashboardTemplate\js\main.js" />
     <Content Include="Content\DashboardTemplate\js\owl.carousel.min.js" />
     <Content Include="Content\DashboardTemplate\js\popper.min.js" />
+    <Content Include="Content\DashboardTemplate\quizstyle.css" />
+    <Content Include="Content\DashboardTemplate\style.css" />
     <Content Include="Content\FrontTemplate\css\bootstrap.css" />
     <Content Include="Content\FrontTemplate\css\breadcrumb.css" />
     <Content Include="Content\FrontTemplate\css\counter-up\jquery.counterup.js" />
@@ -803,6 +810,16 @@
     <Content Include="Views\LabApprove\ViewDetails.cshtml" />
     <Content Include="Views\DoctorApprove\ViewDetails.cshtml" />
     <Content Include="Views\LabSetting\AllTest.cshtml" />
+    <Content Include="Views\QuizAssesment\Add_Category.cshtml" />
+    <Content Include="Views\QuizAssesment\Add_Questions.cshtml" />
+    <Content Include="Views\QuizAssesment\ExamDashboard.cshtml" />
+    <Content Include="Views\QuizAssesment\StartQuiz.cshtml" />
+    <Content Include="Views\QuizAssesment\EndExam.cshtml" />
+    <Content Include="Views\QuizAssesment\ViewAllQuestions.cshtml" />
+    <Content Include="Views\QuizAssesment\Report.cshtml" />
+    <Content Include="Views\UserTables\DoctorList.cshtml" />
+    <Content Include="Views\UserTables\PendingRequests.cshtml" />
+    <Content Include="Views\UserTables\PatientList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

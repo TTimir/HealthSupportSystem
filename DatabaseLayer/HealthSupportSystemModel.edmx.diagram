@@ -42,6 +42,12 @@
         <AssociationConnector Association="HealthSupportSysdbModel.FK_PatientTestDetailTable_LabTestDetailsTable" ManuallyRouted="false" />
         <AssociationConnector Association="HealthSupportSysdbModel.FK_PatientTable_UserTable" ManuallyRouted="false" />
         <AssociationConnector Association="HealthSupportSysdbModel.FK_UserTable_UserTypeTable" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="HealthSupportSysdbModel.quiz_Category" Width="1.5" PointX="5.25" PointY="1.75" />
+        <EntityTypeShape EntityType="HealthSupportSysdbModel.quiz_Result" Width="1.5" PointX="8.5" PointY="6.125" />
+        <AssociationConnector Association="HealthSupportSysdbModel.FK__quiz_Cate__Cat_f__656C112C" />
+        <AssociationConnector Association="HealthSupportSysdbModel.FK__quiz_Resu__Exam___628FA481" />
+        <EntityTypeShape EntityType="HealthSupportSysdbModel.quiz_Questions" Width="1.5" PointX="7.375" PointY="1.75" />
+        <AssociationConnector Association="HealthSupportSysdbModel.FK__quiz_Ques__q_fk___693CA210" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

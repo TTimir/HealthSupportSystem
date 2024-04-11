@@ -1,0 +1,48 @@
+﻿@model IEnumerable<DatabaseLayer.UserTable>
+
+@{
+    ViewBag.Title = "Requests";
+}
+
+<h2>Pending Requests</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Docotor Name
+        </th>
+        <th>
+            Email
+        </th>
+        <th>
+            Contact No
+        </th>
+        <th>
+            Is Verified
+        </th>
+        <th>Action's</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ContactNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsVerified)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.UserID }, new { @class = "genric-btn success" })
+            @Html.ActionLink("Details", "Details", new { id=item.UserID }, new { @class = "genric-btn info" })
+            @Html.ActionLink("Delete", "Delete", new { id=item.UserID }, new { @class = "genric-btn danger" })
+        </td>
+    </tr>
+}
+
+</table>

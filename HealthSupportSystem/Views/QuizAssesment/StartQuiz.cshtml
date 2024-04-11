@@ -1,0 +1,156 @@
+﻿@model DatabaseLayer.quiz_Questions
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>StartQuiz</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/DashboardTemplate/quizstyle.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- JavaScript for redirecting after 10 minutes and handling time over -->
+    <script>
+        $(document).ready(function () {
+            // Function to redirect after 10 minutes and handle time over
+            function redirectAfterTenMinutes() {
+                var timeDisplay = $('#time-display'); // Get the element to display time
+
+                var totalTime = 120; // Total time in seconds (10 minutes)
+                var remainingTime = totalTime;
+
+                var form = $('#quiz-form'); // Get the quiz form
+
+                var submitted = false; // Flag to ensure form submission happens only once
+
+                var intervalId = setInterval(function () {
+                    // Calculate remaining time
+                    var minutes = Math.floor(remainingTime / 60);
+                    var seconds = remainingTime % 60;
+
+                    // Display remaining time
+                    timeDisplay.text(minutes + ' minutes ' + seconds + ' seconds');
+
+                    // Update remaining time
+                    remainingTime--;
+
+                    // Check if time is up
+                    if (remainingTime < 0 && !submitted) {
+                        // Automatically submit the form with default answer (0)
+                        form.submit();
+                        submitted = true; // Set the flag to true to prevent multiple submissions
+                        clearInterval(intervalId); // Stop the countdown timer
+                    }
+                }, 1000); // Update time every second (1000 milliseconds)
+            }
+
+            // Call the function when the document is ready
+            redirectAfterTenMinutes();
+        });
+    </script>
+</head>
+<body>
+    @using (Html.BeginForm("StartQuiz", "QuizAssesment", FormMethod.Post, new { id = "quiz-form" }))
+    {
+        @Html.AntiForgeryToken()
+
+
+        <div class="container mt-5">
+            <div class="d-flex justify-content-center row">
+                <div class="col-md-10 col-lg-10">
+                    <div class="border">
+                        <div class="question bg-white p-3 border-bottom">
+                            <div class="flex-row mcq">
+                                <h4 style="text-align:center;color:green">Welcome to Quiz</h4>
+                                <h4 style="text-align:center;color:green">Best of Luck:)</h4>
+                            </div>
+                        </div>
+
+                        <div>Time Remaining: <span id="time-display"></span></div>
+
+                        <div class="question bg-white p-3 border-bottom">
+                            <div class="d-flex flex-row align-items-center question-title">
+                                <h3 class="text-primary">Q.</h3>
+                                <h5 class="mt-1 ml-2">@Html.DisplayFor(x => x.q_text)</h5>
+                            </div>
+                            <div class="ans ml-2">
+                                <label class="radio">
+                                    <span>
+                                        @Html.RadioButtonFor(x => x.QA, Model.q_id, new { id = "QA" })
+                                        <span class="checkmark"></span>
+                                        @Model.QA
+                                    </span>
+                                </label>
+                            </div>
+                            <div class="ans ml-2">
+                                <label class="radio">
+                                    <span>
+                                        @Html.RadioButtonFor(x => x.QB, Model.q_id, new { id = "QB" })
+                                        <span class="checkmark"></span>
+                                        @Model.QB
+                                    </span>
+                                </label>
+                            </div>
+                            <div class="ans ml-2">
+                                <label class="radio">
+                                    <span>
+                                        @Html.RadioButtonFor(x => x.QC, Model.q_id, new { id = "QC" })
+                                        <span class="checkmark"></span>
+                                        @Model.QC
+                                    </span>
+                                </label>
+                            </div>
+                            <div class="ans ml-2">
+                                <label class="radio">
+                                    <span>
+                                        @Html.RadioButtonFor(x => x.QD, Model.q_id, new { id = "QD" })
+                                        <span class="checkmark"></span>
+                                        @Model.QD
+                                    </span>
+                                </label>
+                            </div>
+
+
+                            <div class="row" style="display:none">
+                                @Html.TextBoxFor(x => x.QCorrectAns)
+                            </div>
+
+                        </div>
+                        <div class="d-flex flex-row justify-content-between align-items-center p-3 bg-white">
+                            <input type="submit" value="Next" class="btn btn-default" />
+                            @Html.ValidationMessage("", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('form').submit(function (e) {
+                // Check if any option is selected
+                if (!$('input[name="QA"]').is(':checked') &&
+                    !$('input[name="QB"]').is(':checked') &&
+                    !$('input[name="QC"]').is(':checked') &&
+                    !$('input[name="QD"]').is(':checked')) {
+                    // Display a warning message
+                    $('.text-danger').text("Please select an option.");
+                    e.preventDefault(); // Prevent form submission
+                }
+            });
+        });
+    </script>
+</body>
+</html>

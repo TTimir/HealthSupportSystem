@@ -151,6 +151,39 @@
           <Property Name="LabTestDetailID" Type="int" Nullable="false" />
           <Property Name="PatientValue" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="quiz_Category">
+          <Key>
+            <PropertyRef Name="Cat_id" />
+          </Key>
+          <Property Name="Cat_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Cat_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Cat_fk_DoctorID" Type="int" />
+          <Property Name="cat_encrypted_string" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="quiz_Questions">
+          <Key>
+            <PropertyRef Name="q_id" />
+          </Key>
+          <Property Name="q_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="q_text" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="QA" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="QB" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="QC" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="QD" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="QCorrectAns" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="q_fk_Cat_id" Type="int" />
+        </EntityType>
+        <EntityType Name="quiz_Result">
+          <Key>
+            <PropertyRef Name="ExamId" />
+          </Key>
+          <Property Name="ExamId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Exam_Date" Type="datetime" />
+          <Property Name="Exam_fk_stud" Type="int" />
+          <Property Name="Exam_name" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Patient_Score" Type="int" />
+          <Property Name="Patient_name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -181,6 +214,42 @@
           <Property Name="UserTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserType" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <Association Name="FK__quiz_Cate__Cat_f__656C112C">
+          <End Role="DoctorTable" Type="Self.DoctorTable" Multiplicity="0..1" />
+          <End Role="quiz_Category" Type="Self.quiz_Category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DoctorTable">
+              <PropertyRef Name="DoctorID" />
+            </Principal>
+            <Dependent Role="quiz_Category">
+              <PropertyRef Name="Cat_fk_DoctorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__quiz_Ques__q_fk___693CA210">
+          <End Role="quiz_Category" Type="Self.quiz_Category" Multiplicity="0..1" />
+          <End Role="quiz_Questions" Type="Self.quiz_Questions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="quiz_Category">
+              <PropertyRef Name="Cat_id" />
+            </Principal>
+            <Dependent Role="quiz_Questions">
+              <PropertyRef Name="q_fk_Cat_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__quiz_Resu__Exam___628FA481">
+          <End Role="PatientTable" Type="Self.PatientTable" Multiplicity="0..1" />
+          <End Role="quiz_Result" Type="Self.quiz_Result" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PatientTable">
+              <PropertyRef Name="PatientID" />
+            </Principal>
+            <Dependent Role="quiz_Result">
+              <PropertyRef Name="Exam_fk_stud" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_DoctorAppointTable_DoctorTable">
           <End Role="DoctorTable" Type="Self.DoctorTable" Multiplicity="1" />
           <End Role="DoctorAppointTable" Type="Self.DoctorAppointTable" Multiplicity="*" />
@@ -458,9 +527,24 @@
           <EntitySet Name="LabTimeSlotTable" EntityType="Self.LabTimeSlotTable" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PatientTable" EntityType="Self.PatientTable" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PatientTestDetailTable" EntityType="Self.PatientTestDetailTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="quiz_Category" EntityType="Self.quiz_Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="quiz_Questions" EntityType="Self.quiz_Questions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="quiz_Result" EntityType="Self.quiz_Result" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserTable" EntityType="Self.UserTable" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserTypeTable" EntityType="Self.UserTypeTable" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__quiz_Cate__Cat_f__656C112C" Association="Self.FK__quiz_Cate__Cat_f__656C112C">
+            <End Role="DoctorTable" EntitySet="DoctorTable" />
+            <End Role="quiz_Category" EntitySet="quiz_Category" />
+          </AssociationSet>
+          <AssociationSet Name="FK__quiz_Ques__q_fk___693CA210" Association="Self.FK__quiz_Ques__q_fk___693CA210">
+            <End Role="quiz_Category" EntitySet="quiz_Category" />
+            <End Role="quiz_Questions" EntitySet="quiz_Questions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__quiz_Resu__Exam___628FA481" Association="Self.FK__quiz_Resu__Exam___628FA481">
+            <End Role="PatientTable" EntitySet="PatientTable" />
+            <End Role="quiz_Result" EntitySet="quiz_Result" />
+          </AssociationSet>
           <AssociationSet Name="FK_DoctorAppointTable_DoctorTable" Association="Self.FK_DoctorAppointTable_DoctorTable">
             <End Role="DoctorTable" EntitySet="DoctorTable" />
             <End Role="DoctorAppointTable" EntitySet="DoctorAppointTable" />
@@ -607,6 +691,7 @@
           <NavigationProperty Name="UserTable" Relationship="Self.FK_DoctorTable_UserTable" FromRole="DoctorTable" ToRole="UserTable" />
           <NavigationProperty Name="DoctorTimeSlotTables" Relationship="Self.FK_DoctorTimeSlotTable_DoctorTable" FromRole="DoctorTable" ToRole="DoctorTimeSlotTable" />
           <Property Name="SupportiveDocument" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="quiz_Category" Relationship="HealthSupportSysdbModel.FK__quiz_Cate__Cat_f__656C112C" FromRole="DoctorTable" ToRole="quiz_Category" />
         </EntityType>
         <EntityType Name="DoctorTimeSlotTable">
           <Key>
@@ -727,6 +812,7 @@
           <NavigationProperty Name="GenderTable" Relationship="Self.FK_PatientTable_GenderTable" FromRole="PatientTable" ToRole="GenderTable" />
           <NavigationProperty Name="LabAppointTables" Relationship="Self.FK_LabAppointTable_PatientTable" FromRole="PatientTable" ToRole="LabAppointTable" />
           <NavigationProperty Name="UserTable" Relationship="Self.FK_PatientTable_UserTable" FromRole="PatientTable" ToRole="UserTable" />
+          <NavigationProperty Name="quiz_Result" Relationship="HealthSupportSysdbModel.FK__quiz_Resu__Exam___628FA481" FromRole="PatientTable" ToRole="quiz_Result" />
         </EntityType>
         <EntityType Name="PatientTestDetailTable">
           <Key>
@@ -1142,7 +1228,95 @@
             <End Role="UserTypeTable" EntitySet="UserTypeTables" />
             <End Role="UserTable" EntitySet="UserTables" />
           </AssociationSet>
+          <EntitySet Name="quiz_Category" EntityType="HealthSupportSysdbModel.quiz_Category" />
+          <EntitySet Name="quiz_Result" EntityType="HealthSupportSysdbModel.quiz_Result" />
+          <AssociationSet Name="FK__quiz_Cate__Cat_f__656C112C" Association="HealthSupportSysdbModel.FK__quiz_Cate__Cat_f__656C112C">
+            <End Role="DoctorTable" EntitySet="DoctorTables" />
+            <End Role="quiz_Category" EntitySet="quiz_Category" />
+          </AssociationSet>
+          <AssociationSet Name="FK__quiz_Resu__Exam___628FA481" Association="HealthSupportSysdbModel.FK__quiz_Resu__Exam___628FA481">
+            <End Role="PatientTable" EntitySet="PatientTables" />
+            <End Role="quiz_Result" EntitySet="quiz_Result" />
+          </AssociationSet>
+          <EntitySet Name="quiz_Questions" EntityType="HealthSupportSysdbModel.quiz_Questions" />
+          <AssociationSet Name="FK__quiz_Ques__q_fk___693CA210" Association="HealthSupportSysdbModel.FK__quiz_Ques__q_fk___693CA210">
+            <End Role="quiz_Category" EntitySet="quiz_Category" />
+            <End Role="quiz_Questions" EntitySet="quiz_Questions" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="quiz_Category">
+          <Key>
+            <PropertyRef Name="Cat_id" />
+          </Key>
+          <Property Name="Cat_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Cat_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Cat_fk_DoctorID" Type="Int32" />
+          <Property Name="cat_encrypted_string" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DoctorTable" Relationship="HealthSupportSysdbModel.FK__quiz_Cate__Cat_f__656C112C" FromRole="quiz_Category" ToRole="DoctorTable" />
+          <NavigationProperty Name="quiz_Questions" Relationship="HealthSupportSysdbModel.FK__quiz_Ques__q_fk___693CA210" FromRole="quiz_Category" ToRole="quiz_Questions" />
+        </EntityType>
+        <EntityType Name="quiz_Result">
+          <Key>
+            <PropertyRef Name="ExamId" />
+          </Key>
+          <Property Name="ExamId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Exam_Date" Type="DateTime" Precision="3" />
+          <Property Name="Exam_fk_stud" Type="Int32" />
+          <Property Name="Exam_name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Patient_Score" Type="Int32" />
+          <NavigationProperty Name="PatientTable" Relationship="HealthSupportSysdbModel.FK__quiz_Resu__Exam___628FA481" FromRole="quiz_Result" ToRole="PatientTable" />
+          <Property Name="Patient_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK__quiz_Cate__Cat_f__656C112C">
+          <End Type="HealthSupportSysdbModel.DoctorTable" Role="DoctorTable" Multiplicity="0..1" />
+          <End Type="HealthSupportSysdbModel.quiz_Category" Role="quiz_Category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DoctorTable">
+              <PropertyRef Name="DoctorID" />
+            </Principal>
+            <Dependent Role="quiz_Category">
+              <PropertyRef Name="Cat_fk_DoctorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__quiz_Resu__Exam___628FA481">
+          <End Type="HealthSupportSysdbModel.PatientTable" Role="PatientTable" Multiplicity="0..1" />
+          <End Type="HealthSupportSysdbModel.quiz_Result" Role="quiz_Result" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PatientTable">
+              <PropertyRef Name="PatientID" />
+            </Principal>
+            <Dependent Role="quiz_Result">
+              <PropertyRef Name="Exam_fk_stud" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="quiz_Questions">
+          <Key>
+            <PropertyRef Name="q_id" />
+          </Key>
+          <Property Name="q_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="q_text" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="QA" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="QB" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="QC" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="QD" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="QCorrectAns" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="q_fk_Cat_id" Type="Int32" />
+          <NavigationProperty Name="quiz_Category" Relationship="HealthSupportSysdbModel.FK__quiz_Ques__q_fk___693CA210" FromRole="quiz_Questions" ToRole="quiz_Category" />
+        </EntityType>
+        <Association Name="FK__quiz_Ques__q_fk___693CA210">
+          <End Type="HealthSupportSysdbModel.quiz_Category" Role="quiz_Category" Multiplicity="0..1" />
+          <End Type="HealthSupportSysdbModel.quiz_Questions" Role="quiz_Questions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="quiz_Category">
+              <PropertyRef Name="Cat_id" />
+            </Principal>
+            <Dependent Role="quiz_Questions">
+              <PropertyRef Name="q_fk_Cat_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1337,6 +1511,42 @@
               <MappingFragment StoreEntitySet="UserTypeTable">
                 <ScalarProperty Name="UserTypeID" ColumnName="UserTypeID" />
                 <ScalarProperty Name="UserType" ColumnName="UserType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="quiz_Category">
+            <EntityTypeMapping TypeName="HealthSupportSysdbModel.quiz_Category">
+              <MappingFragment StoreEntitySet="quiz_Category">
+                <ScalarProperty Name="cat_encrypted_string" ColumnName="cat_encrypted_string" />
+                <ScalarProperty Name="Cat_fk_DoctorID" ColumnName="Cat_fk_DoctorID" />
+                <ScalarProperty Name="Cat_name" ColumnName="Cat_name" />
+                <ScalarProperty Name="Cat_id" ColumnName="Cat_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="quiz_Result">
+            <EntityTypeMapping TypeName="HealthSupportSysdbModel.quiz_Result">
+              <MappingFragment StoreEntitySet="quiz_Result">
+                <ScalarProperty Name="Patient_name" ColumnName="Patient_name" />
+                <ScalarProperty Name="Patient_Score" ColumnName="Patient_Score" />
+                <ScalarProperty Name="Exam_name" ColumnName="Exam_name" />
+                <ScalarProperty Name="Exam_fk_stud" ColumnName="Exam_fk_stud" />
+                <ScalarProperty Name="Exam_Date" ColumnName="Exam_Date" />
+                <ScalarProperty Name="ExamId" ColumnName="ExamId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="quiz_Questions">
+            <EntityTypeMapping TypeName="HealthSupportSysdbModel.quiz_Questions">
+              <MappingFragment StoreEntitySet="quiz_Questions">
+                <ScalarProperty Name="q_fk_Cat_id" ColumnName="q_fk_Cat_id" />
+                <ScalarProperty Name="QCorrectAns" ColumnName="QCorrectAns" />
+                <ScalarProperty Name="QD" ColumnName="QD" />
+                <ScalarProperty Name="QC" ColumnName="QC" />
+                <ScalarProperty Name="QB" ColumnName="QB" />
+                <ScalarProperty Name="QA" ColumnName="QA" />
+                <ScalarProperty Name="q_text" ColumnName="q_text" />
+                <ScalarProperty Name="q_id" ColumnName="q_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

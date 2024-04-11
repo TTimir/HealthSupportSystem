@@ -1,0 +1,47 @@
+﻿@model IEnumerable<DatabaseLayer.UserTable>
+
+@{
+    ViewBag.Title = "PatientS";
+}
+
+<h2>Patient List</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Patient Name
+        </th>
+        <th>
+            Email
+        </th>
+        <th>
+            ContactNo
+        </th>
+        <th>
+            Description
+        </th>
+        <th>Action's</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ContactNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.UserID }, new { @class = "genric-btn success" })
+            @Html.ActionLink("Delete", "Delete", new { id=item.UserID }, new { @class = "genric-btn danger" })
+        </td>
+    </tr>
+}
+
+</table>

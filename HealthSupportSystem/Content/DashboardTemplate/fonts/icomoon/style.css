@@ -4756,6 +4756,22 @@
     content: "\1F5D3";
 }
 
+.icon-quiz:before {
+    content: "\2712";
+}
+
+.icon-quizcat:before {
+    content: "\2A33";
+}
+
+.icon-quizque:before {
+    content: "\2048";
+}
+
+.icon-quizrepo:before {
+    content: "\2398";
+}
+
 .icon-capp:before {
     content: "\21BB";
 }
