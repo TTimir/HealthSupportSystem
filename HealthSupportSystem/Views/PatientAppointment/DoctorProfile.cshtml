@@ -4,10 +4,9 @@
     ViewBag.Title = "DoctorProfile";
 }
 
-<h2>DoctorProfile</h2>
+<h2>Doctor Profile</h2>
 
 <div>
-    <h4>DoctorTable</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -38,16 +37,12 @@
             Fee's
         </dt>
 
-        <dt>
-            Account Type (@Html.DisplayFor(model => model.AccountTypeTable.Name))
-        </dt>
-
         <dd>
-            Before Appointment Must be submit your Appointment Fee, using this account No: "@Html.DisplayFor(model => model.AccountTypeTable.Name)"
+            Before Appointment Must be submit your Appointment Fee, using this account No: "@Html.DisplayFor(model => model.AccountNo)"
         </dd>
 
         <dd>
-            @Html.DisplayFor(model => model.Fees)
+            @String.Format("₹{0:0.00}", Model.Fees)
         </dd>
 
         <dt>
@@ -107,12 +102,12 @@
         </dd>
 
         @*<dt>
-            Supportive Document
-        </dt>
+                Supportive Document
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.SupportiveDocument)
-        </dd>*@
+            <dd>
+                @Html.DisplayFor(model => model.SupportiveDocument)
+            </dd>*@
 
 
 

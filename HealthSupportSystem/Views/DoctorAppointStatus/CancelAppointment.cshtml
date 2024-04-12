@@ -45,41 +45,44 @@
                 <tbody id="searchValue">
                     @foreach (var item in Model)
                     {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.DoctorTable.Name)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.DoctorTimeSlotTable.Name)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.PatientTable.Name)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.AppointDate)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.TransectionNo)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Description)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.DoctorComment)
-                            </td>
-                            <td>
-                                @{
-                                    if (item.IsChecked == false && item.IsFeeSubmit == false)
-                                    {
-                                        <h4 class="bold" style="color: darkred;">Reject</h4>
+                        if (!item.IsChecked && !item.IsFeeSubmit)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DoctorTable.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DoctorTimeSlotTable.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.PatientTable.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.AppointDate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TransectionNo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Description)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DoctorComment)
+                                </td>
+                                <td>
+                                    @{
+                                        if (item.IsChecked == false && item.IsFeeSubmit == false && item.DoctorComment.Length > 0)
+                                        {
+                                            <h4 class="bold" style="color: darkred;">Reject</h4>
+                                        }
+                                        else if (item.IsChecked == false && item.IsFeeSubmit == true && (item.DoctorComment == null || item.DoctorComment.Length == 0))
+                                        {
+                                            <h4 class="bold" style="color: red;">Cancel</h4>
+                                        }
                                     }
-                                    else if (item.IsChecked == false && item.IsFeeSubmit == true)
-                                    {
-                                        <h4 class="bold" style="color: red;">Cancel</h4>
-                                    }
-                                }
-                            </td>
-                        </tr>
+                                </td>
+                            </tr>
+                        }
                     }
                 </tbody>
             </table>

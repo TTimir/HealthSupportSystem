@@ -30,7 +30,7 @@ namespace HealthSupportSystem.Controllers
                 return RedirectToAction("Login", "Home");
             }
             var patient = (PatientTable)Session["Patient"];
-            var currentappointment = db.DoctorAppointTables.Where(d => d.PatientID == patient.PatientID && d.IsChecked == false && d.IsFeeSubmit == true && d.DoctorComment.Trim().Length == 0);
+            var currentappointment = db.DoctorAppointTables.Where(d => d.PatientID == patient.PatientID && d.IsChecked == false && d.IsFeeSubmit == true && (d.DoctorComment == null || d.DoctorComment.Length == 0));
             return View(currentappointment);
         }
 

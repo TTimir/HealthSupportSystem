@@ -64,28 +64,35 @@ namespace HealthSupportSystem.Controllers
             appointment.DoctorID = Convert.ToInt32(Convert.ToString(Session["docid"]));
             if (ModelState.IsValid)
             {
-                var checktransectionno = db.DoctorAppointTables.Where(c => c.TransectionNo == appointment.TransectionNo).FirstOrDefault();
+                var checktransectionno = db.DoctorAppointTables
+                    .Where(c => c.TransectionNo == appointment.TransectionNo && appointment.TransectionNo != "00")
+                    .FirstOrDefault();
                 if (checktransectionno == null)
                 {
-                    var find = db.DoctorAppointTables.Where(p => p.DoctorTimeSlotID == appointment.DoctorTimeSlotID && p.DoctorID == appointment.DoctorID && p.AppointDate == appointment.AppointDate).FirstOrDefault();
+                    var find = db.DoctorAppointTables
+                        .Where(p => p.DoctorTimeSlotID == appointment.DoctorTimeSlotID
+                            && p.DoctorID == appointment.DoctorID
+                            && p.AppointDate == appointment.AppointDate)
+                        .FirstOrDefault();
                     if (find == null)
                     {
                         db.DoctorAppointTables.Add(appointment);
                         db.SaveChanges();
-                        return RedirectToAction("DoctorPendingAppoint");
+                        ViewBag.Message = "Appointment Submitted Successfully!";
                     }
                     else
                     {
-                        ViewBag.Message = "Time Slot is Already Assign!(another patient)";
+                        ViewBag.Message = "Time Slot is Already Assigned to another patient";
                     }
                 }
                 else
                 {
-                    ViewBag.Message = "Transaction No is Already Used! for another transaction!";
+                    ViewBag.Message = "Transaction No is Already Used for another transaction";
                 }
-
             }
-            ViewBag.DoctorTimeSlotID = new SelectList(db.DoctorTimeSlotTables.Where(d => d.DoctorID == appointment.DoctorID && d.IsActive == true), "DoctorTimeSlotID", "Name", "0");
+            ViewBag.DoctorTimeSlotID = new SelectList(db.DoctorTimeSlotTables
+                .Where(d => d.DoctorID == appointment.DoctorID && d.IsActive == true),
+                "DoctorTimeSlotID", "Name", "0");
             return View();
         }
 

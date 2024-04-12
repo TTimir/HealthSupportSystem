@@ -26,18 +26,19 @@
                             Patient
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.AppointDate)
+                            Appointment Date
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.TransectionNo)
+                            Transection No
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.Description)
+                            Reason
                         </th>
                         <th>
                             Status
                         </th>
                     </tr>
+
                 </thead>
                 <tbody id="searchValue">
                     @foreach (var item in Model)
@@ -62,7 +63,7 @@
                                 @Html.DisplayFor(modelItem => item.Description)
                             </td>
                             <td>
-                                    <h4 class="bold" style="color: blue;">Accepted</h4>
+                                <h4 class="bold" style="color: darkorange;">Accepted</h4>
                             </td>
                         </tr>
                     }
@@ -82,3 +83,4 @@
         });
     });
 </script>
+

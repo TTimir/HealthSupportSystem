@@ -303,6 +303,34 @@ namespace HealthSupportSystem.Controllers
             return View(examResults);
         }
 
+
+        public ActionResult PatientReport()
+        {
+            // Check if the user is logged in
+            if (string.IsNullOrEmpty(Convert.ToString(Session["UserName"])))
+            {
+                return RedirectToAction("Login", "Home");
+            }
+
+            // Retrieve the logged-in patient's information from the session
+            var patient = (PatientTable)Session["Patient"];
+            if (patient == null)
+            {
+                // Handle the case where patient information is not found in the session
+                return RedirectToAction("Login", "Home");
+            }
+
+            // Fetch exam results for the logged-in patient from the database
+            int patientId = patient.PatientID;
+            List<quiz_Result> patientExamResults = db.quiz_Result
+                                                   .Where(x => x.Exam_fk_stud == patientId)
+                                                   .ToList();
+
+            // Pass the exam results to the view
+            return View(patientExamResults);
+        }
+
+
         public ActionResult Index()
         {
             return View();

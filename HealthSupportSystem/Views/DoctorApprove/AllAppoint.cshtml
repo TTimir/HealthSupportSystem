@@ -73,7 +73,7 @@
                                     {
                                         <h4 class="bold" style="color: forestgreen;">Complete</h4>
                                     }
-                                    else if (item.IsChecked == false && item.IsFeeSubmit == true && item.DoctorComment.Length > 0)
+                                    else if (item.IsChecked == false && item.IsFeeSubmit == true && (item.DoctorComment == null || item.DoctorComment.Length == 0))
                                     {
                                         <h4 class="bold" style="color: red;">Cancel</h4>
                                     }

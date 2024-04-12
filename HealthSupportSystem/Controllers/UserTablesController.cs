@@ -32,7 +32,7 @@ namespace HealthSupportSystem.Controllers
                 return RedirectToAction("Login", "Home");
             }
             // Filter users based on UserTypeID
-            var doctorList = db.UserTables.Where(u => u.UserTypeID == 2).ToList();
+            var doctorList = db.DoctorTables.ToList();
             return View(doctorList);
         }
 

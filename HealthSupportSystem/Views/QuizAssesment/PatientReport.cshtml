@@ -1,10 +1,10 @@
-﻿@model IEnumerable<DatabaseLayer.DoctorAppointTable>
+﻿@model IEnumerable<DatabaseLayer.quiz_Result>
 
 @{
-    ViewBag.Title = "Current Appointment";
+    ViewBag.Title = "Report";
 }
 
-<h2>Current Appointment's</h2>
+<h2>Patient Report's</h2>
 <script src="~/Scripts/jquery-3.4.1.min.js"></script>
 
 <div class="card shadow mb-4">
@@ -17,27 +17,17 @@
                 <thead>
                     <tr>
                         <th>
-                            Doctor
+                            Patient Name
                         </th>
                         <th>
-                            Time Slot
+                            Exam Date
                         </th>
                         <th>
-                            Patient
+                            Exam Name
                         </th>
                         <th>
-                            Appointment Date
+                            Quiz Score
                         </th>
-                        <th>
-                            Transection No
-                        </th>
-                        <th>
-                            Reason
-                        </th>
-                        <th>
-                            Status
-                        </th>
-                        <th>Action's</th>
                     </tr>
                 </thead>
                 <tbody id="searchValue">
@@ -45,28 +35,16 @@
                     {
                         <tr>
                             <td>
-                                @Html.DisplayFor(modelItem => item.DoctorTable.Name)
+                                @Html.DisplayFor(modelItem => item.Patient_name)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.DoctorTimeSlotTable.Name)
+                                @Html.DisplayFor(modelItem => item.Exam_Date)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.PatientTable.Name)
+                                @Html.DisplayFor(modelItem => item.Exam_name)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.AppointDate)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.TransectionNo)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Description)
-                            </td>
-                            <td>
-                                <h4 class="bold" style="color: darkorange;">Accepted</h4>
-                            </td>
-                            <td>
-                                @Html.ActionLink("Process", "ProcessAppointment", new { id = item.DoctorAppointID }, new { @class = "genric-btn primary" })
+                                @Html.DisplayFor(modelItem => item.Patient_Score)
                             </td>
                         </tr>
                     }

@@ -340,6 +340,8 @@
     <Content Include="Content\FrontTemplate\img\elements\f6.jpg" />
     <Content Include="Content\FrontTemplate\img\elements\f7.jpg" />
     <Content Include="Content\FrontTemplate\img\elements\f8.jpg" />
+    <Content Include="Content\FrontTemplate\img\elements\Feamel_1.png" />
+    <Content Include="Content\FrontTemplate\img\elements\Female_2.png" />
     <Content Include="Content\FrontTemplate\img\elements\g1.jpg" />
     <Content Include="Content\FrontTemplate\img\elements\g2.jpg" />
     <Content Include="Content\FrontTemplate\img\elements\g3.jpg" />
@@ -348,6 +350,7 @@
     <Content Include="Content\FrontTemplate\img\elements\g6.jpg" />
     <Content Include="Content\FrontTemplate\img\elements\g7.jpg" />
     <Content Include="Content\FrontTemplate\img\elements\g8.jpg" />
+    <Content Include="Content\FrontTemplate\img\elements\Male.png" />
     <Content Include="Content\FrontTemplate\img\elements\primary-check.png" />
     <Content Include="Content\FrontTemplate\img\elements\primary-radio.png" />
     <Content Include="Content\FrontTemplate\img\elements\success-check.png" />
@@ -820,6 +823,7 @@
     <Content Include="Views\UserTables\DoctorList.cshtml" />
     <Content Include="Views\UserTables\PendingRequests.cshtml" />
     <Content Include="Views\UserTables\PatientList.cshtml" />
+    <Content Include="Views\QuizAssesment\PatientReport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
