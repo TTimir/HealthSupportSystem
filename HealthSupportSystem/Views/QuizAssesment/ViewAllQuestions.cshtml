@@ -62,7 +62,7 @@
                 @Html.DisplayFor(modelItem => item.quiz_Category.Cat_name)
             </td>
             <td>
-                @Html.ActionLink("Delete", "Delete", new { id = item.q_id }, new { @class = "genric-btn danger" })
+                @Html.ActionLink("Delete", "Delete", "QuizAssesment", new { id = item.q_id }, new { @class = "genric-btn danger" })
             </td>
         </tr>
     }

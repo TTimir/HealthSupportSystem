@@ -11,7 +11,8 @@ namespace DatabaseLayer
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class quiz_Category
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,12 +20,12 @@ namespace DatabaseLayer
         {
             this.quiz_Questions = new HashSet<quiz_Questions>();
         }
-    
+
         public int Cat_id { get; set; }
         public string Cat_name { get; set; }
         public Nullable<int> Cat_fk_DoctorID { get; set; }
         public string cat_encrypted_string { get; set; }
-    
+
         public virtual DoctorTable DoctorTable { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<quiz_Questions> quiz_Questions { get; set; }

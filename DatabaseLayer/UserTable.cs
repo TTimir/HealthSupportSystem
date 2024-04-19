@@ -11,7 +11,8 @@ namespace DatabaseLayer
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class UserTable
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -25,10 +26,16 @@ namespace DatabaseLayer
         }
     
         public int UserID { get; set; }
+        [Required(ErrorMessage = "*Required!")]
         public int UserTypeID { get; set; }
+        [Required(ErrorMessage = "*Required!")]
         public string UserName { get; set; }
+        [Required(ErrorMessage = "*Required!")]
         public string Password { get; set; }
+        [Required(ErrorMessage = "*Required!")]
+        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
+        [Required(ErrorMessage = "*Required!")]
         public string ContactNo { get; set; }
         public string Description { get; set; }
         public bool IsVerified { get; set; }

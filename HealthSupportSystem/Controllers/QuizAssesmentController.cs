@@ -330,6 +330,32 @@ namespace HealthSupportSystem.Controllers
             return View(patientExamResults);
         }
 
+        [HttpPost]
+        public ActionResult Delete(int questionId)
+        {
+            if (string.IsNullOrEmpty(Convert.ToString(Session["UserName"])))
+            {
+                return RedirectToAction("Login", "Home");
+            }
+
+            // Retrieve the question from the database
+            var question = db.quiz_Questions.Find(questionId);
+            if (question == null)
+            {
+                // Handle the case where the question is not found
+                return HttpNotFound();
+            }
+
+            // Remove the question from the database and save changes
+            db.quiz_Questions.Remove(question);
+            db.SaveChanges();
+
+            TempData["Message"] = "Question deleted successfully!";
+            TempData.Keep();
+
+            return RedirectToAction("ViewAllQuestions");
+        }
+
 
         public ActionResult Index()
         {
