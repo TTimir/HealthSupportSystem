@@ -1,0 +1,309 @@
+﻿@model DatabaseLayer.Forum_Questions
+
+@{
+    ViewBag.Title = "Details";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Forum App</title>
+
+    <link href="~/Content/DashboardTemplate/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/ForumTemplate/css/site.css" rel="stylesheet" asp-append-version="true" />
+    <!-- Forum -->
+    <link href="~/Content/ForumTemplate/css/StyleSheet.css" rel="stylesheet" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha512-bnIvzh6FU75ZKxp0GXLH9bewza/OIw6dLVh9ICg0gogclmYGguQJWl8U30WpbsGTqbIiAwxTsbe76DErLq5EDQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <style>
+        .form-wrap {
+            background: rgba(255,255,255,1);
+            width: 100%;
+            max-width: 850px;
+            padding: 50px;
+            margin: 0 auto;
+            position: relative;
+            -webkit-border-radius: 10px;
+            -moz-border-radius: 10px;
+            border-radius: 10px;
+            -webkit-box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.15);
+            -moz-box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.15);
+            box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.15);
+        }
+
+            .form-wrap:before {
+                content: "";
+                width: 90%;
+                height: calc(100% + 60px);
+                left: 0;
+                right: 0;
+                margin: 0 auto;
+                position: absolute;
+                top: -30px;
+                background: #00bcd9;
+                z-index: -1;
+                opacity: 0.8;
+                -webkit-border-radius: 10px;
+                -moz-border-radius: 10px;
+                border-radius: 10px;
+                -webkit-box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.15);
+                -moz-box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.15);
+                box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.15);
+            }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+            .form-group > label {
+                display: block;
+                font-size: 18px;
+                color: #000;
+            }
+
+        .custom-control-label {
+            color: #000;
+            font-size: 16px;
+        }
+
+        .form-control {
+            height: 50px;
+            background: #ecf0f4;
+            border-color: transparent;
+            padding: 0 15px;
+            font-size: 16px;
+            -webkit-transition: all 0.3s ease-in-out;
+            -moz-transition: all 0.3s ease-in-out;
+            -o-transition: all 0.3s ease-in-out;
+            transition: all 0.3s ease-in-out;
+        }
+
+            .form-control:focus {
+                border-color: #0051D2;
+                -webkit-box-shadow: 0px 0px 20px rgba(0, 0, 0, .1);
+                -moz-box-shadow: 0px 0px 20px rgba(0, 0, 0, .1);
+                box-shadow: 0px 0px 20px rgba(0, 0, 0, .1);
+            }
+
+        textarea.form-control {
+            height: 160px;
+            padding-top: 15px;
+            resize: none;
+        }
+
+        .btn {
+            padding: .657rem .75rem;
+            font-size: 14px;
+            letter-spacing: 0.050em;
+            -webkit-transition: all 0.3s ease-in-out;
+            -moz-transition: all 0.3s ease-in-out;
+            -o-transition: all 0.3s ease-in-out;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .btn-primary {
+            color: #fff;
+            background-color: #0051D2;
+            border-color: #0051D2;
+            border-radius: 4px;
+        }
+
+            .btn-primary:hover {
+                color: #0051D2;
+                background-color: #ffffff;
+                border-color: #0051D2;
+                -webkit-box-shadow: 0px 0px 20px rgba(0, 0, 0, .1);
+                -moz-box-shadow: 0px 0px 20px rgba(0, 0, 0, .1);
+                box-shadow: 0px 0px 20px rgba(0, 0, 0, .1);
+            }
+
+            .btn-primary:focus, .btn-primary.focus {
+                color: #00bcd9;
+                background-color: #ffffff;
+                border-color: #00bcd9;
+                -webkit-box-shadow: 0px 0px 20px rgba(0, 0, 0, .1);
+                -moz-box-shadow: 0px 0px 20px rgba(0, 0, 0, .1);
+                box-shadow: 0px 0px 20px rgba(0, 0, 0, .1);
+            }
+
+            .btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active,
+            .show > .btn-primary.dropdown-toggle {
+                color: #00bcd9;
+                background-color: #ffffff;
+                border-color: #00bcd9;
+            }
+
+                .btn-primary:not(:disabled):not(.disabled):active:focus, .btn-primary:not(:disabled):not(.disabled).active:focus,
+                .show > .btn-primary.dropdown-toggle:focus {
+                    -webkit-box-shadow: 0px 0px 20px rgba(0, 0, 0, .1);
+                    -moz-box-shadow: 0px 0px 20px rgba(0, 0, 0, .1);
+                    box-shadow: 0px 0px 20px rgba(0, 0, 0, .1);
+                }
+    </style>
+
+</head>
+<body class="hm-gradient">
+    <header class="header_area" style="background-color:#fff">
+        <div class="main_menu">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <div class="container">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <a class="navbar-brand logo_h" href="@Url.Action("Index", "Home")"><img src="~/Content/FrontTemplate/img/logo_dark.png" alt=""></a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+                        <ul class="nav navbar-nav menu_nav ml-auto">
+                            <li class="nav-item"><a class="nav-link" href="@Url.Action("Index", "Home")">Home</a></li>
+                            <li class="nav-item"><a class="nav-link" href="@Url.Action("Create", "Forum_Questions")">Ask Question</a></li>
+                            <li class="nav-item"><a class="nav-link" href="@Url.Action("QuestionsList", "Forum_Questions")">Your Questions</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="wrapper wrapper-content animated fadeInRight">
+
+                    <div class="ibox-content m-b-sm border-bottom">
+                        <span>Feel free to Ask Anything you're interested in</span>
+                        <a href="@Url.Action("Create", "Forum_Questions")" class="btn btn-primary">Have a Question?</a>
+                    </div>
+
+                    <div class="ibox-content m-b-sm border-bottom">
+                        <div class="pull-left m-r-md">
+                            <img src="~/Content/ForumTemplate/user.256x256.png" width="42" height="42" /> &nbsp;
+                        </div>
+                        <h2>@Model.Title</h2>
+                        <span class="text-primary fs-6">
+                            Posted By: @Model.UserTable.UserName
+                        </span>
+                    </div>
+                </div>
+
+                <div class="ibox-content forum-container">
+
+                    <div class="forum-title">
+                        <h3>Description</h3>
+                        <hr />
+                    </div>
+
+
+                    <div class="forum-item active">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="forum-sub-title" style="margin-bottom: 20px;">@Model.Description</div>
+                            </div>
+                            <div class="col-md-4" style="margin-left: 4%;">
+                                <div class="action-button-container action-btns">
+                                    <form action="@Url.Action("AddAnswer", "Forum_Questions")" method="post">
+                                        @Html.AntiForgeryToken()
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label>Your Answer:</label>
+                                                    <textarea name="content" class="form-control" style="margin-right: auto; margin-left: auto; height: 100px" placeholder="Enter your answer here..."></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <input type="hidden" name="questionId" value="@Model.QId" />
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <input type="submit" class="btn btn-primary" value="Answer" style="margin-right: 10px;" />
+                                            </div>
+                                            <div class="col-md-6">
+                                                <a href="@Url.Action("Index", "Forum_Questions")" class="btn btn-default">Back</a>
+                                            </div>
+                                        </div>
+
+
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="call-to-action">
+                        <div class="overlay-bg"></div>
+                        <div class="container">
+                            <div class="action-content-wrapper">
+                                <div class="action-title-wrap title-img">
+                                    <img src="~/Content/ForumTemplate/chat-smile.png" alt="">
+                                    <h2 class="action-title">New to Communities?</h2>
+                                </div>
+                                <a href="@Url.Action("Create", "Forum_Questions")" style="text-decoration:none!important; color:#fff!important;" class="action_btn">Join the community <i class="arrow_right"></i></a>
+                            </div>
+                            <!-- /.action-content-wrapper -->
+                        </div>
+                        <!-- /.container -->
+                    </div>
+                    <!-- /.call-to-action -->
+
+                    <div class="forum-item active">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="forum-title" style="margin-bottom: 20px; font-size: 24px; color:green;">All Answers</div>
+                            </div>
+                            @foreach (var answer in Model.Forum_Answers)
+                            {
+                                <div class="col-md-12">
+
+                                    <div class="forum-item active">
+                                        <div class="row">
+                                            <div class="col-md-9">
+                                                <div class="forum-icon">
+                                                    <img src="~/Content/ForumTemplate/answer-user.png" width="35" height="40" />
+                                                </div>
+                                                <h5 class="forum-item-title">@answer.UserTable.UserName</h5>
+                                                <div class="forum-sub-title">@answer.Content</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer-area area-padding-top">
+        <div class="container">
+            <div class="row footer-bottom d-flex justify-content-between">
+                <p class="col-lg-8 col-sm-12 footer-text m-0">
+                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    Copyright &copy;
+                    <script>document.write(new Date().getFullYear());</script> All rights reserved | This Website is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://ttimir.github.io/timirbhingradiya-pf.github.io/" target="_blank">Timir</a>
+                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                </p>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- Bootstrap and jQuery -->
+    <script src="~/Content/ForumTemplate/js/jquery.min.js"></script>
+    <script src="~/Content/ForumTemplate/js/bootstrap.bundle.min.js"></script>
+    <script src="~/Content/ForumTemplate/js/site.js" asp-append-version="true"></script>
+</body>
+</html>
+
+

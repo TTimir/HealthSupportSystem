@@ -4730,6 +4730,7 @@
 
 .icon-alldoc:before {
     content: "\2624";
+    font-size: 24px;
 }
 
 .icon-alllab:before {
@@ -4738,6 +4739,23 @@
 
 .icon-allpat:before {
     content: "\2661";
+}
+
+.icon-forum:before {
+    content: "\F262";
+    font-size: 15px;
+}
+
+.icon-forumdash:before {
+    content: "\F24D";
+}
+
+.icon-forumq:before {
+    content: "\F8F7";
+}
+
+.icon-forumlist:before {
+    content: "\F477";
 }
 
 .icon-logout:before {

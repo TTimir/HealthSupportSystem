@@ -27,7 +27,8 @@
     <link href="~/Content/AdminTemplate/css/main.css" rel="stylesheet" />
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="~/Content/DashboardTemplate/css/bootstrap.min.css">
+    @*<link rel="stylesheet" href="~/Content/DashboardTemplate/css/bootstrap.min.css">*@
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css" rel="stylesheet">
 
     <!-- Style -->
@@ -113,6 +114,19 @@
                                     <li><a href="@Url.Action("Index", "AccountTypeTables")" class="d-flex align-items-center"><span class="wrap-icon icon-account mr-3"></span><span class="menu-text">Account Type</span></a></li>
                                     <li><a href="@Url.Action("PatientList", "UserTables")" class="d-flex align-items-center"><span class="wrap-icon icon-allpat mr-3"></span><span class="menu-text">All Patients</span></a></li>
                                     <li><a href="@Url.Action("Index", "UserTables")" class="d-flex align-items-center"><span class="wrap-icon icon-user mr-3"></span><span class="menu-text">All Users</span></a></li>
+
+                                    <li>
+                                        <a href="#!">
+                                            <div class="icon"><i class="icon-forum"></i></div>
+                                            <div class="s-title">Forum</div>
+                                            <div class="arrow"><i class="fas fa-chevron-down"></i></div>
+                                        </a>
+                                        <ul class="accordion">
+                                            <li><a href="@Url.Action("Index", "Forum_Questions")" class="d-flex align-items-center"><span class="wrap-icon icon-forumdash mr-3"></span><span class="menu-text">DashBoard</span></a></li>
+                                            <li><a href="@Url.Action("Create", "Forum_Questions")" class="d-flex align-items-center"><span class="wrap-icon icon-forumq mr-3"></span><span class="menu-text">Ask Question</span></a></li>
+                                            <li><a href="@Url.Action("QuestionsList", "Forum_Questions")" class="d-flex align-items-center"><span class="wrap-icon icon-forumlist mr-3"></span><span class="menu-text">Your Questions</span></a></li>
+                                        </ul>
+                                    </li>
                                 }
 
                                 else if (value == 3)
@@ -142,6 +156,19 @@
                                             <li><a href="@Url.Action("CurrentAppoint", "LabApprove")" class="d-flex align-items-center"><span class="wrap-icon icon-capp mr-3"></span><span class="menu-text">Current Appointment</span></a></li>
                                             <li><a href="@Url.Action("PendingAppoint", "LabApprove")" class="d-flex align-items-center"><span class="wrap-icon icon-papp mr-3"></span><span class="menu-text">Pending Appointment</span></a></li>
                                             <li><a href="@Url.Action("CompleteAppoint", "LabApprove")" class="d-flex align-items-center"><span class="wrap-icon icon-comapp mr-3"></span><span class="menu-text">Complate Appointment</span></a></li>
+                                        </ul>
+                                    </li>
+
+                                    <li>
+                                        <a href="#!">
+                                            <div class="icon"><i class="icon-forum"></i></div>
+                                            <div class="s-title">Forum</div>
+                                            <div class="arrow"><i class="fas fa-chevron-down"></i></div>
+                                        </a>
+                                        <ul class="accordion">
+                                            <li><a href="@Url.Action("Index", "Forum_Questions")" class="d-flex align-items-center"><span class="wrap-icon icon-forumdash mr-3"></span><span class="menu-text">DashBoard</span></a></li>
+                                            <li><a href="@Url.Action("Create", "Forum_Questions")" class="d-flex align-items-center"><span class="wrap-icon icon-forumq mr-3"></span><span class="menu-text">Ask Question</span></a></li>
+                                            <li><a href="@Url.Action("QuestionsList", "Forum_Questions")" class="d-flex align-items-center"><span class="wrap-icon icon-forumlist mr-3"></span><span class="menu-text">Your Questions</span></a></li>
                                         </ul>
                                     </li>
 
@@ -176,6 +203,19 @@
                                             <li><a href="@Url.Action("Add_Category", "QuizAssesment")" class="d-flex align-items-center"><span class="wrap-icon icon-quizcat mr-3"></span><span class="menu-text">Add Categories</span></a></li>
                                             <li><a href="@Url.Action("Add_Questions", "QuizAssesment")" class="d-flex align-items-center"><span class="wrap-icon icon-quizque mr-3"></span><span class="menu-text">Add Questions</span></a></li>
                                             <li><a href="@Url.Action("Report", "QuizAssesment")" class="d-flex align-items-center"><span class="wrap-icon icon-quizrepo mr-3"></span><span class="menu-text">Report</span></a></li>
+                                        </ul>
+                                    </li>
+
+                                    <li>
+                                        <a href="#!">
+                                            <div class="icon"><i class="icon-forum"></i></div>
+                                            <div class="s-title">Forum</div>
+                                            <div class="arrow"><i class="fas fa-chevron-down"></i></div>
+                                        </a>
+                                        <ul class="accordion">
+                                            <li><a href="@Url.Action("Index", "Forum_Questions")" class="d-flex align-items-center"><span class="wrap-icon icon-forumdash mr-3"></span><span class="menu-text">DashBoard</span></a></li>
+                                            <li><a href="@Url.Action("Create", "Forum_Questions")" class="d-flex align-items-center"><span class="wrap-icon icon-forumq mr-3"></span><span class="menu-text">Ask Question</span></a></li>
+                                            <li><a href="@Url.Action("QuestionsList", "Forum_Questions")" class="d-flex align-items-center"><span class="wrap-icon icon-forumlist mr-3"></span><span class="menu-text">Your Questions</span></a></li>
                                         </ul>
                                     </li>
 
@@ -228,6 +268,19 @@
                                         <ul class="accordion">
                                             <li><a href="@Url.Action("ExamDashboard", "QuizAssesment")" class="d-flex align-items-center"><span class="wrap-icon icon-quizcat mr-3"></span><span class="menu-text">Exam Dashboard</span></a></li>
                                             <li><a href="@Url.Action("PatientReport", "QuizAssesment")" class="d-flex align-items-center"><span class="wrap-icon icon-quizrepo mr-3"></span><span class="menu-text">History</span></a></li>
+                                        </ul>
+                                    </li>
+
+                                    <li>
+                                        <a href="#!">
+                                            <div class="icon"><i class="icon-forum"></i></div>
+                                            <div class="s-title">Forum</div>
+                                            <div class="arrow"><i class="fas fa-chevron-down"></i></div>
+                                        </a>
+                                        <ul class="accordion">
+                                            <li><a href="@Url.Action("Index", "Forum_Questions")" class="d-flex align-items-center"><span class="wrap-icon icon-forumdash mr-3"></span><span class="menu-text">DashBoard</span></a></li>
+                                            <li><a href="@Url.Action("Create", "Forum_Questions")" class="d-flex align-items-center"><span class="wrap-icon icon-forumq mr-3"></span><span class="menu-text">Ask Question</span></a></li>
+                                            <li><a href="@Url.Action("QuestionsList", "Forum_Questions")" class="d-flex align-items-center"><span class="wrap-icon icon-forumlist mr-3"></span><span class="menu-text">Your Questions</span></a></li>
                                         </ul>
                                     </li>
 

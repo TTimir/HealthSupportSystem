@@ -151,8 +151,9 @@
         .valid-feedback {
             color: #2acc80;
         }
+
         .row {
-            --bs-gutter-x:0;
+            --bs-gutter-x: 0;
         }
     </style>
 
@@ -166,10 +167,13 @@
                         <h3>Enter Room Number</h3>
                         <p>Start The Quiz.</p>
 
-                        @if (@ViewBag.Message != null)
+                        @if (!string.IsNullOrEmpty(ViewBag.Message))
                         {
-                            <div class="alert alert-danger">
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                 <strong>Error!</strong> @ViewBag.Message
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
                             </div>
                         }
 

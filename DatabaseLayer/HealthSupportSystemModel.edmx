@@ -60,6 +60,24 @@
           <Property Name="FromTime" Type="time" Precision="7" Nullable="false" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="Forum_Answers">
+          <Key>
+            <PropertyRef Name="AId" />
+          </Key>
+          <Property Name="AId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Content" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="FK_UserId" Type="int" />
+          <Property Name="QuestionId" Type="int" />
+        </EntityType>
+        <EntityType Name="Forum_Questions">
+          <Key>
+            <PropertyRef Name="QId" />
+          </Key>
+          <Property Name="QId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Description" Type="text" Nullable="false" />
+          <Property Name="FK_UserId" Type="int" />
+        </EntityType>
         <EntityType Name="GenderTable">
           <Key>
             <PropertyRef Name="GenderID" />
@@ -214,6 +232,42 @@
           <Property Name="UserTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserType" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <Association Name="FK__Forum_Ans__FK_Us__72C60C4A">
+          <End Role="UserTable" Type="Self.UserTable" Multiplicity="0..1" />
+          <End Role="Forum_Answers" Type="Self.Forum_Answers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserTable">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Forum_Answers">
+              <PropertyRef Name="FK_UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Forum_Ans__Quest__73BA3083">
+          <End Role="Forum_Questions" Type="Self.Forum_Questions" Multiplicity="0..1" />
+          <End Role="Forum_Answers" Type="Self.Forum_Answers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Forum_Questions">
+              <PropertyRef Name="QId" />
+            </Principal>
+            <Dependent Role="Forum_Answers">
+              <PropertyRef Name="QuestionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Forum_Que__FK_Us__6FE99F9F">
+          <End Role="UserTable" Type="Self.UserTable" Multiplicity="0..1" />
+          <End Role="Forum_Questions" Type="Self.Forum_Questions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserTable">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Forum_Questions">
+              <PropertyRef Name="FK_UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__quiz_Cate__Cat_f__656C112C">
           <End Role="DoctorTable" Type="Self.DoctorTable" Multiplicity="0..1" />
           <End Role="quiz_Category" Type="Self.quiz_Category" Multiplicity="*" />
@@ -519,6 +573,8 @@
           <EntitySet Name="DoctorAppointTable" EntityType="Self.DoctorAppointTable" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DoctorTable" EntityType="Self.DoctorTable" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DoctorTimeSlotTable" EntityType="Self.DoctorTimeSlotTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Forum_Answers" EntityType="Self.Forum_Answers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Forum_Questions" EntityType="Self.Forum_Questions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GenderTable" EntityType="Self.GenderTable" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LabAppointTable" EntityType="Self.LabAppointTable" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LabTable" EntityType="Self.LabTable" Schema="dbo" store:Type="Tables" />
@@ -533,6 +589,18 @@
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserTable" EntityType="Self.UserTable" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserTypeTable" EntityType="Self.UserTypeTable" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Forum_Ans__FK_Us__72C60C4A" Association="Self.FK__Forum_Ans__FK_Us__72C60C4A">
+            <End Role="UserTable" EntitySet="UserTable" />
+            <End Role="Forum_Answers" EntitySet="Forum_Answers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Forum_Ans__Quest__73BA3083" Association="Self.FK__Forum_Ans__Quest__73BA3083">
+            <End Role="Forum_Questions" EntitySet="Forum_Questions" />
+            <End Role="Forum_Answers" EntitySet="Forum_Answers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Forum_Que__FK_Us__6FE99F9F" Association="Self.FK__Forum_Que__FK_Us__6FE99F9F">
+            <End Role="UserTable" EntitySet="UserTable" />
+            <End Role="Forum_Questions" EntitySet="Forum_Questions" />
+          </AssociationSet>
           <AssociationSet Name="FK__quiz_Cate__Cat_f__656C112C" Association="Self.FK__quiz_Cate__Cat_f__656C112C">
             <End Role="DoctorTable" EntitySet="DoctorTable" />
             <End Role="quiz_Category" EntitySet="quiz_Category" />
@@ -851,6 +919,8 @@
           <NavigationProperty Name="LabTables" Relationship="Self.FK_LabTable_UserTable" FromRole="UserTable" ToRole="LabTable" />
           <NavigationProperty Name="PatientTables" Relationship="Self.FK_PatientTable_UserTable" FromRole="UserTable" ToRole="PatientTable" />
           <NavigationProperty Name="UserTypeTable" Relationship="Self.FK_UserTable_UserTypeTable" FromRole="UserTable" ToRole="UserTypeTable" />
+          <NavigationProperty Name="Forum_Answers" Relationship="HealthSupportSysdbModel.FK__Forum_Ans__FK_Us__72C60C4A" FromRole="UserTable" ToRole="Forum_Answers" />
+          <NavigationProperty Name="Forum_Questions" Relationship="HealthSupportSysdbModel.FK__Forum_Que__FK_Us__6FE99F9F" FromRole="UserTable" ToRole="Forum_Questions" />
         </EntityType>
         <EntityType Name="UserTypeTable">
           <Key>
@@ -1243,6 +1313,20 @@
             <End Role="quiz_Category" EntitySet="quiz_Category" />
             <End Role="quiz_Questions" EntitySet="quiz_Questions" />
           </AssociationSet>
+          <EntitySet Name="Forum_Answers" EntityType="HealthSupportSysdbModel.Forum_Answers" />
+          <EntitySet Name="Forum_Questions" EntityType="HealthSupportSysdbModel.Forum_Questions" />
+          <AssociationSet Name="FK__Forum_Ans__FK_Us__72C60C4A" Association="HealthSupportSysdbModel.FK__Forum_Ans__FK_Us__72C60C4A">
+            <End Role="UserTable" EntitySet="UserTables" />
+            <End Role="Forum_Answers" EntitySet="Forum_Answers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Forum_Ans__Quest__73BA3083" Association="HealthSupportSysdbModel.FK__Forum_Ans__Quest__73BA3083">
+            <End Role="Forum_Questions" EntitySet="Forum_Questions" />
+            <End Role="Forum_Answers" EntitySet="Forum_Answers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Forum_Que__FK_Us__6FE99F9F" Association="HealthSupportSysdbModel.FK__Forum_Que__FK_Us__6FE99F9F">
+            <End Role="UserTable" EntitySet="UserTables" />
+            <End Role="Forum_Questions" EntitySet="Forum_Questions" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="quiz_Category">
           <Key>
@@ -1314,6 +1398,64 @@
             </Principal>
             <Dependent Role="quiz_Questions">
               <PropertyRef Name="q_fk_Cat_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Forum_Answers">
+          <Key>
+            <PropertyRef Name="AId" />
+          </Key>
+          <Property Name="AId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Content" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FK_UserId" Type="Int32" />
+          <Property Name="QuestionId" Type="Int32" />
+          <NavigationProperty Name="UserTable" Relationship="HealthSupportSysdbModel.FK__Forum_Ans__FK_Us__72C60C4A" FromRole="Forum_Answers" ToRole="UserTable" />
+          <NavigationProperty Name="Forum_Questions" Relationship="HealthSupportSysdbModel.FK__Forum_Ans__Quest__73BA3083" FromRole="Forum_Answers" ToRole="Forum_Questions" />
+        </EntityType>
+        <EntityType Name="Forum_Questions">
+          <Key>
+            <PropertyRef Name="QId" />
+          </Key>
+          <Property Name="QId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="FK_UserId" Type="Int32" />
+          <NavigationProperty Name="Forum_Answers" Relationship="HealthSupportSysdbModel.FK__Forum_Ans__Quest__73BA3083" FromRole="Forum_Questions" ToRole="Forum_Answers" />
+          <NavigationProperty Name="UserTable" Relationship="HealthSupportSysdbModel.FK__Forum_Que__FK_Us__6FE99F9F" FromRole="Forum_Questions" ToRole="UserTable" />
+        </EntityType>
+        <Association Name="FK__Forum_Ans__FK_Us__72C60C4A">
+          <End Type="HealthSupportSysdbModel.UserTable" Role="UserTable" Multiplicity="0..1" />
+          <End Type="HealthSupportSysdbModel.Forum_Answers" Role="Forum_Answers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserTable">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Forum_Answers">
+              <PropertyRef Name="FK_UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Forum_Ans__Quest__73BA3083">
+          <End Type="HealthSupportSysdbModel.Forum_Questions" Role="Forum_Questions" Multiplicity="0..1" />
+          <End Type="HealthSupportSysdbModel.Forum_Answers" Role="Forum_Answers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Forum_Questions">
+              <PropertyRef Name="QId" />
+            </Principal>
+            <Dependent Role="Forum_Answers">
+              <PropertyRef Name="QuestionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Forum_Que__FK_Us__6FE99F9F">
+          <End Type="HealthSupportSysdbModel.UserTable" Role="UserTable" Multiplicity="0..1" />
+          <End Type="HealthSupportSysdbModel.Forum_Questions" Role="Forum_Questions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserTable">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Forum_Questions">
+              <PropertyRef Name="FK_UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1547,6 +1689,26 @@
                 <ScalarProperty Name="QA" ColumnName="QA" />
                 <ScalarProperty Name="q_text" ColumnName="q_text" />
                 <ScalarProperty Name="q_id" ColumnName="q_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Forum_Answers">
+            <EntityTypeMapping TypeName="HealthSupportSysdbModel.Forum_Answers">
+              <MappingFragment StoreEntitySet="Forum_Answers">
+                <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
+                <ScalarProperty Name="FK_UserId" ColumnName="FK_UserId" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="AId" ColumnName="AId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Forum_Questions">
+            <EntityTypeMapping TypeName="HealthSupportSysdbModel.Forum_Questions">
+              <MappingFragment StoreEntitySet="Forum_Questions">
+                <ScalarProperty Name="FK_UserId" ColumnName="FK_UserId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="QId" ColumnName="QId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

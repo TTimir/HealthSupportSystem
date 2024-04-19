@@ -14,7 +14,17 @@
         <h4>New Time Slot</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <h4 class="text-danger">@ViewBag.Message</h4>
+
+        @if (!string.IsNullOrEmpty(ViewBag.Message))
+        {
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>Warning!</strong> @ViewBag.Message
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        }
+
         <div class="form-group">
             @Html.LabelFor(model => model.Name, "Time Slot", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">

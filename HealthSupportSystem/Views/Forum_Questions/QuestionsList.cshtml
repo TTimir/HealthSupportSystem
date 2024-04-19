@@ -1,0 +1,133 @@
+﻿@model IEnumerable<DatabaseLayer.Forum_Questions>
+
+@{
+    ViewBag.Title = "QuestionsList";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HealMate Forum App</title>
+
+    <link rel="icon" href="~/Content/FrontTemplate/img/sub_logo.png" type="image/png">
+
+    <!-- Bootstrap CSS -->
+    <link href="~/Content/FrontTemplate/css/bootstrap.css" rel="stylesheet">
+    <!-- Forum CSS -->
+    <link href="~/Content/ForumTemplate/css/StyleSheet.css" rel="stylesheet" />
+    <!-- Font Awesome -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="~/Content/FrontTemplate/css/style.css">
+    <link rel="stylesheet" href="~/Content/FrontTemplate/css/responsive.css">
+
+    <!-- Optional: Your custom CSS -->
+    <style>
+        * {
+            scroll-behavior: smooth !important;
+        }
+
+        .highlight {
+            background-color: yellow;
+            padding: 5px;
+            margin-top: 10px;
+        }
+    </style>
+
+</head>
+<body>
+    <main>
+
+        <!--MDB Tables-->
+        <div class="container mt-4">
+
+            <div class="card mb-4">
+                <div class="card-body">
+                    <!-- Grid row -->
+                    <div class="row">
+                        <!-- Grid column -->
+                        <div class="col-md-12">
+                            <h2 class="pt-3 pb-4 text-center font-bold font-up deep-purple-text">Questions List</h2>
+                            <div class="input-group mb-3">
+                                <input type="text" id="search" name="search" class="form-control search-input" placeholder="🔍 Search here" aria-label="Search here" aria-describedby="basic-addon2">
+                            </div>
+                            <br />
+                        </div>
+                        <!-- Grid column -->
+                    </div>
+                    <!-- Grid row -->
+                    <!--Table-->
+                    <table class="table table-striped table-responsive">
+                        <!--Table head-->
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Title)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Description)
+                                </th>
+                                <th>Action's</th>
+                            </tr>
+                        </thead>
+                        <!--Table head-->
+                        <!--Table body-->
+                        <tbody id="searchValue">
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Title)
+                                    </td>
+                                    <td style="width: 65%;">
+                                        @Html.DisplayFor(modelItem => item.Description)
+                                    </td>
+                                    <td>
+                                        <a asp-action="Edit" asp-route-id="@item.QId" class="btn btn-info" style="color:#fff">Edit</a>
+                                        <a asp-action="Delete" asp-route-id="@item.QId" class="btn btn-danger" style="color:#fff">Delete</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                        <!--Table body-->
+                    </table>
+                    <!--Table-->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Bootstrap and jQuery -->
+    <script src="~/Content/ForumTemplate/js/jquery.min.js"></script>
+    <script src="~/Content/ForumTemplate/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Scripts from FrontTemplate -->
+    <script src="~/Content/FrontTemplate/js/jquery-2.2.4.min.js"></script>
+    <script src="~/Content/FrontTemplate/js/popper.js"></script>
+    <script src="~/Content/FrontTemplate/js/bootstrap.min.js"></script>
+    <script src="~/Content/FrontTemplate/js/stellar.js"></script>
+    <script src="~/Content/FrontTemplate/js/jquery.ajaxchimp.min.js"></script>
+    <script src="~/Content/FrontTemplate/js/jquery.validate.min.js"></script>
+    <script src="~/Content/FrontTemplate/js/mail-script.js"></script>
+    <script src="~/Content/FrontTemplate/js/contact.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#search").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#searchValue tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

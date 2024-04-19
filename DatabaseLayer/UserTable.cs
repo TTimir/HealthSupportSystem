@@ -11,8 +11,7 @@ namespace DatabaseLayer
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class UserTable
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,19 +20,15 @@ namespace DatabaseLayer
             this.DoctorTables = new HashSet<DoctorTable>();
             this.LabTables = new HashSet<LabTable>();
             this.PatientTables = new HashSet<PatientTable>();
+            this.Forum_Answers = new HashSet<Forum_Answers>();
+            this.Forum_Questions = new HashSet<Forum_Questions>();
         }
     
         public int UserID { get; set; }
-        [Required(ErrorMessage = "*Required!")]
         public int UserTypeID { get; set; }
-        [Required(ErrorMessage = "*Required!")]
         public string UserName { get; set; }
-        [Required(ErrorMessage = "*Required!")]
         public string Password { get; set; }
-        [Required(ErrorMessage = "*Required!")]
-        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
-        [Required(ErrorMessage = "*Required!")]
         public string ContactNo { get; set; }
         public string Description { get; set; }
         public bool IsVerified { get; set; }
@@ -45,5 +40,9 @@ namespace DatabaseLayer
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PatientTable> PatientTables { get; set; }
         public virtual UserTypeTable UserTypeTable { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Forum_Answers> Forum_Answers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Forum_Questions> Forum_Questions { get; set; }
     }
 }

@@ -63,6 +63,12 @@
     <Compile Include="DoctorTimeSlotTable.cs">
       <DependentUpon>HealthSupportSystemModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Forum_Answers.cs">
+      <DependentUpon>HealthSupportSystemModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Forum_Questions.cs">
+      <DependentUpon>HealthSupportSystemModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="GenderTable.cs">
       <DependentUpon>HealthSupportSystemModel.tt</DependentUpon>
     </Compile>

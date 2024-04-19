@@ -220,6 +220,49 @@ section p {
     max-width: 100%;
 }
 
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideIn {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+.wel-text {
+    margin-top: 15px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to right, #0051D2, #FF4B2B); /* Gradient color for the header */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; /* Apply the gradient to the text */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); /* Subtle text shadow */
+    animation: fadeIn 1.5s ease-out;
+}
+
+.wel-sub-text {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    animation: slideIn 1s ease-out;
+    animation-delay: 0.5s;
+    color: #ffd700; /* Gold color */
+    font-size: 1.2em;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-top: 20px;
+}
 
 
 

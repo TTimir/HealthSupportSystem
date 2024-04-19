@@ -373,6 +373,11 @@
 .fa-map-marker:before {
   content: "\f041";
 }
+
+.fa-msg-marker:before {
+    content: "\F882";
+}
+
 .fa-adjust:before {
   content: "\f042";
 }

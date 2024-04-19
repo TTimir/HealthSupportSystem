@@ -48,6 +48,11 @@
         <AssociationConnector Association="HealthSupportSysdbModel.FK__quiz_Resu__Exam___628FA481" />
         <EntityTypeShape EntityType="HealthSupportSysdbModel.quiz_Questions" Width="1.5" PointX="7.375" PointY="1.75" />
         <AssociationConnector Association="HealthSupportSysdbModel.FK__quiz_Ques__q_fk___693CA210" />
+        <EntityTypeShape EntityType="HealthSupportSysdbModel.Forum_Answers" Width="1.5" PointX="5.25" PointY="19.125" />
+        <EntityTypeShape EntityType="HealthSupportSysdbModel.Forum_Questions" Width="1.5" PointX="3" PointY="17" />
+        <AssociationConnector Association="HealthSupportSysdbModel.FK__Forum_Ans__FK_Us__72C60C4A" />
+        <AssociationConnector Association="HealthSupportSysdbModel.FK__Forum_Ans__Quest__73BA3083" />
+        <AssociationConnector Association="HealthSupportSysdbModel.FK__Forum_Que__FK_Us__6FE99F9F" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

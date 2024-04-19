@@ -43,5 +43,7 @@ namespace DatabaseLayer
         public virtual DbSet<quiz_Category> quiz_Category { get; set; }
         public virtual DbSet<quiz_Result> quiz_Result { get; set; }
         public virtual DbSet<quiz_Questions> quiz_Questions { get; set; }
+        public virtual DbSet<Forum_Answers> Forum_Answers { get; set; }
+        public virtual DbSet<Forum_Questions> Forum_Questions { get; set; }
     }
 }

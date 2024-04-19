@@ -1,0 +1,180 @@
+﻿@model DatabaseLayer.Forum_Questions
+
+@{
+    ViewBag.Title = "Create";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Contact Form 09</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <link href="~/Content/ForumTemplate/css/forum_create.css" rel="stylesheet" />
+</head>
+<body class="hm-gradient">
+
+    <header class="header_area" style="background-color:#fff">
+        <div class="main_menu">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <div class="container">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <a class="navbar-brand logo_h" href="@Url.Action("Index", "Home")"><img src="~/Content/FrontTemplate/img/logo_dark.png" alt=""></a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+                        <ul class="nav navbar-nav menu_nav ml-auto">
+                            <li class="nav-item"><a class="nav-link" href="@Url.Action("Index", "Home")">Home</a></li>
+                            <li class="nav-item"><a class="nav-link" href="@Url.Action("QuestionsList", "Forum_Questions")">Your Questions</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.FK_UserId)
+
+        <section class="ftco-section">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-6 text-center mb-5">
+                        <h2 class="heading-section">Ask Question</h2>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-lg-10 col-md-12">
+                        <div class="wrapper">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-8 mb-5">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="dbox w-100 text-center">
+                                                <div class="icon d-flex align-items-center justify-content-center">
+                                                    <i class='bx bx-globe' style='color: #ffffff; font-size: 24px;'></i>
+                                                </div>
+                                                <div class="text">
+                                                    <p><span>Join Community</span></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="dbox w-100 text-center">
+                                                <div class="icon d-flex align-items-center justify-content-center">
+                                                    <i class='bx bx-question-mark' style='color: #ffffff; font-size: 24px;'></i>
+                                                </div>
+                                                <div class="text">
+                                                    <p><span>Ask Question</span></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="dbox w-100 text-center">
+                                                <div class="icon d-flex align-items-center justify-content-center">
+                                                    <i class='bx bx-message-dots' style='color:#ffffff; font-size: 24px;'></i>
+                                                </div>
+                                                <div class="text">
+                                                    <p><span>Help Others</span></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-8">
+                                    <div class="contact-wrap">
+                                        <h3 class="mb-4 text-center">Ask Question To Community</h3>
+                                        <div id="form-message-warning" class="mb-4 w-100 text-center"></div>
+                                        <div id="form-message-success" class="mb-4 w-100 text-center">
+                                            Your question was posted, thank you!
+                                        </div>
+                                        @if (TempData["Message"] != null)
+                                        {
+                                            <div class="alert alert-info alert-dismissible fade show" role="alert">
+                                                <strong>Info!</strong> TempData["Message"]
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                        }
+                                    <form method="POST" id="contactForm" name="contactForm" class="contactForm">
+                                        <div class="row">
+                                            <div class="col-md-10 col-lg-8">
+                                                <!-- Adjusted column width -->
+                                                <div class="form-group">
+                                                    @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter title here" } })
+                                                    @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-10 col-lg-8">
+                                                <!-- Adjusted column width -->
+                                                <div class="form-group">
+                                                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter description here" } })
+                                                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-md-2">
+                                                    <input type="submit" value="Post" class="btn btn-primary" />
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <a href="@Url.Action("Index", "Home")" class="btn btn-default">Back</a>
+                                                </div>
+                                            </div>
+                                            <div class="submitting"></div>
+                                        </div>
+
+                                    </form>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    }
+
+    <footer class="footer-area area-padding-top">
+        <div class="container">
+            <div class="row footer-bottom d-flex justify-content-between">
+                <p class="col-lg-8 col-sm-12 footer-text m-0">
+                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    Copyright &copy;
+                    <script>document.write(new Date().getFullYear());</script> All rights reserved | This Website is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://ttimir.github.io/timirbhingradiya-pf.github.io/" target="_blank">Timir</a>
+                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="~/Content/ForumTemplate/js/jquery.min.js"></script>
+    <script src="~/Content/ForumTemplate/js/popper.js"></script>
+    <script src="~/Content/ForumTemplate/js/bootstrap.min.js"></script>
+    <script src="~/Content/ForumTemplate/js/jquery.validate.min.js"></script>
+    <script src="~/Content/ForumTemplate/js/main.js"></script>
+
+</body>
+</html>
+

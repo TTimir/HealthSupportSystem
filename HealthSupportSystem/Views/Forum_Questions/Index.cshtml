@@ -1,0 +1,164 @@
+﻿@model IEnumerable<DatabaseLayer.Forum_Questions>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HealMate Forum App</title>
+
+    <link rel="icon" href="~/Content/FrontTemplate/img/sub_logo.png" type="image/png">
+
+    <!-- Bootstrap CSS -->
+    <link href="~/Content/FrontTemplate/css/bootstrap.css" rel="stylesheet">
+    <!-- Forum CSS -->
+    <link href="~/Content/ForumTemplate/css/StyleSheet.css" rel="stylesheet" />
+    <!-- Font Awesome -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="~/Content/FrontTemplate/css/style.css">
+    <link rel="stylesheet" href="~/Content/FrontTemplate/css/responsive.css">
+
+    <!-- Optional: Your custom CSS -->
+    <style>
+        * {
+            scroll-behavior: smooth !important;
+        }
+
+        .highlight {
+            background-color: yellow;
+            padding: 5px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body class="hm-gradient">
+    <header class="header_area" style="background-color:#fff">
+        <div class="main_menu">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <div class="container">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <a class="navbar-brand logo_h" href="@Url.Action("Index", "Home")"><img src="~/Content/FrontTemplate/img/logo_dark.png" alt=""></a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+                        <ul class="nav navbar-nav menu_nav ml-auto">
+                            <li class="nav-item"><a class="nav-link" href="@Url.Action("Index", "Home")">Home</a></li>
+                            <li class="nav-item"><a class="nav-link" href="@Url.Action("Create", "Forum_Questions")">Ask Question</a></li>
+                            <li class="nav-item"><a class="nav-link" href="@Url.Action("QuestionsList", "Forum_Questions")">Your Questions</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="wrapper wrapper-content animated fadeInRight">
+
+                    <div class="ibox-content m-b-sm border-bottom">
+                        <div class="pull-left m-r-md">
+                            <i class="fa fa-globe text-navy mid-icon"></i> &nbsp;
+                        </div>
+                        <h2>Welcome to our HealMate forum</h2>
+                        <span>Feel free to Ask Anything you're interested in.</span>
+                        <a href="@Url.Action("Create", "Forum_Questions")" class="btn btn-primary">Have a Question?</a>
+                    </div>
+                </div>
+
+
+                <div class="ibox-content forum-container">
+
+                    <div class="forum-title">
+                        <div class="pull-right forum-desc">
+                            <samll>Total posts: @Model.Count()</samll>
+                        </div>
+                        <h3>Community Questions</h3>
+                        <hr />
+                    </div>
+
+                    @foreach (var item in Model)
+                    {
+                        <div class="forum-item active">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="forum-icon">
+                                        <img src="~/Content/ForumTemplate/user.256x256.png" width="42" height="42" style="max-width:500px!important;" />
+                                    </div>
+                                    <a asp-action="Details" asp-route-id="@item.QId" class="forum-item-title">@item.Title</a>
+                                    <div class="forum-sub-title">Upload By: @item.UserTable.UserName</div>
+                                </div>
+                                <div class="col-md-1 forum-info">
+                                    <span class="views-number">
+                                        @item.Forum_Answers.Count
+                                    </span>
+                                    <div>
+                                        <small>Answers</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-2 forum-info">
+                                    <span class="views-number">
+                                        Jan 24, 2024
+                                    </span>
+                                    <div>
+                                        <small>Upload On</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-1 forum-info">
+                                    @*<a asp-action="Details" asp-route-id="@item.QId" class="btn btn-info" style="background-color: #0051D2!important; color:#fff!important;">Details</a>*@
+                                    <a href="@Url.Action("Details", "Forum_Questions", new { id = @item.QId })" class="btn btn-info" style="background-color: #0051D2!important; color:#fff!important;">Details</a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer-area area-padding-top">
+        <div class="container">
+            <div class="row footer-bottom d-flex justify-content-between">
+                <p class="col-lg-8 col-sm-12 footer-text m-0">
+                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    Copyright &copy;
+                    <script>document.write(new Date().getFullYear());</script> All rights reserved | This Website is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://ttimir.github.io/timirbhingradiya-pf.github.io/" target="_blank">Timir</a>
+                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                </p>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- Bootstrap and jQuery -->
+    <script src="~/Content/ForumTemplate/js/jquery.min.js"></script>
+    <script src="~/Content/ForumTemplate/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Scripts from FrontTemplate -->
+    <script src="~/Content/FrontTemplate/js/jquery-2.2.4.min.js"></script>
+    <script src="~/Content/FrontTemplate/js/popper.js"></script>
+    <script src="~/Content/FrontTemplate/js/bootstrap.min.js"></script>
+    <script src="~/Content/FrontTemplate/js/stellar.js"></script>
+    <script src="~/Content/FrontTemplate/js/jquery.ajaxchimp.min.js"></script>
+    <script src="~/Content/FrontTemplate/js/jquery.validate.min.js"></script>
+    <script src="~/Content/FrontTemplate/js/mail-script.js"></script>
+    <script src="~/Content/FrontTemplate/js/contact.js"></script>
+
+</body>
+</html>
