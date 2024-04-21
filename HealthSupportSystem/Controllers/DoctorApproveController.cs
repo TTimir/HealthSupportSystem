@@ -74,9 +74,9 @@ namespace HealthSupportSystem.Controllers
             {
                 return RedirectToAction("Login", "Home");
             }
+
             if (ModelState.IsValid)
             {
-
                 db.Entry(appointTable).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("PendingAppoint");

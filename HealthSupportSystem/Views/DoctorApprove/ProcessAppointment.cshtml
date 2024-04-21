@@ -26,6 +26,8 @@
     <div class="form-group">
         @Html.LabelFor(model => model.DoctorComment, "Doctor Comments", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
+            <span style="color:red;">*Make sure to add instruction or any comments before process</span>
+            <br />
             @Html.EditorFor(model => model.DoctorComment, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.DoctorComment, "", new { @class = "text-danger" })
         </div>
@@ -35,6 +37,8 @@
         @Html.LabelFor(model => model.IsChecked, "Patient Checking Status", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             <div class="checkbox">
+                <span style="color:red;">*Make sure checking status is checked before process</span>
+                <br />
                 @Html.EditorFor(model => model.IsChecked)
                 @Html.ValidationMessageFor(model => model.IsChecked, "", new { @class = "text-danger" })
             </div>
