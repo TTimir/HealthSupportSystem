@@ -11,7 +11,6 @@ namespace DatabaseLayer
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Web;
 
@@ -28,23 +27,14 @@ namespace DatabaseLayer
     
         public int LabID { get; set; }
         public int UserID { get; set; }
-        [Required(ErrorMessage = "*Required!")]
         public string Name { get; set; }
         public string Photo { get; set; }
-        [Required(ErrorMessage = "*Required!")]
         public string ContactNo { get; set; }
-        [Required(ErrorMessage = "*Required!")]
-        [DataType(DataType.PhoneNumber)]
         public string PhoneNo { get; set; }
-        [Required(ErrorMessage = "*Required!")]
-        [DataType(DataType.EmailAddress)]
         public string EmailAddress { get; set; }
-        [Required(ErrorMessage = "*Required!")]
         public string PermanentAddress { get; set; }
         public string AboutLab { get; set; }
-        [Required(ErrorMessage = "*Required!")]
         public int AccountTypeID { get; set; }
-        [Required(ErrorMessage = "*Required!")]
         public string AccountNo { get; set; }
         [NotMapped]
         public HttpPostedFileBase LogoFile { get; set; }

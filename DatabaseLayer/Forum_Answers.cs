@@ -18,6 +18,7 @@ namespace DatabaseLayer
         public string Content { get; set; }
         public Nullable<int> FK_UserId { get; set; }
         public Nullable<int> QuestionId { get; set; }
+        public System.DateTime AnsDate { get; set; }
     
         public virtual UserTable UserTable { get; set; }
         public virtual Forum_Questions Forum_Questions { get; set; }

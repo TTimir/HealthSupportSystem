@@ -919,6 +919,7 @@
     <Content Include="Views\Forum_Questions\Edit.cshtml" />
     <Content Include="Views\Forum_Questions\Index.cshtml" />
     <Content Include="Views\Forum_Questions\QuestionsList.cshtml" />
+    <Content Include="Views\QuizAssesment\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

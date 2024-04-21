@@ -3,6 +3,7 @@ using HealthSupportSystem.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Helpers;
 using System.Web.Mvc;
@@ -57,6 +58,8 @@ namespace HealthSupportSystem.Controllers
                     TempData["questions"] = queue;
                     TempData["score"] = 0;
 
+                    // Set the categoryId in TempData
+                    TempData["categoryId"] = item.Cat_id;
 
                     TempData.Keep();
                     return RedirectToAction("StartQuiz");
@@ -159,10 +162,18 @@ namespace HealthSupportSystem.Controllers
                 int score = (int)TempData["score"];
                 DateTime examDate = DateTime.Now;
 
+                // Fetch the category ID associated with the exam result
+                int categoryId = (int)TempData["categoryId"];
+                // Fetch the category name from the database using the category ID
+                string categoryName = db.quiz_Category.Where(x => x.Cat_id == categoryId).Select(x => x.Cat_name).FirstOrDefault();
+
+
+                System.Diagnostics.Debug.WriteLine("Cat Id: " + categoryId);
+                System.Diagnostics.Debug.WriteLine("Cat name: " + categoryName);
                 System.Diagnostics.Debug.WriteLine("patient ID: " + patientId);
                 System.Diagnostics.Debug.WriteLine("patient Name: " + patientName);
 
-                string categoryName = "Health Self-Assesment";
+                //string categoryName = "Health Self-Assesment";
 
                 // Create a new exam result object
                 quiz_Result examResult = new quiz_Result
@@ -217,7 +228,7 @@ namespace HealthSupportSystem.Controllers
             Random r = new Random();
 
             var doc = (DoctorTable)Session["Doctor"];
-            
+
             c.Cat_name = cat.Cat_name;
             c.cat_encrypted_string = CryptMV.Encrypt(cat.Cat_name.Trim() + r.Next().ToString(), true);
             c.Cat_fk_DoctorID = doc.DoctorID;
@@ -330,30 +341,50 @@ namespace HealthSupportSystem.Controllers
             return View(patientExamResults);
         }
 
-        [HttpPost]
-        public ActionResult Delete(int questionId)
+        // GET: QuizAssesment/Delete/5
+        public ActionResult Delete(int? id)
+        {
+            if (string.IsNullOrEmpty(Convert.ToString(Session["UserName"])))
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            quiz_Questions question = db.quiz_Questions.Find(id);
+            if (question == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(question);
+        }
+
+        // POST: QuizAssesment/Delete/5
+        [HttpPost, ActionName("DeleteQuestion")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
         {
             if (string.IsNullOrEmpty(Convert.ToString(Session["UserName"])))
             {
                 return RedirectToAction("Login", "Home");
             }
 
-            // Retrieve the question from the database
-            var question = db.quiz_Questions.Find(questionId);
+            quiz_Questions question = db.quiz_Questions.Find(id);
             if (question == null)
             {
-                // Handle the case where the question is not found
                 return HttpNotFound();
             }
 
-            // Remove the question from the database and save changes
             db.quiz_Questions.Remove(question);
             db.SaveChanges();
 
             TempData["Message"] = "Question deleted successfully!";
             TempData.Keep();
 
-            return RedirectToAction("ViewAllQuestions");
+            return RedirectToAction("ViewAllQuestions", new { id = question.q_fk_Cat_id });
         }
 
 

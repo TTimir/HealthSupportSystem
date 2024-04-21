@@ -60,7 +60,7 @@ namespace HealthSupportSystem.Controllers
                     Content = content,
                     FK_UserId = userId,
                     QuestionId = questionId,
-                    // You may set other properties such as CreatedDate if needed
+                    AnsDate = DateTime.Now
                 };
 
                 db.Forum_Answers.Add(answer);
@@ -93,6 +93,7 @@ namespace HealthSupportSystem.Controllers
             if (userId != 0 && ModelState.IsValid)
             {
                 forum_Questions.FK_UserId = userId;
+                forum_Questions.PostDate = DateTime.Now;
                 db.Forum_Questions.Add(forum_Questions);
                 db.SaveChanges();
                 TempData["Message"] = "Your question was posted, thank you!";

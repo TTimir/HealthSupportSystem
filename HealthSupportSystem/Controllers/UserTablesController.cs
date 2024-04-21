@@ -180,7 +180,31 @@ namespace HealthSupportSystem.Controllers
             {
                 return RedirectToAction("Login", "Home");
             }
+
             UserTable userTable = db.UserTables.Find(id);
+
+            // Check if the user is a patient
+            if (userTable.UserTypeID == 4)
+            {
+                // If the user is a patient, delete associated patient records
+                var patientRecords = db.PatientTables.Where(p => p.UserID == id);
+                foreach (var record in patientRecords)
+                {
+                    db.PatientTables.Remove(record);
+                }
+            }
+            // Check if the user is a doctor
+            else if (userTable.UserTypeID == 2)
+            {
+                // If the user is a doctor, delete associated doctor records
+                var doctorRecords = db.DoctorTables.Where(d => d.UserID == id);
+                foreach (var record in doctorRecords)
+                {
+                    db.DoctorTables.Remove(record);
+                }
+            }
+
+            // Now, delete the user
             db.UserTables.Remove(userTable);
             db.SaveChanges();
             return RedirectToAction("Index");
