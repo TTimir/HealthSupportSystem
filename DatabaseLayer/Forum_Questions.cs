@@ -11,7 +11,8 @@ namespace DatabaseLayer
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Forum_Questions
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,7 +22,9 @@ namespace DatabaseLayer
         }
     
         public int QId { get; set; }
+        [Required(ErrorMessage = "*Required!")]
         public string Title { get; set; }
+        [Required(ErrorMessage = "*Required!")]
         public string Description { get; set; }
         public Nullable<int> FK_UserId { get; set; }
         public System.DateTime PostDate { get; set; }

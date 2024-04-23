@@ -11,18 +11,33 @@ namespace DatabaseLayer
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class quiz_Questions
     {
         public int q_id { get; set; }
+        [Required(ErrorMessage = "*Required!")]
+        [Display(Name = "Question Title")]
         public string q_text { get; set; }
+        [Required(ErrorMessage = "*Required!")]
+        [Display(Name = "Option A")]
         public string QA { get; set; }
+        [Required(ErrorMessage = "*Required!")]
+        [Display(Name = "Option B")]
         public string QB { get; set; }
+        [Required(ErrorMessage = "*Required!")]
+        [Display(Name = "Option C")]
         public string QC { get; set; }
+        [Required(ErrorMessage = "*Required!")]
+        [Display(Name = "Option D")]
         public string QD { get; set; }
+        [Required(ErrorMessage = "*Required!")]
+        [Display(Name = "Correct Option")]
         public string QCorrectAns { get; set; }
+        [Required(ErrorMessage = "*Required!")]
+        [Display(Name = "Select Category")]
         public Nullable<int> q_fk_Cat_id { get; set; }
-    
+
         public virtual quiz_Category quiz_Category { get; set; }
     }
 }

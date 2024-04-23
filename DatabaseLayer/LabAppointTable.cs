@@ -11,7 +11,8 @@ namespace DatabaseLayer
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class LabAppointTable
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,14 +22,22 @@ namespace DatabaseLayer
         }
     
         public int LabAppointID { get; set; }
+        [Required(ErrorMessage = "*Required!")]
         public int LabTestID { get; set; }
+        [Required(ErrorMessage = "*Required!")]
         public int PatientID { get; set; }
+        [Required(ErrorMessage = "*Required!")]
         public int LabID { get; set; }
+        [Required(ErrorMessage = "*Required!")]
         public int LabTimeSlotID { get; set; }
+        [Required(ErrorMessage = "*Required!")]
+        [DataType(DataType.Date)]
         public System.DateTime AppointDate { get; set; }
+        [Required(ErrorMessage = "*Required!")]
         public bool IsFeeSubmit { get; set; }
         public bool IsComplete { get; set; }
         public string Description { get; set; }
+        [Required(ErrorMessage = "*Required!")]
         public string TransectionNo { get; set; }
     
         public virtual LabTable LabTable { get; set; }
