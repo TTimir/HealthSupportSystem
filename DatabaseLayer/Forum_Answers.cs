@@ -11,12 +11,10 @@ namespace DatabaseLayer
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Forum_Answers
     {
         public int AId { get; set; }
-        [Required(ErrorMessage = "*Required!")]
         public string Content { get; set; }
         public Nullable<int> FK_UserId { get; set; }
         public Nullable<int> QuestionId { get; set; }

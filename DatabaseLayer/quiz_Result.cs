@@ -20,6 +20,8 @@ namespace DatabaseLayer
         public string Exam_name { get; set; }
         public Nullable<int> Patient_Score { get; set; }
         public string Patient_name { get; set; }
+        public string AttendedQuestions { get; set; }
+        public Nullable<System.TimeSpan> TimeTaken { get; set; }
     
         public virtual PatientTable PatientTable { get; set; }
     }

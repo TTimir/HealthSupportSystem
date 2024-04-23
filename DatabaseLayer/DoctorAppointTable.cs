@@ -11,28 +11,18 @@ namespace DatabaseLayer
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class DoctorAppointTable
     {
         public int DoctorAppointID { get; set; }
-        [Required(ErrorMessage = "*Required!")]
         public int DoctorID { get; set; }
-        [Required(ErrorMessage = "*Required!")]
         public int PatientID { get; set; }
-        [Required(ErrorMessage = "*Required!")]
         public int DoctorTimeSlotID { get; set; }
-        [Required(ErrorMessage = "*Required!")]
-        [DataType(DataType.Date)]
         public System.DateTime AppointDate { get; set; }
         public string Description { get; set; }
-        [Required(ErrorMessage = "*Required!")]
         public bool IsFeeSubmit { get; set; }
-        [Required(ErrorMessage = "*Required!")]
         public bool IsChecked { get; set; }
-        [Required(ErrorMessage = "*Required!")]
         public string TransectionNo { get; set; }
-        [Required(ErrorMessage = "*Required!")]
         public string DoctorComment { get; set; }
     
         public virtual DoctorTable DoctorTable { get; set; }

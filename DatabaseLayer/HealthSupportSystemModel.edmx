@@ -203,6 +203,8 @@
           <Property Name="Exam_name" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="Patient_Score" Type="int" />
           <Property Name="Patient_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="AttendedQuestions" Type="nvarchar(max)" />
+          <Property Name="TimeTaken" Type="time" Precision="7" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -1352,6 +1354,8 @@
           <Property Name="Patient_Score" Type="Int32" />
           <NavigationProperty Name="PatientTable" Relationship="HealthSupportSysdbModel.FK__quiz_Resu__Exam___628FA481" FromRole="quiz_Result" ToRole="PatientTable" />
           <Property Name="Patient_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AttendedQuestions" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TimeTaken" Type="Time" Precision="7" />
         </EntityType>
         <Association Name="FK__quiz_Cate__Cat_f__656C112C">
           <End Type="HealthSupportSysdbModel.DoctorTable" Role="DoctorTable" Multiplicity="0..1" />
@@ -1673,6 +1677,8 @@
           <EntitySetMapping Name="quiz_Result">
             <EntityTypeMapping TypeName="HealthSupportSysdbModel.quiz_Result">
               <MappingFragment StoreEntitySet="quiz_Result">
+                <ScalarProperty Name="TimeTaken" ColumnName="TimeTaken" />
+                <ScalarProperty Name="AttendedQuestions" ColumnName="AttendedQuestions" />
                 <ScalarProperty Name="Patient_name" ColumnName="Patient_name" />
                 <ScalarProperty Name="Patient_Score" ColumnName="Patient_Score" />
                 <ScalarProperty Name="Exam_name" ColumnName="Exam_name" />

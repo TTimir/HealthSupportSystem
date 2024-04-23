@@ -219,13 +219,6 @@
                                 <span class="star"><i class='bx bx-calendar-check' style='color: #FFA03A'></i></span>
                                 <div class="d-flex flex-column">
                                     <span>Exam Date: </span>
-                                    <div class="d-flex flex-row align-items-center time-text">
-                                        <small>Marketing</small>
-                                        <span class="dots"></span>
-                                        <small>viewed Just now</small>
-                                        <span class="dots"></span>
-                                        <small>Edited 15 minutes ago</small>
-                                    </div>
                                 </div>
                             </div>
                             <span class="content-text-1">@DateTime.Now</span>
@@ -238,13 +231,6 @@
                                 <span class="star"><i class='bx bxs-contact' style='color:#a064e8'></i></span>
                                 <div class="d-flex flex-column">
                                     <span>Patient Name: </span>
-                                    <div class="d-flex flex-row align-items-center time-text">
-                                        <small>Developing</small>
-                                        <span class="dots"></span>
-                                        <small>viewed Just now</small>
-                                        <span class="dots"></span>
-                                        <small>Edited 25 minutes ago</small>
-                                    </div>
                                 </div>
                             </div>
                             <span class="content-text-3">@TempData["patientName"]</span>
@@ -259,13 +245,6 @@
                                 <span class="star"><i class='bx bxs-dashboard' style='color: #FFA03A'></i></span>
                                 <div class="d-flex flex-column">
                                     <span>Category Name: </span>
-                                    <div class="d-flex flex-row align-items-center time-text">
-                                        <small>Marketing</small>
-                                        <span class="dots"></span>
-                                        <small>viewed Just now</small>
-                                        <span class="dots"></span>
-                                        <small>Edited 15 minutes ago</small>
-                                    </div>
                                 </div>
                             </div>
                             <span class="content-text-1">@TempData["categoryName"]</span>
@@ -278,16 +257,37 @@
                                 <span class="star"><i class='bx bxs-quote-single-right' style='color:#00dd38'></i></span>
                                 <div class="d-flex flex-column">
                                     <span>Your Score: </span>
-                                    <div class="d-flex flex-row align-items-center time-text">
-                                        <small>Marketing</small>
-                                        <span class="dots"></span>
-                                        <small>viewed Just now</small>
-                                        <span class="dots"></span>
-                                        <small>Edited 15 minutes ago</small>
-                                    </div>
                                 </div>
                             </div>
                             <span class="content-text-4">@TempData["score"]</span>
+                        </div>
+                    </div>
+
+                    <div class="mt-3">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex flex-row align-items-center">
+                                <span class="star"><i class='bx bxs-hand-up' style='color:#f38c00'></i></span>
+                                <div class="d-flex flex-column">
+                                    <span>Number of questions attempted: </span>
+                                </div>
+                            </div>
+                            <span class="content-text-4">
+                                <p>@TempData["totalQuestions"]/@TempData["totalQuestions"]</p>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="mt-3">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex flex-row align-items-center">
+                                <span class="star"><i class='bx bxs-timer' style='color:#a60404'></i></span>
+                                <div class="d-flex flex-column">
+                                    <span>Time Taken to Complete the Quiz: </span>
+                                </div>
+                            </div>
+                            <span class="content-text-4">
+                                <p>@TempData["timeTaken"]</p>
+                            </span>
                         </div>
                     </div>
 

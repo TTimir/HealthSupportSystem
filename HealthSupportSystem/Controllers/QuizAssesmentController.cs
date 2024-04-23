@@ -57,8 +57,7 @@ namespace HealthSupportSystem.Controllers
                     TempData["examid"] = item.Cat_fk_DoctorID;
                     TempData["questions"] = queue;
                     TempData["score"] = 0;
-
-                    // Set the categoryId in TempData
+                    TempData["startTime"] = DateTime.Now;
                     TempData["categoryId"] = item.Cat_id;
 
                     TempData.Keep();
@@ -166,7 +165,15 @@ namespace HealthSupportSystem.Controllers
                 int categoryId = (int)TempData["categoryId"];
                 // Fetch the category name from the database using the category ID
                 string categoryName = db.quiz_Category.Where(x => x.Cat_id == categoryId).Select(x => x.Cat_name).FirstOrDefault();
+                // Fetch the total number of questions in the room
+                int totalQuestions = db.quiz_Questions.Count(x => x.q_fk_Cat_id == categoryId);
 
+                // Calculate the duration of the exam
+                DateTime startTime = (DateTime)TempData["startTime"];
+                TimeSpan duration = examDate - startTime;
+
+                // Store time taken in TempData
+                TempData["timeTaken"] = duration;
 
                 System.Diagnostics.Debug.WriteLine("Cat Id: " + categoryId);
                 System.Diagnostics.Debug.WriteLine("Cat name: " + categoryName);
@@ -182,7 +189,9 @@ namespace HealthSupportSystem.Controllers
                     Exam_fk_stud = patientId,
                     Patient_name = patientName,
                     Exam_name = categoryName,
-                    Patient_Score = score
+                    Patient_Score = score,
+                    AttendedQuestions = string.Join(",", totalQuestions),
+                    TimeTaken = duration
                 };
 
                 // Add the exam result to the database
@@ -191,6 +200,7 @@ namespace HealthSupportSystem.Controllers
 
                 TempData["patientName"] = patientName;
                 TempData["categoryName"] = categoryName;
+                TempData["totalQuestions"] = totalQuestions;
             }
             return View();
         }

@@ -28,6 +28,12 @@
                         <th>
                             Quiz Score
                         </th>
+                        <th>
+                            Attended Questions
+                        </th>
+                        <th>
+                            Taken Time
+                        </th>
                     </tr>
                 </thead>
                 <tbody id="searchValue">
@@ -45,6 +51,12 @@
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Patient_Score)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.AttendedQuestions)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.TimeTaken)
                             </td>
                         </tr>
                     }

@@ -11,7 +11,6 @@ namespace DatabaseLayer
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Web;
 
@@ -27,34 +26,19 @@ namespace DatabaseLayer
     
         public int DoctorID { get; set; }
         public int UserID { get; set; }
-        [Required(ErrorMessage = "*Required!")]
         public string Name { get; set; }
-        [Required(ErrorMessage = "*Required!")]
         public string ContactNo { get; set; }
-        [Required(ErrorMessage = "*Required!")]
-        [DataType(DataType.Currency)]
         public double Fees { get; set; }
-        [Required(ErrorMessage = "*Required!")]
         public string Splztion { get; set; }
-        [Required(ErrorMessage = "*Required!")]
         public string ClinicAddress { get; set; }
-        [Required(ErrorMessage = "*Required!")]
         public string PermanentAddress { get; set; }
-        [Required(ErrorMessage = "*Required!")]
-        [DataType(DataType.EmailAddress)]
         public string EmailAddress { get; set; }
-        [Required(ErrorMessage = "*Required!")]
-        [DataType(DataType.PhoneNumber)]
         public string ClinicPhoneNo { get; set; }
         public string Description { get; set; }
-        [Required(ErrorMessage = "*Required!")]
         public Nullable<int> PerDayMaxAppitmnt { get; set; }
         public string Photo { get; set; }
-        [Required(ErrorMessage = "*Required!")]
         public int AccountTypeID { get; set; }
-        [Required(ErrorMessage = "*Required!")]
         public string AccountNo { get; set; }
-        [Required(ErrorMessage = "*Required!")]
         public Nullable<int> GenderID { get; set; }
         public string SupportiveDocument { get; set; }
         [NotMapped]
