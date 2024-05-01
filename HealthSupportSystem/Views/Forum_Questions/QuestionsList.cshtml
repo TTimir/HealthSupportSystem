@@ -91,8 +91,8 @@
                                         @Html.DisplayFor(modelItem => item.Description)
                                     </td>
                                     <td>
-                                        <a asp-action="Edit" asp-route-id="@item.QId" class="btn btn-info" style="color:#fff">Edit</a>
-                                        <a asp-action="Delete" asp-route-id="@item.QId" class="btn btn-danger" style="color:#fff">Delete</a>
+                                        @*<a asp-action="Delete" asp-route-id="@item.QId" class="btn btn-danger" style="color:#fff">Delete</a>*@
+                                        @Html.ActionLink("Delete", "Delete", new { id = item.QId }, new { @class = "genric-btn danger" })
                                     </td>
                                 </tr>
                             }

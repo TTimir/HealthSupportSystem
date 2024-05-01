@@ -113,15 +113,16 @@ namespace HealthSupportSystem.Controllers
 
         public ActionResult ViewDetails(int? id)
         {
-            ViewBag.Doctor = db.DoctorAppointTables.Find(id).DoctorTable.Name;
-            ViewBag.DocContact = db.DoctorAppointTables.Find(id).DoctorTable.ClinicPhoneNo;
-            ViewBag.DocEmail = db.DoctorAppointTables.Find(id).DoctorTable.EmailAddress;
-            ViewBag.DocComment = db.DoctorAppointTables.Find(id).DoctorComment;
-            ViewBag.ClinicAddress = db.DoctorAppointTables.Find(id).DoctorTable.ClinicAddress;
-            ViewBag.Patient = db.DoctorAppointTables.Find(id).PatientTable.Name;
-            ViewBag.PatientEmail = db.DoctorAppointTables.Find(id).PatientTable.Email;
-            ViewBag.AppointmentNo = db.DoctorAppointTables.Find(id).TransectionNo;
-            ViewBag.AppointmentDate = db.DoctorAppointTables.Find(id).AppointDate;
+            var appointment = db.DoctorAppointTables.Find(id);
+            ViewBag.Doctor = appointment.DoctorTable.Name;
+            ViewBag.DocContact = appointment.DoctorTable.ClinicPhoneNo;
+            ViewBag.DocEmail = appointment.DoctorTable.EmailAddress;
+            ViewBag.DocComment = appointment.DoctorComment;
+            ViewBag.ClinicAddress = appointment.DoctorTable.ClinicAddress;
+            ViewBag.Patient = appointment.PatientTable.Name;
+            ViewBag.PatientEmail = appointment.PatientTable.Email;
+            ViewBag.AppointmentDate = appointment.AppointDate;
+            ViewBag.Amount = appointment.IsFeeSubmit ? "Paid" : "Not applicable";
 
             ViewBag.DocLogo = db.DoctorAppointTables.Find(id).DoctorTable.Photo;
             ViewBag.PatientLogo = db.DoctorAppointTables.Find(id).PatientTable.Photo;

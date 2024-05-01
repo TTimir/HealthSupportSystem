@@ -462,8 +462,8 @@
     <Content Include="Content\FrontTemplate\img\instagram\widget-i5.png" />
     <Content Include="Content\FrontTemplate\img\instagram\widget-i6.png" />
     <Content Include="Content\FrontTemplate\img\logo.png" />
-    <Content Include="Content\FrontTemplate\img\logo_dark.png" />
     <Content Include="Content\FrontTemplate\img\logo_white.png" />
+    <Content Include="Content\FrontTemplate\img\logo_dark.png" />
     <Content Include="Content\FrontTemplate\img\notify-bg.jpg" />
     <Content Include="Content\FrontTemplate\img\project\1.jpg" />
     <Content Include="Content\FrontTemplate\img\project\2.jpg" />

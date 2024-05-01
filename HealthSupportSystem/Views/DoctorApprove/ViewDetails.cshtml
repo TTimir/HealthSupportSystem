@@ -37,7 +37,7 @@
                 <img src="~/Content/FrontTemplate/img/logo_dark.png" alt="">
             </div>
             <div class="text-center border-top border-bottom my-5 py-3">
-                <h4 class="display-5 fw-bold">Doctor Report</h4>
+                <h4 class="display-5 fw-bold">Patient Report</h4>
                 <p class="m-0">Appointment No: <span class="text-black font-weight-bold">@ViewBag.AppointmentNo</span></p>
                 <p class="m-0">Appointment Date: <span class="text-black font-weight-bold">@ViewBag.AppointmentDate</span></p>
             </div>
@@ -100,10 +100,10 @@
                         Doctor
                     </th>
                     <th>
-                        Consultancy Time (From)
+                        Visit Time (From)
                     </th>
                     <th>
-                        Consultancy Time (To)
+                        Visit Time (To)
                     </th>
                     <th>
                         Reason
@@ -157,8 +157,8 @@
                 <div>
                     <h5 class="fw-bold my-4">Payment Info</h5>
                     <ul class="list-unstyled">
-                        <li><span class="fw-semibold">Account No: </span> @ViewBag.AppointmentNo</li>
                         <li><span class="fw-semibold">Patient Name: </span> @ViewBag.Patient</li>
+                        <li><span class="fw-semibold">Amount: </span> @ViewBag.Amount</li>
                         <li><span class="fw-semibold">Branch Name: </span> N/A </li>
 
                     </ul>
@@ -178,7 +178,7 @@
                     <div class="row mt-3">
                         <div class="col-md-6 copyright">
                             <p>
-                                © 2024 HealMmate. <a href="#!" target="_blank"
+                                © 2024 HealMate. <a href="#!" target="_blank"
                                                         class="text-decoration-none text-black-50">Terms & Conditions</a>
                             </p>
                         </div>

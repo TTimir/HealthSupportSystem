@@ -30,7 +30,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"><!-- main css -->
-    
+
     <link rel="stylesheet" href="~/Content/FrontTemplate/css/style.css">
     <link rel="stylesheet" href="~/Content/FrontTemplate/css/responsive.css">
     @*@Styles.Render("~/Content/css")
@@ -68,7 +68,7 @@
             <nav class="navbar navbar-expand-lg navbar-light">
                 <div class="container">
                     <!-- Brand and toggle get grouped for better mobile display -->
-                    <a class="navbar-brand logo_h" href="index.html"><img src="~/Content/FrontTemplate/img/logo_dark.png" alt=""></a>
+                    <a class="navbar-brand logo_h" href="#!"><img src="~/Content/FrontTemplate/img/logo_dark.png" alt=""></a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
@@ -106,7 +106,7 @@
                             Welcome to Making Health Care Better Together! Our system makes healthcare easier for everyone. Together, we're making healthcare smoother and all about you. Join us and make your healthcare experience better!
                         </p>
                         @Html.ActionLink("Make an Appointment", "Login", "Home", new { @class = "main_btn" })
-                        @Html.ActionLink("Create Account", "CreateUser", "Home", new { @class = "main_btn_light" })
+                        @Html.ActionLink("Create Your Account", "CreateUser", "Home", new { @class = "main_btn_light" })
                     </div>
                 </div>
             </div>
@@ -504,8 +504,8 @@
             </div>
         </section>
         <!-- ================ testimonial section end ================= -->
-        
-        
+
+
         <!--================ Start Brands Area =================-->
         <section class="brands-area background_one">
             <div class="container">
@@ -597,23 +597,10 @@
                     </ul>
                 </div>
                 <div class="col-lg-4 col-md-6 single-footer-widget">
-                    <h4>Newsletter</h4>
-                    <p>You can trust us. we only send Healt Updates,</p>
-                    <div class="form-wrap" id="mc_embed_signup">
-                        <form target="_blank" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
-                              method="get" class="form-inline">
-                            <input class="form-control" name="EMAIL" placeholder="Your Email Address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Your Email Address'"
-                                   required="" type="email" />
-                            <button class="click-btn btn btn-default">
-                                <i class="ti-arrow-right"></i>
-                            </button>
-                            <div style="position: absolute; left: -5000px;">
-                                <input name="b_36c4fd991d266f23781ded980_aefe40901a" tabindex="-1" value="" type="text" />
-                            </div>
-
-                            <div class="info"></div>
-                        </form>
-                    </div>
+                    <h4>HealMate.Heal</h4>
+                    <a class="navbar-brand logo_h" href="#!"><img src="~/Content/FrontTemplate/img/logo_dark.png" alt=""></a>
+                    <br />
+                    <p>You can trust us.</p>
                 </div>
             </div>
             <div class="row footer-bottom d-flex justify-content-between">
