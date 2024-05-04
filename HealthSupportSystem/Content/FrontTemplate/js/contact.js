@@ -20,17 +20,17 @@ $(document).ready(function(){
                     required: true,
                     minlength: 4
                 },
-                number: {
-                    required: true,
-                    minlength: 5
-                },
+                //number: {
+                //    required: true,
+                //    minlength: 5
+                //},
                 email: {
                     required: true,
                     email: true
                 },
                 message: {
                     required: true,
-                    minlength: 20
+                    minlength: 10
                 }
             },
             messages: {
@@ -42,10 +42,10 @@ $(document).ready(function(){
                     required: "come on, you have a subject, don't you?",
                     minlength: "your subject must consist of at least 4 characters"
                 },
-                number: {
-                    required: "come on, you have a number, don't you?",
-                    minlength: "your Number must consist of at least 5 characters"
-                },
+                //number: {
+                //    required: "come on, you have a number, don't you?",
+                //    minlength: "your Number must consist of at least 5 characters"
+                //},
                 email: {
                     required: "no email, no message"
                 },
@@ -58,7 +58,7 @@ $(document).ready(function(){
                 $(form).ajaxSubmit({
                     type:"POST",
                     data: $(form).serialize(),
-                    url:"contact_process.php",
+                    url:"https://formspree.io/f/xnqeoowp",
                     success: function() {
                         $('#contactForm :input').attr('disabled', 'disabled');
                         $('#contactForm').fadeTo( "slow", 1, function() {
