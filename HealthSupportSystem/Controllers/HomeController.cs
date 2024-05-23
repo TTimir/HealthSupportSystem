@@ -8,6 +8,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI.WebControls;
+using BCrypt.Net;
 
 namespace HealthSupportSystem.Controllers
 {
@@ -31,10 +32,12 @@ namespace HealthSupportSystem.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Login(string email, string password)
         {
             if (string.IsNullOrEmpty(email) && string.IsNullOrEmpty(password))
             {
+                ModelState.AddModelError("", "Email and password are required.");
                 return View("Login");
             }
 
@@ -45,7 +48,7 @@ namespace HealthSupportSystem.Controllers
                 Session["UserID"] = user.UserID;
                 Session["UserTypeID"] = user.UserTypeID;
                 Session["UserName"] = user.UserName;
-                Session["Password"] = user.Password;
+                //Session["Password"] = user.Password;
                 Session["Email"] = user.Email;
                 Session["ContactNo"] = user.ContactNo;
                 Session["Description"] = user.Description;
@@ -105,7 +108,7 @@ namespace HealthSupportSystem.Controllers
             }
             else
             {
-                ViewBag.message = "User Name and Password is incorrect!";
+                ViewBag.message = "Username and Password is incorrect!";
             }
 
             LogOut();
@@ -117,11 +120,18 @@ namespace HealthSupportSystem.Controllers
             Session["UserID"] = string.Empty;
             Session["UserTypeID"] = string.Empty;
             Session["UserName"] = string.Empty;
-            Session["Password"] = string.Empty;
+            //Session["Password"] = string.Empty;
             Session["Email"] = string.Empty;
             Session["ContactNo"] = string.Empty;
             Session["Description"] = string.Empty;
             Session["IsVerified"] = string.Empty;
+
+            Session.Abandon();
+
+            // Clear authentication cookie
+            HttpCookie authCookie = new HttpCookie("User_SessionId", string.Empty);
+            authCookie.Expires = DateTime.Now.AddMonths(-1);
+            Response.Cookies.Add(authCookie);
         }
 
         public ActionResult ChangePassword()
@@ -134,6 +144,7 @@ namespace HealthSupportSystem.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult ChangePassword(string OldPassword, string NewPassword, string ConfirmPassword)
         {
             if (Session["UserID"] == null)
@@ -144,14 +155,20 @@ namespace HealthSupportSystem.Controllers
             int? userid = Convert.ToInt32(Session["UserID"].ToString());
             UserTable users = db.UserTables.Find(userid);
 
-            if (users.Password == OldPassword)
+            if (users != null && users.Password == OldPassword)
             {
                 if (NewPassword == ConfirmPassword)
                 {
+                    if (!IsPasswordValid(NewPassword))
+                    {
+                        ViewBag.Message = "Password does not meet complexity requirements.";
+                        return View("ChangePassword");
+                    }
+
                     users.Password = NewPassword;
                     db.Entry(users).State = EntityState.Modified;
                     db.SaveChanges();
-                    ViewBag.message = "Saved Successfully!";
+                    ViewBag.message = "Password changed successfully!";
                     return RedirectToAction("Login", "Home");
                 }
                 else
@@ -166,7 +183,6 @@ namespace HealthSupportSystem.Controllers
                 return View("ChangePassword");
             }
 
-            return View();
         }
 
         public ActionResult CreateUser()
@@ -177,17 +193,58 @@ namespace HealthSupportSystem.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateUser(UserTable user)
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateUser(UserTable user, string password)
         {
             if (user != null)
             {
                 if (ModelState.IsValid)
                 {
+                    if (!IsPasswordValid(password))
+                    {
+                        ViewBag.Message = "Password does not meet complexity requirements.";
+                        ViewBag.UserTypeID = new SelectList(db.UserTypeTables.Where(u => u.UserTypeID != 1 && u.UserTypeID != 3), "UserTypeID", "UserType", "0");
+                        return View("CreateUser");
+                    }
+
                     var finduser = db.UserTables.Where(u => u.Email == user.Email).FirstOrDefault();
                     if (finduser == null)
                     {
                         finduser = db.UserTables.Where(u => u.Email == user.Email && u.IsVerified == false).FirstOrDefault();
-                        if (finduser == null)
+                        if (finduser != null)
+                        {
+                            ViewBag.Message = "Email Already Registered, Please Enter Profile Details!";
+                            Session["User"] = finduser;
+
+                            if (finduser.UserTypeID == 2) // Doctor
+                            {
+                                var doc = db.DoctorTables.Where(u => u.UserID == finduser.UserID).FirstOrDefault();
+                                if (doc == null)
+                                {
+                                    return RedirectToAction("AddDoctor");
+                                }
+                                ViewBag.Message = "Account is Under Review!";
+                            }
+                            else if (finduser.UserTypeID == 3) // Lab
+                            {
+                                var lab = db.LabTables.Where(u => u.UserID == finduser.UserID).FirstOrDefault();
+                                if (lab == null)
+                                {
+                                    return RedirectToAction("AddLab");
+                                }
+                                return RedirectToAction("AddLab");
+                            }
+                            else if (finduser.UserTypeID == 4) // Patient
+                            {
+                                var patient = db.PatientTables.Where(u => u.UserID == finduser.UserID).FirstOrDefault();
+                                if (patient == null)
+                                {
+                                    return RedirectToAction("AddPatient");
+                                }
+                                ViewBag.Message = "Account is Under Review!";
+                            }
+                        }
+                        else
                         {
                             if (user.UserTypeID == 2) // Doctor
                             {
@@ -205,6 +262,7 @@ namespace HealthSupportSystem.Controllers
                             {
                                 user.IsVerified = false;
                             }
+                            user.Password = password;
 
                             db.UserTables.Add(user);
                             db.SaveChanges();
@@ -229,40 +287,8 @@ namespace HealthSupportSystem.Controllers
                             }
                         }
                     }
-                    else
-                    {
-                        ViewBag.Message = "Email Already Registered, Please Enter Profile Details!";
-
-                        Session["User"] = finduser;
-                        if (finduser.UserTypeID == 2) // Doctor
-                        {
-                            var doc = db.DoctorTables.Where(u => u.UserID == finduser.UserID).FirstOrDefault();
-                            if (doc == null)
-                            {
-                                return RedirectToAction("AddDoctor");
-                            }
-                            ViewBag.Message = "Account is Under Review!";
-                        }
-                        else if (finduser.UserTypeID == 3) // Lab
-                        {
-                            var lab = db.LabTables.Where(u => u.UserID == finduser.UserID).FirstOrDefault();
-                            if (lab == null)
-                            {
-                                return RedirectToAction("AddLab");
-                            }
-                            return RedirectToAction("AddLab");
-                        }
-                        else if (finduser.UserTypeID == 4) // Patient
-                        {
-                            var patient = db.PatientTables.Where(u => u.UserID == finduser.UserID).FirstOrDefault();
-                            if (patient == null)
-                            {
-                                return RedirectToAction("AddPatient");
-                            }
-                            ViewBag.Message = "Account is Under Review!";
-                        }
-                    }
                 }
+
             }
             else
             {
@@ -273,6 +299,19 @@ namespace HealthSupportSystem.Controllers
             return View("CreateUser");
         }
 
+        private bool IsPasswordValid(string password)
+        {
+            if (password.Length < 8)
+                return false;
+
+            bool hasUppercase = password.Any(char.IsUpper);
+            bool hasLowercase = password.Any(char.IsLower);
+            bool hasDigit = password.Any(char.IsDigit);
+            bool hasSpecialCharacter = password.Any(ch => "!@#$%^&*()-_=+".Contains(ch));
+
+            return hasUppercase && hasLowercase && hasDigit && hasSpecialCharacter;
+        }
+
         public ActionResult AddDoctor()
         {
             ViewBag.GenderID = new SelectList(db.GenderTables.ToList(), "GenderID", "Name", "0");
@@ -281,6 +320,7 @@ namespace HealthSupportSystem.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult AddDoctor(DoctorTable doctor)
         {
             if (Session["User"] != null)
@@ -292,9 +332,7 @@ namespace HealthSupportSystem.Controllers
                     var finddoctor = db.DoctorTables.Where(d => d.EmailAddress == doctor.EmailAddress).FirstOrDefault();
                     if (finddoctor == null)
                     {
-                        db.DoctorTables.Add(doctor);
-                        db.SaveChanges();
-                        if (doctor.LogoFile != null && doctor.DocumentFile != null)
+                        if (finddoctor == null)
                         {
                             var folder = "~/Content/DoctorImages";
                             var file = string.Format("{0}.png", doctor.DoctorID);
@@ -345,6 +383,7 @@ namespace HealthSupportSystem.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult AddLab(LabTable lab)
         {
             if (Session["User"] != null)
@@ -369,9 +408,9 @@ namespace HealthSupportSystem.Controllers
                                 lab.Photo = pic;
                                 db.Entry(lab).State = EntityState.Modified;
                                 db.SaveChanges();
-                                return View("UnderReview");
                             }
                         }
+                        return RedirectToAction("Login");
                     }
                     else
                     {
@@ -395,6 +434,7 @@ namespace HealthSupportSystem.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult AddPatient(PatientTable patient)
         {
             if (Session["User"] != null)
