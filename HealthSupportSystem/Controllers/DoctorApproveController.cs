@@ -121,6 +121,7 @@ namespace HealthSupportSystem.Controllers
             ViewBag.ClinicAddress = appointment.DoctorTable.ClinicAddress;
             ViewBag.Patient = appointment.PatientTable.Name;
             ViewBag.PatientEmail = appointment.PatientTable.Email;
+            ViewBag.AppointmentNo = appointment.DoctorAppointID;
             ViewBag.AppointmentDate = appointment.AppointDate;
             ViewBag.Amount = appointment.IsFeeSubmit ? "Paid" : "Not applicable";
 
