@@ -4814,6 +4814,10 @@
     content: "\1F5E0";
 }
 
+.icon-userac:before {
+    content: "\1330";
+}
+
 .icon-timeslot:before {
     content: "\25D4";
 }

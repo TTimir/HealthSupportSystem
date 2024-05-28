@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.UI.WebControls;
 using BCrypt.Net;
+using System.Data.Entity.Infrastructure;
 
 namespace HealthSupportSystem.Controllers
 {
@@ -319,62 +320,71 @@ namespace HealthSupportSystem.Controllers
             return View();
         }
 
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult AddDoctor(DoctorTable doctor)
         {
-            if (Session["User"] != null)
-            {
-                var user = (UserTable)Session["User"];
-                doctor.UserID = user.UserID;
-                if (ModelState.IsValid)
-                {
-                    var finddoctor = db.DoctorTables.Where(d => d.EmailAddress == doctor.EmailAddress).FirstOrDefault();
-                    if (finddoctor == null)
-                    {
-                        if (finddoctor == null)
-                        {
-                            var folder = "~/Content/DoctorImages";
-                            var file = string.Format("{0}.png", doctor.DoctorID);
-                            var response = FileHelpers.UploadPhoto(doctor.LogoFile, folder, file);
-                            if (response)
-                            {
-                                var pic = string.Format("{0}/{1}", folder, file);
-                                doctor.Photo = pic;
-                            }
-
-                            var docfolder = "~/Content/DoctorDocuments";
-                            var docfile = string.Format("{0}.png", doctor.DoctorID);
-                            var docresponse = FileHelpers.UploadDocument(doctor.DocumentFile, docfolder, docfile);
-                            if (docresponse)
-                            {
-                                var pic = string.Format("{0}/{1}", docfolder, docfile);
-                                doctor.SupportiveDocument = pic;
-                            }
-
-                            if (doctor.LogoFile != null && doctor.DocumentFile != null)
-                            {
-                                db.Entry(doctor).State = EntityState.Modified;
-                                db.SaveChanges();
-                                return View("UnderReview");
-                            }
-                        }
-                    }
-                    else
-                    {
-                        ViewBag.Message = "Email Already Registered!";
-                    }
-                }
-            }
-            else
+            if (Session["User"] == null)
             {
                 return RedirectToAction("Login");
+            }
+
+            var user = (UserTable)Session["User"];
+            doctor.UserID = user.UserID;
+
+            if (ModelState.IsValid)
+            {
+                var existingDoctor = db.DoctorTables.FirstOrDefault(d => d.EmailAddress == doctor.EmailAddress);
+                if (existingDoctor != null)
+                {
+                    ViewBag.Message = "Email Already Registered!";
+                }
+                else
+                {
+                    if (doctor.LogoFile != null)
+                    {
+                        var folder = "~/Content/DoctorImages";
+                        var file = $"{doctor.DoctorID}.png";
+                        var response = FileHelpers.UploadPhoto(doctor.LogoFile, folder, file);
+                        if (response)
+                        {
+                            doctor.Photo = $"{folder}/{file}";
+                        }
+                    }
+
+                    if (doctor.DocumentFile != null)
+                    {
+                        var docfolder = "~/Content/DoctorDocuments";
+                        var docfile = $"{doctor.DoctorID}.png";
+                        var docresponse = FileHelpers.UploadDocument(doctor.DocumentFile, docfolder, docfile);
+                        if (docresponse)
+                        {
+                            doctor.SupportiveDocument = $"{docfolder}/{docfile}";
+                        }
+                    }
+
+                    try
+                    {
+                        db.DoctorTables.Add(doctor);
+                        db.SaveChanges();
+                        return View("UnderReview");
+                    }
+                    catch (DbUpdateConcurrencyException ex)
+                    {
+                        // Log the error (uncomment the line below after adding a logging mechanism)
+                        // Log.Error(ex, "Concurrency error occurred while adding doctor.");
+
+                        ModelState.AddModelError("", "An error occurred while saving the doctor details. Please try again.");
+                    }
+                }
             }
 
             ViewBag.GenderID = new SelectList(db.GenderTables.ToList(), "GenderID", "Name", doctor.GenderID);
             ViewBag.AccountTypeID = new SelectList(db.AccountTypeTables.ToList(), "AccountTypeID", "Name", doctor.AccountTypeID);
             return View(doctor);
         }
+
 
         public ActionResult AddLab()
         {

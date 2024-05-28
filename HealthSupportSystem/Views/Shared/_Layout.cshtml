@@ -27,21 +27,19 @@
     <link href="~/Content/AdminTemplate/css/main.css" rel="stylesheet" />
 
     <!-- Bootstrap CSS -->
-    @*<link rel="stylesheet" href="~/Content/DashboardTemplate/css/bootstrap.min.css">*@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css" rel="stylesheet">
 
     <!-- Style -->
     <link rel="stylesheet" href="~/Content/DashboardTemplate/css/style.css">
 
-    <!-- Bootstrap CSS -->
+    <!-- FrontTemplate Styles -->
     <link rel="stylesheet" href="~/Content/FrontTemplate/css/bootstrap.css">
     <link rel="stylesheet" href="~/Content/FrontTemplate/css/themify-icons.css">
     <link rel="stylesheet" href="~/Content/FrontTemplate/css/flaticon.css">
     <link rel="stylesheet" href="~/Content/FrontTemplate/vendors/fontawesome/css/all.min.css">
     <link rel="stylesheet" href="~/Content/FrontTemplate/vendors/owl-carousel/owl.carousel.min.css">
     <link rel="stylesheet" href="~/Content/FrontTemplate/vendors/animate-css/animate.css">
-    <!-- main css -->
     <link rel="stylesheet" href="~/Content/FrontTemplate/css/style.css">
     <link rel="stylesheet" href="~/Content/FrontTemplate/css/responsive.css">
 
@@ -88,16 +86,16 @@
                                 if (value == 1)
                                 {
                                     @*<li>
-                                            <a href="#!">
-                                                <div class="icon"><i class="icon-alllab"></i></div>
-                                                <div class="s-title">Lab</div>
-                                                <div class="arrow"><i class="fas fa-chevron-down"></i></div>
-                                            </a>
-                                            <ul class="accordion">
-                                                <li><a href="@Url.Action("Index", "UserTables")" class="d-flex align-items-center"><span class="wrap-icon icon-lab mr-3"></span><span class="menu-text">Pending(Lab) Request</span></a></li>
-                                                <li><a href="@Url.Action("Index", "UserTables")" class="d-flex align-items-center"><span class="wrap-icon icon-alllab mr-3"></span><span class="menu-text">All Labs</span></a></li>
-                                            </ul>
-                                        </li>*@
+                        <a href="#!">
+                            <div class="icon"><i class="icon-alllab"></i></div>
+                            <div class="s-title">Lab</div>
+                            <div class="arrow"><i class="fas fa-chevron-down"></i></div>
+                        </a>
+                        <ul class="accordion">
+                            <li><a href="@Url.Action("Index", "UserTables")" class="d-flex align-items-center"><span class="wrap-icon icon-lab mr-3"></span><span class="menu-text">Pending(Lab) Request</span></a></li>
+                            <li><a href="@Url.Action("Index", "UserTables")" class="d-flex align-items-center"><span class="wrap-icon icon-alllab mr-3"></span><span class="menu-text">All Labs</span></a></li>
+                        </ul>
+                    </li>*@
 
                                     <li><a href="@Url.Action("Index", "AccountTypeTables")" class="d-flex align-items-center"><span class="wrap-icon icon-account mr-3"></span><span class="menu-text">Account Type</span></a></li>
 
@@ -133,6 +131,7 @@
                                 else if (value == 3)
                                 {
                                     //Lab User Access
+                                    <li><a href="@Url.Action("UserDetails", "UserTables")" class="d-flex align-items-center"><span class="wrap-icon icon-userac mr-3"></span><span class="menu-text">User Accout</span></a></li>
                                     <li><a href="@Url.Action("Index", "LabTimeSlotTables")" class="d-flex align-items-center"><span class="wrap-icon icon-timeslot mr-3"></span><span class="menu-text">Time Slot</span></a></li>
 
                                     <li>
@@ -179,6 +178,7 @@
                                 else if (value == 2)
                                 {
                                     //Doctor User Access
+                                    <li><a href="@Url.Action("UserDetails", "UserTables")" class="d-flex align-items-center"><span class="wrap-icon icon-userac mr-3"></span><span class="menu-text">User Accout</span></a></li>
                                     <li><a href="@Url.Action("Index", "DoctorTimeSlotTables")" class="d-flex align-items-center"><span class="wrap-icon icon-timeslot mr-3"></span><span class="menu-text">Time Slot</span></a></li>
 
                                     <li>
@@ -227,23 +227,24 @@
                                 {
                                     //Patient User Access
                                     <li>@*<a href="@Url.Action("GetAllLabs", "PatientAppointment")" class="d-flex align-items-center"><span class="wrap-icon icon-alllab mr-3"></span><span class="menu-text">All Labs</span></a>*@</li>
+                                    <li><a href="@Url.Action("UserDetails", "UserTables")" class="d-flex align-items-center"><span class="wrap-icon icon-userac mr-3"></span><span class="menu-text">User Accout</span></a></li>
                                     <li><a href="@Url.Action("GetAllDoctors", "PatientAppointment")" class="d-flex align-items-center"><span class="wrap-icon icon-alldoc mr-3"></span><span class="menu-text">All Doctors</span></a></li>
                                     <li>@*<a href="@Url.Action("AllTest", "LabSetting")" class="d-flex align-items-center"><span class="wrap-icon icon-alldoc mr-3"></span><span class="menu-text">All Tests</span></a>*@</li>
 
                                     @*<li>
-                                            <a href="#!">
-                                                <div class="icon"><i class="icon-labapp"></i></div>
-                                                <div class="s-title">Labs</div>
-                                                <div class="arrow"><i class="fas fa-chevron-down"></i></div>
-                                            </a>
-                                            <ul class="accordion">
-                                                <li><a href="@Url.Action("AllAppointment", "LabAppointStatus")" class="d-flex align-items-center"><span class="wrap-icon icon-allapp mr-3"></span><span class="menu-text">All Appointment</span></a></li>
-                                                <li><a href="@Url.Action("PendingAppointment", "LabAppointStatus")" class="d-flex align-items-center"><span class="wrap-icon icon-papp mr-3"></span><span class="menu-text">Pending Appointment</span></a></li>
-                                                <li><a href="@Url.Action("CurrentAppointment", "LabAppointStatus")" class="d-flex align-items-center"><span class="wrap-icon icon-capp mr-3"></span><span class="menu-text">Current Appointment</span></a></li>
-                                                <li><a href="@Url.Action("CancelAppointment", "LabAppointStatus")" class="d-flex align-items-center"><span class="wrap-icon icon-canapp mr-3"></span><span class="menu-text">Cancel Appointment</span></a></li>
-                                                <li><a href="@Url.Action("CompleteAppointment", "LabAppointStatus")" class="d-flex align-items-center"><span class="wrap-icon icon-comapp mr-3"></span><span class="menu-text">Complate Appointment</span></a></li>
-                                            </ul>
-                                        </li>*@
+                        <a href="#!">
+                            <div class="icon"><i class="icon-labapp"></i></div>
+                            <div class="s-title">Labs</div>
+                            <div class="arrow"><i class="fas fa-chevron-down"></i></div>
+                        </a>
+                        <ul class="accordion">
+                            <li><a href="@Url.Action("AllAppointment", "LabAppointStatus")" class="d-flex align-items-center"><span class="wrap-icon icon-allapp mr-3"></span><span class="menu-text">All Appointment</span></a></li>
+                            <li><a href="@Url.Action("PendingAppointment", "LabAppointStatus")" class="d-flex align-items-center"><span class="wrap-icon icon-papp mr-3"></span><span class="menu-text">Pending Appointment</span></a></li>
+                            <li><a href="@Url.Action("CurrentAppointment", "LabAppointStatus")" class="d-flex align-items-center"><span class="wrap-icon icon-capp mr-3"></span><span class="menu-text">Current Appointment</span></a></li>
+                            <li><a href="@Url.Action("CancelAppointment", "LabAppointStatus")" class="d-flex align-items-center"><span class="wrap-icon icon-canapp mr-3"></span><span class="menu-text">Cancel Appointment</span></a></li>
+                            <li><a href="@Url.Action("CompleteAppointment", "LabAppointStatus")" class="d-flex align-items-center"><span class="wrap-icon icon-comapp mr-3"></span><span class="menu-text">Complate Appointment</span></a></li>
+                        </ul>
+                    </li>*@
 
                                     <li>
                                         <a href="#!">
@@ -327,10 +328,14 @@
     </main>
 
 
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="~/Content/FrontTemplate/js/jquery-2.2.4.min.js"></script>
+    <!-- Common Scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Bootstrap JS -->
     <script src="~/Content/FrontTemplate/js/popper.js"></script>
     <script src="~/Content/FrontTemplate/js/bootstrap.min.js"></script>
+
+    <!-- Frontend Template Scripts -->
     <script src="~/Content/FrontTemplate/js/stellar.js"></script>
     <script src="~/Content/FrontTemplate/vendors/owl-carousel/owl.carousel.min.js"></script>
     <script src="~/Content/FrontTemplate/js/jquery.ajaxchimp.min.js"></script>
@@ -339,32 +344,28 @@
     <script src="~/Content/FrontTemplate/js/contact.js"></script>
     <script src="~/Content/FrontTemplate/js/jquery.form.js"></script>
     <script src="~/Content/FrontTemplate/js/jquery.validate.min.js"></script>
-    <script src="~/Content/FrontTemplate/js/mail-script.js"></script>
     <script src="~/Content/FrontTemplate/js/theme.js"></script>
 
-    <script src="~/Content/DashboardTemplate/js/jquery-3.3.1.min.js"></script>
+    <!-- Dashboard Template Scripts -->
     <script src="~/Content/DashboardTemplate/js/popper.min.js"></script>
     <script src="~/Content/DashboardTemplate/js/bootstrap.min.js"></script>
     <script src="~/Content/DashboardTemplate/js/main.js"></script>
 
-    <script src="~/Content/AdminTemplate/js/jquery-1.11.0.min.js"></script>
+    <!-- Admin Template Scripts -->
     <script src="~/Content/AdminTemplate/js/jquery.nav.js"></script>
     <script src="~/Content/AdminTemplate/syntax-highlighter/scripts/shCore.js"></script>
     <script src="~/Content/AdminTemplate/syntax-highlighter/scripts/shBrushXml.js"></script>
     <script src="~/Content/AdminTemplate/syntax-highlighter/scripts/shBrushCss.js"></script>
     <script src="~/Content/AdminTemplate/syntax-highlighter/scripts/shBrushJScript.js"></script>
     <script src="~/Content/AdminTemplate/syntax-highlighter/scripts/shBrushPhp.js"></script>
-    <script type="text/javascript">
-        SyntaxHighlighter.all()
-    </script>
     <script src="~/Content/AdminTemplate/js/custom.js"></script>
 
     <!-- Page Level Plugin -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.6/js/jquery.dataTables.min.js"></script>
 
-    <!-- Page Level Custome Script -->
+    <!-- Page Level Custom Script -->
     <script src="https://example.com/path/to/datatables.demo.js"></script>
+
 
     <script>
         $(document).ready(function () {

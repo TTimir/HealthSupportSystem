@@ -11458,6 +11458,7 @@ h1, h2, h3, h4, h5,
 }
 
 .form-control {
+    width: 100%;
     height: 50px;
     color: #111 !important;
     font-size: 14px;

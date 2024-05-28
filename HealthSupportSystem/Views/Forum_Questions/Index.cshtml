@@ -94,11 +94,21 @@
                         </div>
                         <h3>Community Questions</h3>
                         <hr />
+                        <div class="row">
+                            <!-- Grid column -->
+                            <div class="col-md-12">
+                                <div class="input-group mb-3">
+                                    <input type="text" id="search" name="search" class="form-control search-input" placeholder="🔍 Search here" aria-label="Search here" aria-describedby="basic-addon2">
+                                </div>
+                                <br />
+                            </div>
+                            <!-- Grid column -->
+                        </div>
                     </div>
 
                     @foreach (var item in Model)
                     {
-                        <div class="forum-item active">
+                        <div class="forum-item active" id="searchValue">
                             <div class="row">
                                 <div class="col-md-8">
                                     <div class="forum-icon">
@@ -162,6 +172,17 @@
     <script src="~/Content/FrontTemplate/js/jquery.validate.min.js"></script>
     <script src="~/Content/FrontTemplate/js/mail-script.js"></script>
     <script src="~/Content/FrontTemplate/js/contact.js"></script>
+    
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#search").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $(".forum-item").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+                });
+            });
+        });
+    </script>
 
 </body>
 </html>

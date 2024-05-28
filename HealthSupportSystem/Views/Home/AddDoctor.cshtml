@@ -153,6 +153,7 @@
                                     <div class="form-group">
                                         @Html.LabelFor(model => model.AccountNo, "Enter Account No", htmlAttributes: new { @class = "control-label col-md-2" })
                                         <div class="col-md-10">
+                                            <p class="text-danger">*If Account Type is cash then enter '00'</p>
                                             @Html.EditorFor(model => model.AccountNo, new { htmlAttributes = new { @class = "form-control" } })
                                             @Html.ValidationMessageFor(model => model.AccountNo, "", new { @class = "text-danger" })
                                         </div>

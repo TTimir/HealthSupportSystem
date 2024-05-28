@@ -272,11 +272,25 @@ namespace HealthSupportSystem.Controllers
             {
                 return RedirectToAction("Login", "Home");
             }
-            var doc = (DoctorTable)Session["Doctor"];
-            int sessid = doc.DoctorID;
 
-            List<quiz_Category> list = db.quiz_Category.Where(x => x.Cat_id == sessid).ToList();
-            ViewBag.list = new SelectList(list, "Cat_id", "Cat_name");
+            // Validate if any field is empty
+            if (string.IsNullOrWhiteSpace(questions.q_text) ||
+                string.IsNullOrWhiteSpace(questions.QA) ||
+                string.IsNullOrWhiteSpace(questions.QB) ||
+                string.IsNullOrWhiteSpace(questions.QC) ||
+                string.IsNullOrWhiteSpace(questions.QD) ||
+                string.IsNullOrWhiteSpace(questions.QCorrectAns))
+            {
+                ModelState.AddModelError("", "All fields are required.");
+
+                // Populate dropdown again in case of validation error
+                var doc = (DoctorTable)Session["Doctor"];
+                int sessid = doc.DoctorID;
+                List<quiz_Category> list = db.quiz_Category.Where(x => x.Cat_id == sessid).ToList();
+                ViewBag.list = new SelectList(list, "Cat_id", "Cat_name");
+
+                return View("Add_Questions", questions);
+            }
 
             quiz_Questions qa = new quiz_Questions();
             qa.q_text = questions.q_text;

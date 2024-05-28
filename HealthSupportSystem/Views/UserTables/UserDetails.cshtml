@@ -1,0 +1,63 @@
+﻿@model DatabaseLayer.UserTable
+
+@{
+    ViewBag.Title = "Account Details";
+}
+
+<h2>Account Details</h2>
+
+<div class="user-details">
+    <div class="detail">
+        <span class="label">User ID:</span>
+        <span class="value">@Model.UserID</span>
+    </div>
+    <hr />
+    <dl class="dl-horizontal">
+        <div class="detail">
+            <dt>User Type</dt>
+            <dd>@(Model.UserTypeTable != null ? Model.UserTypeTable.UserType : "N/A")</dd>
+        </div>
+        <div class="detail">
+            <dt>Username</dt>
+            <dd>@(Model.UserName ?? "N/A")</dd>
+        </div>
+        <div class="detail">
+            <dt>Email</dt>
+            <dd>@(Model.Email ?? "N/A")</dd>
+        </div>
+        <div class="detail">
+            <dt>Contact No</dt>
+            <dd>@(Model.ContactNo ?? "N/A")</dd>
+        </div>
+        <div class="detail">
+            <dt>Description</dt>
+            <dd>@(Model.Description ?? "N/A")</dd>
+        </div>
+        <div class="detail">
+            <dt>Is Verified</dt>
+            <dd>@(Model.IsVerified ? "Yes" : "No")</dd>
+        </div>
+    </dl>
+</div>
+
+
+<style>
+    .user-details {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 20px;
+        margin: 20px 0;
+    }
+
+    .detail {
+        margin-bottom: 10px;
+    }
+
+    .label {
+        font-weight: bold;
+    }
+
+    .value {
+        margin-left: 10px;
+    }
+</style>

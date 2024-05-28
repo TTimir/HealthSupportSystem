@@ -31,7 +31,6 @@ namespace DatabaseLayer
         public bool IsChecked { get; set; }
         [Required(ErrorMessage = "*Required!")]
         public string TransectionNo { get; set; }
-        [Required(ErrorMessage = "*Required!")]
         public string DoctorComment { get; set; }
     
         public virtual DoctorTable DoctorTable { get; set; }
