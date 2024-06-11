@@ -155,31 +155,6 @@ namespace HealthSupportSystem.Controllers
             return View(forum_Questions);
         }
 
-        // GET: Forum_Questions/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Forum_Questions forum_Questions = db.Forum_Questions.Find(id);
-            if (forum_Questions == null)
-            {
-                return HttpNotFound();
-            }
-            return View(forum_Questions);
-        }
-
-        // POST: Forum_Questions/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Forum_Questions forum_Questions = db.Forum_Questions.Find(id);
-            db.Forum_Questions.Remove(forum_Questions);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
 
         public ActionResult QuestionsList()
         {
@@ -205,10 +180,42 @@ namespace HealthSupportSystem.Controllers
 
         }
 
-        private bool QuestionsExists(int id)
+        public ActionResult Delete(int? id)
         {
-            return db.Forum_Questions.Any(e => e.QId == id);
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Forum_Questions forum_Questions = db.Forum_Questions.Find(id);
+            if (forum_Questions == null)
+            {
+                return HttpNotFound();
+            }
+            return View(forum_Questions);
         }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            // Find the question
+            Forum_Questions forum_Questions = db.Forum_Questions.Find(id);
+
+            // Find all answers associated with the question
+            var answersToDelete = db.Forum_Answers.Where(a => a.QuestionId == id);
+
+            // Delete all associated answers
+            foreach (var answer in answersToDelete)
+            {
+                db.Forum_Answers.Remove(answer);
+            }
+
+            // Delete the question itself
+            db.Forum_Questions.Remove(forum_Questions);
+            db.SaveChanges();
+            return RedirectToAction("QuestionsList");
+        }
+
 
         protected override void Dispose(bool disposing)
         {
