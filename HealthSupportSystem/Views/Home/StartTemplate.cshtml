@@ -33,6 +33,13 @@
 
     <link rel="stylesheet" href="~/Content/FrontTemplate/css/style.css">
     <link rel="stylesheet" href="~/Content/FrontTemplate/css/responsive.css">
+
+
+
+    <link rel="stylesheet" type="text/css" href="~/Content/FrontTemplate/css/main.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/FrontTemplate/css/shortcodes.css" />
+
+
     @*@Styles.Render("~/Content/css")
         @Scripts.Render("~/bundles/modernizr")*@
     <style>
@@ -221,7 +228,7 @@
                     <div class="col-md-10 offset-md-1 col-lg-6 offset-lg-6 offset-xl-7 col-xl-5">
                         <div class="about-content">
                             <h4>
-                                About HealhMate:<br>
+                                About HealhMate<br>
                                 Your Trusted Partner
                             </h4>
                             <h6>we believe that everyone deserves access to convenient and reliable healthcare services. </h6>
@@ -244,66 +251,145 @@
                     <div class="col-md-5 col-xl-4">
                         <h3>
                             HealMate<br>
-                            Experience Doctors
+                            How we work
                         </h3>
                     </div>
                     <div class="col-md-7 col-xl-8">
-                        <p>We have experienced doctors ready to help you right now. Our goal is to make sure everyone can get good healthcare easily. With HealMate, so you don't have to worry about going to the doctor's office.</p>
+                        <p>With the HealMate, effortlessly book your appointment, receive a comprehensive checkup, and experience top-notch treatments<br />—all delivered with our dedication to exceptional care.</p>
                     </div>
                 </div>
 
                 <div class="row">
-                    <div class="col-12 col-md-6 col-lg-4">
-                        <div class="card card-team">
-                            <img class="card-img rounded-0" src="~/Content/FrontTemplate/img/team/4.png" alt="">
-                            <div class="card-team__body text-center">
-                                <h3><a href="#">Dr. Aarav Mehra</a></h3>
-                                <p>Mental Health</p>
-                                <div class="team-footer d-flex justify-content-between">
-                                    <a class="dn_btn" href=""><i class="ti-mobile"></i>+91 985 365 2365</a>
-                                    <ul class="card-team__social">
-                                        <li><a href="#"><i class="ti-facebook"></i></a></li>
-                                        <li><a href="#"><i class="ti-twitter-alt"></i></a></li>
-                                        <li><a href="#"><i class="ti-instagram"></i></a></li>
-                                    </ul>
+                    <div class="page" style="overflow:visible">
+                        <div class="site-main">
+                            <!--process-section-->
+                            <section class="prt-row process-section clearfix">
+                                <div class="container">
+                                    <!-- row -->
+                                    <div class="row pt-110 res-1335-pt-20">
+                                        <div class="col-lg-12">
+                                            <div class="process-box-block-main"
+                                                 data-aos="fade-up"
+                                                 data-aos-offset="200"
+                                                 data-aos-duration="1000"
+                                                 data-aos-once="true">
+                                                <div class="process-box-block">
+                                                    <div class="process-box-item">
+                                                        <div class="process-box-circle"></div>
+                                                        <div class="process-box-wrapper">
+                                                            <div class="process-box-thumbnail bottom-img">
+                                                                <img src="~/Content/FrontTemplate/img/team/process-1.jpeg"
+                                                                     loading="lazy"
+                                                                     alt="process-1"
+                                                                     class="process-box-image" />
+                                                            </div>
+                                                            <div class="process-box-overlay top-box"></div>
+                                                            <div class="process-box-content">
+                                                                <div class="process-box-title">
+                                                                    <h3 class="process-box-heading">
+                                                                        Book appointment
+                                                                    </h3>
+                                                                </div>
+                                                                <div class="process-box-desc">
+                                                                    <p class="process-box-text">
+                                                                        Schedule appointments conveniently online.
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="process-box-num top-of-box">
+                                                            <div class="process-number"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="process-box-item">
+                                                        <div class="process-box-circle"></div>
+                                                        <div class="process-box-wrapper">
+                                                            <div class="process-box-thumbnail">
+                                                                <img src="~/Content/FrontTemplate/img/team/process-2.jpeg"
+                                                                     loading="lazy"
+                                                                     alt="process-1"
+                                                                     class="process-box-image" />
+                                                            </div>
+                                                            <div class="process-box-overlay bottom-box"></div>
+                                                            <div class="process-box-content bottom-text">
+                                                                <div class="process-box-title">
+                                                                    <h3 class="process-box-heading">Conduct checkup</h3>
+                                                                </div>
+                                                                <div class="process-box-desc">
+                                                                    <p class="process-box-text">
+                                                                        Initiate health assessment with the chosen doctor.
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="process-box-num bottom-of-box">
+                                                            <div class="process-number"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="process-box-block">
+                                                    <div class="process-box-item">
+                                                        <div class="process-box-circle"></div>
+                                                        <div class="process-box-wrapper">
+                                                            <div class="process-box-thumbnail bottom-img">
+                                                                <img src="~/Content/FrontTemplate/img/team/process-3.jpeg"
+                                                                     loading="lazy"
+                                                                     alt="process-1"
+                                                                     class="process-box-image" />
+                                                            </div>
+                                                            <div class="process-box-overlay top-box"></div>
+                                                            <div class="process-box-content">
+                                                                <div class="process-box-title">
+                                                                    <h3 class="process-box-heading">
+                                                                        Perform treatment
+                                                                    </h3>
+                                                                </div>
+                                                                <div class="process-box-desc">
+                                                                    <p class="process-box-text">
+                                                                        Initiate and carry out the necessary treatment.
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="process-box-num top-of-box">
+                                                            <div class="process-number"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="process-box-item last-child">
+                                                        <div class="process-box-circle"></div>
+                                                        <div class="process-box-wrapper">
+                                                            <div class="process-box-thumbnail">
+                                                                <img src="~/Content/FrontTemplate/img/team/process-4.jpeg"
+                                                                     loading="lazy"
+                                                                     alt="process-1"
+                                                                     class="process-box-image" />
+                                                            </div>
+                                                            <div class="process-box-overlay bottom-box"></div>
+                                                            <div class="process-box-content bottom-text">
+                                                                <div class="process-box-title">
+                                                                    <h3 class="process-box-heading">
+                                                                        Doctor Comment
+                                                                    </h3>
+                                                                </div>
+                                                                <div class="process-box-desc">
+                                                                    <p class="process-box-text">
+                                                                        Doctor will provide feedback or instructions.
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="process-box-num bottom-of-box">
+                                                            <div class="process-number"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- row end -->
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-12 col-md-6 col-lg-4">
-                        <div class="card card-team">
-                            <img class="card-img rounded-0" src="~/Content/FrontTemplate/img/team/5.png" alt="">
-                            <div class="card-team__body text-center">
-                                <h3><a href="#">Dr. Vikram Singhania</a></h3>
-                                <p>Psychology Therapist</p>
-                                <div class="team-footer d-flex justify-content-between">
-                                    <a class="dn_btn" href=""><i class="ti-mobile"></i>+91 653 365 2365</a>
-                                    <ul class="card-team__social">
-                                        <li><a href="#"><i class="ti-facebook"></i></a></li>
-                                        <li><a href="#"><i class="ti-twitter-alt"></i></a></li>
-                                        <li><a href="#"><i class="ti-instagram"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-12 col-md-6 col-lg-4">
-                        <div class="card card-team">
-                            <img class="card-img rounded-0" src="~/Content/FrontTemplate/img/team/6.png" alt="">
-                            <div class="card-team__body text-center">
-                                <h3><a href="#">Dr. Arjun Malhotra</a></h3>
-                                <p>Stress Therapist</p>
-                                <div class="team-footer d-flex justify-content-between">
-                                    <a class="dn_btn" href=""><i class="ti-mobile"></i>+91 925 365 2365</a>
-                                    <ul class="card-team__social">
-                                        <li><a href="#"><i class="ti-facebook"></i></a></li>
-                                        <li><a href="#"><i class="ti-twitter-alt"></i></a></li>
-                                        <li><a href="#"><i class="ti-instagram"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
+                            </section>
+                            <!--process-section end-->
                         </div>
                     </div>
                 </div>
@@ -464,7 +550,7 @@
                     <div class="item">
                         <div class="testi_item">
                             <div class="testimonial_image">
-                                <img src="~/Content/FrontTemplate/img/elements/Female_2.png" alt="">
+                                <img src="~/Content/FrontTemplate/img/elements/testomonial1.svg" alt="">
                             </div>
                             <div class="testi_item_content">
                                 <p>
@@ -477,26 +563,26 @@
                     <div class="item">
                         <div class="testi_item">
                             <div class="testimonial_image">
-                                <img src="~/Content/FrontTemplate/img/elements/Male.png" alt="">
+                                <img src="~/Content/FrontTemplate/img/elements/testomonial2.svg" alt="">
                             </div>
                             <div class="testi_item_content">
                                 <p>
                                     “ I've been using HealMate for regular check-ups and consultations, and I'm extremely impressed with the quality of care I've received. ”
                                 </p>
-                                <h4>- Rahul Singh -</h4>
+                                <h4>- Dr.Sneha Patel -</h4>
                             </div>
                         </div>
                     </div>
                     <div class="item">
                         <div class="testi_item">
                             <div class="testimonial_image">
-                                <img src="~/Content/FrontTemplate/img/elements/Feamel_1.png" alt="">
+                                <img src="~/Content/FrontTemplate/img/elements/testomonial3.svg" alt="">
                             </div>
                             <div class="testi_item_content">
                                 <p>
                                     “ I was initially skeptical about telemedicine, but HealMate exceeded my expectations. The process of booking appointments is seamless, and the doctors are professional and thorough in their assessments. ”
                                 </p>
-                                <h4>- Dr.Sneha Patel -</h4>
+                                <h4>- Rahul Singh -</h4>
                             </div>
                         </div>
                     </div>
@@ -602,7 +688,7 @@
                 <div class="col-lg-2 col-sm-6 single-footer-widget">
                     <h4>Resources</h4>
                     <ul>
-                        <li><a href="#">Guides</a></li>
+                        <li><a href="@Url.Content("~/Home/Guide")">Guides</a></li>
                         <li><a href="#">Research</a></li>
                         <li><a href="#d-doc">Doctors</a></li>
                         <li><a href="#">Health</a></li>

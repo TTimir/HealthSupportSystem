@@ -4375,7 +4375,7 @@ h6 {
 ============================================================================================ */
 .about-area {
     background: #f7f7f7;
-    background-image: url(../img/background/bg_3.png);
+    background-image: url(../img/background/bg_5.jpeg);
     background-size: cover;
     background-repeat: no-repeat;
     position: relative;
@@ -4384,56 +4384,33 @@ h6 {
     margin-top: -180px;
 }
 
+.about-area::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Adjust the opacity here */
+    z-index: 1; /* Ensure this layer is behind the text content */
+}
+
 @media (max-width: 991px) {
     .about-area {
         padding-top: 250px;
     }
 }
 
-.about-area:after {
-    content: '';
-    position: absolute;
-    left: 0;
-    width: 50%;
-    top: 0;
-    background: url(../img/banner/about3.png);
-    backgroundsize: auto;
-    z-index: 11;
-    height: 100%;
-    background-repeat: no-repeat;
-    background-position: right bottom;
-}
-
-@media (max-width: 991px) {
-    .about-area:after {
-        display: none;
-    }
-}
-
-@media (min-width: 1199px) and (max-width: 1199px) {
-    .about-area .about-content {
-        padding-top: 30px;
-    }
-}
-
-@media (max-width: 991px) {
-    .about-area .about-content {
-        margin-top: 0;
-        padding-left: 0;
-    }
-
-        .about-area .about-content h4 br {
-            display: none;
-        }
-
-        .about-area .about-content p br {
-            display: none;
-        }
+.about-area .about-content {
+    position: relative; /* Ensure content is above the semi-transparent layer */
+    z-index: 2; /* Ensure content is above the semi-transparent layer */
+    color: #fff; /* Adjust text color for visibility */
+    padding-top: 30px; /* Adjust padding as needed */
 }
 
 .about-area .about-content h4 {
     font-size: 36px;
-    color: #33363e;
+    color: #fff; /* Adjust text color for visibility */
     font-family: "Merriweather", serif;
     margin-bottom: 32px;
     line-height: 46px;
@@ -4442,7 +4419,7 @@ h6 {
 .about-area .about-content h6 {
     font-size: 16px;
     font-weight: 400;
-    color: #0051d2;
+    color: #fff; /* Adjust text color for visibility */
     line-height: 25px;
     margin-bottom: 25px;
 }
@@ -4452,6 +4429,26 @@ h6 {
     margin-bottom: 30px;
     line-height: 26px;
 }
+
+.about-area .about-content .link_one {
+    color: #fff; /* Adjust link color for visibility */
+}
+
+@media (max-width: 991px) {
+    .about-area .about-content {
+        margin-top: 0;
+        padding-left: 0;
+    }
+
+    .about-area .about-content h4 br {
+        display: none;
+    }
+
+    .about-area .about-content p br {
+        display: none;
+    }
+}
+
 
 /*---------------------------------------------------- */
 /*----------------------------------------------------*/
