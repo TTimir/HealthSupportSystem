@@ -35,10 +35,8 @@
     <link rel="stylesheet" href="~/Content/FrontTemplate/css/responsive.css">
 
 
-
-    <link rel="stylesheet" type="text/css" href="~/Content/FrontTemplate/css/main.css" />
-    <link rel="stylesheet" type="text/css" href="~/Content/FrontTemplate/css/shortcodes.css" />
-
+    <link href="~/Content/FrontTemplate/css/process_responsive.css" rel="stylesheet" />
+    <link href="~/Content/FrontTemplate/css/shortcodes.css" rel="stylesheet" />
 
     @*@Styles.Render("~/Content/css")
         @Scripts.Render("~/bundles/modernizr")*@
@@ -91,7 +89,6 @@
                             <li class="nav-item">
                                 @Html.ActionLink("Contact", "Contact", "Home", new { @class = "nav-link" })
                             </li>
-                            <li class="nav-item"><a class="nav-link" href="#d-appointment">Quick Appointment</a></li>
                         </ul>
                     </div>
                 </div>
@@ -244,161 +241,155 @@
         <!--================About Area End =================-->
 
 
-        <!--================ Team section start =================-->
+        <!--================ Process section start =================-->
         <section class="team-area area-padding" id="d-doc">
             <div class="container">
                 <div class="area-heading row">
                     <div class="col-md-5 col-xl-4">
-                        <h3>
+                        <h3 class="pb-5">
                             HealMate<br>
                             How we work
                         </h3>
                     </div>
                     <div class="col-md-7 col-xl-8">
-                        <p>With the HealMate, effortlessly book your appointment, receive a comprehensive checkup, and experience top-notch treatments<br />—all delivered with our dedication to exceptional care.</p>
+                        <p>With the HealMate, effortlessly book your appointment, receive a comprehensive checkup, and experience top-notch treatments—all delivered with our dedication to exceptional care.</p>
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="page" style="overflow:visible">
-                        <div class="site-main">
-                            <!--process-section-->
-                            <section class="prt-row process-section clearfix">
-                                <div class="container">
-                                    <!-- row -->
-                                    <div class="row pt-110 res-1335-pt-20">
-                                        <div class="col-lg-12">
-                                            <div class="process-box-block-main"
-                                                 data-aos="fade-up"
-                                                 data-aos-offset="200"
-                                                 data-aos-duration="1000"
-                                                 data-aos-once="true">
-                                                <div class="process-box-block">
-                                                    <div class="process-box-item">
-                                                        <div class="process-box-circle"></div>
-                                                        <div class="process-box-wrapper">
-                                                            <div class="process-box-thumbnail bottom-img">
-                                                                <img src="~/Content/FrontTemplate/img/team/process-1.jpeg"
-                                                                     loading="lazy"
-                                                                     alt="process-1"
-                                                                     class="process-box-image" />
-                                                            </div>
-                                                            <div class="process-box-overlay top-box"></div>
-                                                            <div class="process-box-content">
-                                                                <div class="process-box-title">
-                                                                    <h3 class="process-box-heading">
-                                                                        Book appointment
-                                                                    </h3>
-                                                                </div>
-                                                                <div class="process-box-desc">
-                                                                    <p class="process-box-text">
-                                                                        Schedule appointments conveniently online.
-                                                                    </p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="process-box-num top-of-box">
-                                                            <div class="process-number"></div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="process-box-item">
-                                                        <div class="process-box-circle"></div>
-                                                        <div class="process-box-wrapper">
-                                                            <div class="process-box-thumbnail">
-                                                                <img src="~/Content/FrontTemplate/img/team/process-2.jpeg"
-                                                                     loading="lazy"
-                                                                     alt="process-1"
-                                                                     class="process-box-image" />
-                                                            </div>
-                                                            <div class="process-box-overlay bottom-box"></div>
-                                                            <div class="process-box-content bottom-text">
-                                                                <div class="process-box-title">
-                                                                    <h3 class="process-box-heading">Conduct checkup</h3>
-                                                                </div>
-                                                                <div class="process-box-desc">
-                                                                    <p class="process-box-text">
-                                                                        Initiate health assessment with the chosen doctor.
-                                                                    </p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="process-box-num bottom-of-box">
-                                                            <div class="process-number"></div>
-                                                        </div>
-                                                    </div>
+                <!--process-section-->
+                <section class="prt-row process-section clearfix pt-5">
+                    <div class="container">
+                        <!-- row -->
+                        <div class="row pt-110 res-1335-pt-20">
+                            <div class="col-lg-12">
+                                <div class="process-box-block-main"
+                                     data-aos="fade-up"
+                                     data-aos-offset="200"
+                                     data-aos-duration="1000"
+                                     data-aos-once="true">
+                                    <div class="process-box-block">
+                                        <div class="process-box-item">
+                                            <div class="process-box-circle"></div>
+                                            <div class="process-box-wrapper">
+                                                <div class="process-box-thumbnail bottom-img">
+                                                    <img src="~/Content/FrontTemplate/img/team/process-1.jpeg"
+                                                         loading="lazy"
+                                                         alt="process-1"
+                                                         class="process-box-image" />
                                                 </div>
-                                                <div class="process-box-block">
-                                                    <div class="process-box-item">
-                                                        <div class="process-box-circle"></div>
-                                                        <div class="process-box-wrapper">
-                                                            <div class="process-box-thumbnail bottom-img">
-                                                                <img src="~/Content/FrontTemplate/img/team/process-3.jpeg"
-                                                                     loading="lazy"
-                                                                     alt="process-1"
-                                                                     class="process-box-image" />
-                                                            </div>
-                                                            <div class="process-box-overlay top-box"></div>
-                                                            <div class="process-box-content">
-                                                                <div class="process-box-title">
-                                                                    <h3 class="process-box-heading">
-                                                                        Perform treatment
-                                                                    </h3>
-                                                                </div>
-                                                                <div class="process-box-desc">
-                                                                    <p class="process-box-text">
-                                                                        Initiate and carry out the necessary treatment.
-                                                                    </p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="process-box-num top-of-box">
-                                                            <div class="process-number"></div>
-                                                        </div>
+                                                <div class="process-box-overlay top-box"></div>
+                                                <div class="process-box-content">
+                                                    <div class="process-box-title">
+                                                        <h3 class="process-box-heading">
+                                                            Book appointment
+                                                        </h3>
                                                     </div>
-                                                    <div class="process-box-item last-child">
-                                                        <div class="process-box-circle"></div>
-                                                        <div class="process-box-wrapper">
-                                                            <div class="process-box-thumbnail">
-                                                                <img src="~/Content/FrontTemplate/img/team/process-4.jpeg"
-                                                                     loading="lazy"
-                                                                     alt="process-1"
-                                                                     class="process-box-image" />
-                                                            </div>
-                                                            <div class="process-box-overlay bottom-box"></div>
-                                                            <div class="process-box-content bottom-text">
-                                                                <div class="process-box-title">
-                                                                    <h3 class="process-box-heading">
-                                                                        Doctor Comment
-                                                                    </h3>
-                                                                </div>
-                                                                <div class="process-box-desc">
-                                                                    <p class="process-box-text">
-                                                                        Doctor will provide feedback or instructions.
-                                                                    </p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="process-box-num bottom-of-box">
-                                                            <div class="process-number"></div>
-                                                        </div>
+                                                    <div class="process-box-desc">
+                                                        <p class="process-box-text">
+                                                            Schedule appointments conveniently online.
+                                                        </p>
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="process-box-num top-of-box">
+                                                <div class="process-number"></div>
+                                            </div>
+                                        </div>
+                                        <div class="process-box-item">
+                                            <div class="process-box-circle"></div>
+                                            <div class="process-box-wrapper">
+                                                <div class="process-box-thumbnail">
+                                                    <img src="~/Content/FrontTemplate/img/team/process-2.jpeg"
+                                                         loading="lazy"
+                                                         alt="process-1"
+                                                         class="process-box-image" />
+                                                </div>
+                                                <div class="process-box-overlay bottom-box"></div>
+                                                <div class="process-box-content bottom-text">
+                                                    <div class="process-box-title">
+                                                        <h3 class="process-box-heading">Conduct checkup</h3>
+                                                    </div>
+                                                    <div class="process-box-desc">
+                                                        <p class="process-box-text">
+                                                            Initiate health assessment with the chosen doctor.
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="process-box-num bottom-of-box">
+                                                <div class="process-number"></div>
+                                            </div>
                                         </div>
                                     </div>
-                                    <!-- row end -->
+                                    <div class="process-box-block">
+                                        <div class="process-box-item">
+                                            <div class="process-box-circle"></div>
+                                            <div class="process-box-wrapper">
+                                                <div class="process-box-thumbnail bottom-img">
+                                                    <img src="~/Content/FrontTemplate/img/team/process-3.jpeg"
+                                                         loading="lazy"
+                                                         alt="process-1"
+                                                         class="process-box-image" />
+                                                </div>
+                                                <div class="process-box-overlay top-box"></div>
+                                                <div class="process-box-content">
+                                                    <div class="process-box-title">
+                                                        <h3 class="process-box-heading">
+                                                            Perform treatment
+                                                        </h3>
+                                                    </div>
+                                                    <div class="process-box-desc">
+                                                        <p class="process-box-text">
+                                                            Initiate and carry out the necessary treatment.
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="process-box-num top-of-box">
+                                                <div class="process-number"></div>
+                                            </div>
+                                        </div>
+                                        <div class="process-box-item last-child">
+                                            <div class="process-box-circle"></div>
+                                            <div class="process-box-wrapper">
+                                                <div class="process-box-thumbnail">
+                                                    <img src="~/Content/FrontTemplate/img/team/process-4.jpeg"
+                                                         loading="lazy"
+                                                         alt="process-1"
+                                                         class="process-box-image" />
+                                                </div>
+                                                <div class="process-box-overlay bottom-box"></div>
+                                                <div class="process-box-content bottom-text">
+                                                    <div class="process-box-title">
+                                                        <h3 class="process-box-heading">
+                                                            Doctor Comment
+                                                        </h3>
+                                                    </div>
+                                                    <div class="process-box-desc">
+                                                        <p class="process-box-text">
+                                                            Doctor will provide feedback or instructions.
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="process-box-num bottom-of-box">
+                                                <div class="process-number"></div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </section>
-                            <!--process-section end-->
+                            </div>
                         </div>
+                        <!-- row end -->
                     </div>
-                </div>
+                </section>
+                <!--process-section end-->
             </div>
         </section>
-        <!--================ Team section end =================-->
+        <!--================ Process section end =================-->
 
 
-        <!--================ appointment Area Starts =================-->
+        <!--================ FAQs Area Starts =================-->
         <section class="appointment-area" id="d-appointment">
             <div class="container">
 
@@ -489,7 +480,7 @@
                         </div>
                         <div class="col-lg-5">
                             <div class="appointment-form">
-                                <h3>Make an Appointment</h3>
+                                <h3>Have a Query? Reach Out!</h3>
                                 <form id="appointment-form" action="https://formspree.io/f/mjvnpplw" method="post">
                                     <div class="form-group">
                                         <label>Full Name</label>
@@ -503,7 +494,7 @@
                                         <label>Message</label>
                                         <textarea name="message" cols="20" rows="7" placeholder="Message" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Message'" required></textarea>
                                     </div>
-                                    <button type="submit" class="main_btn">Make an Appointment</button>
+                                    <button type="submit" class="main_btn">Send Query <i class="bi bi-send ml-1"></i></button>
                                     <div id="message"></div>
                                 </form>
                                 <script>
@@ -517,7 +508,7 @@
                                             event.preventDefault();
 
                                             // Display the message
-                                            messageDiv.textContent = "If Form Submitted Successfully Then Our Doctor Will Get In Touch With You In Few Hours!";
+                                            messageDiv.textContent = "If Form Submitted Successfully Then Our Team Will Get In Touch With You In Few Hours!";
                                             messageDiv.classList.add('highlight'); // Add a class for styling
 
                                             // Optionally, submit the form after displaying the message
@@ -540,7 +531,7 @@
 
             </div>
         </section>
-        <!--================ appointment Area End =================-->
+        <!--================ FAQs Area End =================-->
 
 
         <!-- ================ testimonial section start ================= -->
@@ -598,7 +589,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h2>Emergency hotline</h2>
-                        <span>(+91) – 256 567 550</span>
+                        <span>(+91) – 256 567 5505</span>
                         <p class="pt-3">We provide 24/7 customer support. Please feel free to contact us <br>for emergency case.</p>
                     </div>
                 </div>
@@ -609,10 +600,10 @@
 
         <!--================ Start Brands Area =================-->
         <!--<section class="brands-area background_one">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-lg-10">
-                        <div class="owl-carousel brand-carousel">-->
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="owl-carousel brand-carousel">-->
         <!-- single-brand -->
         <!--<div class="single-brand-item d-table">
             <div class="d-table-cell">

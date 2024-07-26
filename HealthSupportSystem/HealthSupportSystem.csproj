@@ -347,9 +347,9 @@
     <Content Include="Content\FrontTemplate\css\counter-up\jquery.counterup.js" />
     <Content Include="Content\FrontTemplate\css\counter-up\jquery.waypoints.min.js" />
     <Content Include="Content\FrontTemplate\css\flaticon.css" />
-    <Content Include="Content\FrontTemplate\css\main.css" />
-    <Content Include="Content\FrontTemplate\css\responsive.css" />
     <Content Include="Content\FrontTemplate\css\shortcodes.css" />
+    <Content Include="Content\FrontTemplate\css\process_responsive.css" />
+    <Content Include="Content\FrontTemplate\css\responsive.css" />
     <Content Include="Content\FrontTemplate\css\style.css" />
     <Content Include="Content\FrontTemplate\css\themify-icons.css" />
     <Content Include="Content\FrontTemplate\css\_about.css" />
@@ -468,7 +468,6 @@
     <Content Include="Content\FrontTemplate\img\instagram\widget-i4.png" />
     <Content Include="Content\FrontTemplate\img\instagram\widget-i5.png" />
     <Content Include="Content\FrontTemplate\img\instagram\widget-i6.png" />
-    <Content Include="Content\FrontTemplate\img\logo.png" />
     <Content Include="Content\FrontTemplate\img\logo_white.png" />
     <Content Include="Content\FrontTemplate\img\logo_dark.png" />
     <Content Include="Content\FrontTemplate\img\notify-bg.jpg" />

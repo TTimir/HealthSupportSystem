@@ -4105,94 +4105,7 @@ h6 {
 ============================================================================================ */
 /*---------------------------------------------------- */
 /*----------------------------------------------------*/
-/* Team section start
-============================================================================================ */
-.card-team {
-    border: 0;
-    border-radius: 0;
-    transition: all 300ms linear 0s;
-}
 
-@media (max-width: 991px) {
-    .card-team {
-        margin-bottom: 30px;
-    }
-}
-
-.card-team__body {
-    border: 1px solid #e8edf1;
-    border-top: 0;
-    padding: 28px 30px 6px;
-    transition: all 300ms linear 0s;
-}
-
-@media (max-width: 1199px) {
-    .card-team__body {
-        padding: 28px 20px 6px;
-    }
-}
-
-.card-team__body h3 {
-    font-size: 20px;
-    margin-bottom: 3px;
-}
-
-    .card-team__body h3 a {
-        color: #2a2a2a;
-    }
-
-.card-team__body p {
-    margin-bottom: 26px;
-}
-
-.card-team__social {
-    float: right;
-}
-
-    .card-team__social li {
-        display: inline-block;
-        margin-right: 14px;
-    }
-
-@media (max-width: 1199px) {
-    .card-team__social li {
-        margin-right: 10px;
-    }
-}
-
-.card-team__social li:last-child {
-    margin-right: 0;
-}
-
-.card-team__social li a {
-    color: #777884;
-}
-
-    .card-team__social li a:hover {
-        color: #0051d2;
-    }
-
-.card-team:hover {
-    background: #fff;
-}
-
-.card-team .team-footer {
-    padding-top: 18px;
-    border-top: 1px solid #e8edf1;
-}
-
-    .card-team .team-footer .dn_btn {
-        font-size: 14px;
-        color: #797979;
-    }
-
-        .card-team .team-footer .dn_btn i {
-            margin-right: 9px;
-            font-size: 13px;
-        }
-
-/* Team section end
-============================================================================================ */
 /*---------------------------------------------------- */
 /*----------------------------------------------------*/
 /* Start Hotline Area css
@@ -4368,7 +4281,6 @@ h6 {
         padding-left: 0;
     }
 }
-
 /*---------------------------------------------------- */
 /*----------------------------------------------------*/
 /* About Area css
@@ -4384,16 +4296,16 @@ h6 {
     margin-top: -180px;
 }
 
-.about-area::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Adjust the opacity here */
-    z-index: 1; /* Ensure this layer is behind the text content */
-}
+    .about-area::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5); /* Adjust the opacity here */
+        z-index: 1; /* Ensure this layer is behind the text content */
+    }
 
 @media (max-width: 991px) {
     .about-area {
@@ -4408,31 +4320,31 @@ h6 {
     padding-top: 30px; /* Adjust padding as needed */
 }
 
-.about-area .about-content h4 {
-    font-size: 36px;
-    color: #fff; /* Adjust text color for visibility */
-    font-family: "Merriweather", serif;
-    margin-bottom: 32px;
-    line-height: 46px;
-}
+    .about-area .about-content h4 {
+        font-size: 36px;
+        color: #fff; /* Adjust text color for visibility */
+        font-family: "Merriweather", serif;
+        margin-bottom: 32px;
+        line-height: 46px;
+    }
 
-.about-area .about-content h6 {
-    font-size: 16px;
-    font-weight: 400;
-    color: #fff; /* Adjust text color for visibility */
-    line-height: 25px;
-    margin-bottom: 25px;
-}
+    .about-area .about-content h6 {
+        font-size: 16px;
+        font-weight: 400;
+        color: #fff; /* Adjust text color for visibility */
+        line-height: 25px;
+        margin-bottom: 25px;
+    }
 
-.about-area .about-content p {
-    font-size: 15px;
-    margin-bottom: 30px;
-    line-height: 26px;
-}
+    .about-area .about-content p {
+        font-size: 15px;
+        margin-bottom: 30px;
+        line-height: 26px;
+    }
 
-.about-area .about-content .link_one {
-    color: #fff; /* Adjust link color for visibility */
-}
+    .about-area .about-content .link_one {
+        color: #fff; /* Adjust link color for visibility */
+    }
 
 @media (max-width: 991px) {
     .about-area .about-content {
@@ -4440,13 +4352,13 @@ h6 {
         padding-left: 0;
     }
 
-    .about-area .about-content h4 br {
-        display: none;
-    }
+        .about-area .about-content h4 br {
+            display: none;
+        }
 
-    .about-area .about-content p br {
-        display: none;
-    }
+        .about-area .about-content p br {
+            display: none;
+        }
 }
 
 

@@ -1,3 +1,9 @@
+/* Process section start
+============================================================================================ */
+.prt-row.process-section {
+    padding: 100px 0 165px;
+}
+
 /*process-box-block*/
 .process-box-block-main {
     display: -webkit-box;
@@ -165,6 +171,7 @@
 h3.process-box-heading {
     margin-top: 10px;
     margin-bottom: 10px;
+    font-family: var(--base-headingfont);
     color: #000;
     font-size: 22px;
     line-height: 30px;
@@ -176,7 +183,7 @@ h3.process-box-heading {
 }
 
 .process-box-item:hover h3.process-box-heading {
-    background: #0051D2;
+    background: linear-gradient(to right,var(--base-first-gradientcolor) 0%, var(--base-second-gradientcolor) 50%, var(--base-first-gradientcolor) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -221,13 +228,14 @@ p.process-box-text {
 .process-number {
     position: relative;
     display: inline-block;
-    color: #111;
+    font-family: var(--base-headingfont);
+    color: var(--base-dark);
     font-size: 30px;
     line-height: 30px;
 }
 
 .process-box-item:hover .process-number {
-    color: #0051D2;
+    color: var(--base-skin);
 }
 
 .container {
@@ -257,3 +265,6 @@ p.process-box-text {
     bottom: 40px;
     left: 15px;
 }
+
+/* Process section end
+============================================================================================ */
