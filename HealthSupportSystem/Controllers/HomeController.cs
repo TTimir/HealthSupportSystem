@@ -10,6 +10,8 @@ using System.Web.Mvc;
 using System.Web.UI.WebControls;
 using BCrypt.Net;
 using System.Data.Entity.Infrastructure;
+using System.Diagnostics;
+using System.Numerics;
 
 namespace HealthSupportSystem.Controllers
 {
@@ -342,25 +344,35 @@ namespace HealthSupportSystem.Controllers
                 }
                 else
                 {
+                    // Check if the LogoFile property of the doctor object is not null
                     if (doctor.LogoFile != null)
                     {
+
+                        // Generate a unique file name using a GUID
                         var folder = "~/Content/DoctorImages";
-                        var file = $"{doctor.DoctorID}.png";
+                        var uniqueFileName = Guid.NewGuid().ToString();
+                        var file = string.Format("{0}.png", uniqueFileName);
+                        Debug.WriteLine("Generated Unique File Name: " + file);
                         var response = FileHelpers.UploadPhoto(doctor.LogoFile, folder, file);
                         if (response)
                         {
-                            doctor.Photo = $"{folder}/{file}";
+                            var pic = string.Format("{0}/{1}", folder, file);
+                            doctor.Photo = pic;
+                            Debug.WriteLine("Image uploaded and path set: " + pic);
                         }
                     }
+
 
                     if (doctor.DocumentFile != null)
                     {
                         var docfolder = "~/Content/DoctorDocuments";
-                        var docfile = $"{doctor.DoctorID}.png";
+                        var uniqueDocFileName = Guid.NewGuid().ToString(); 
+                        var docfile = string.Format("{0}.png", uniqueDocFileName);
                         var docresponse = FileHelpers.UploadDocument(doctor.DocumentFile, docfolder, docfile);
                         if (docresponse)
                         {
-                            doctor.SupportiveDocument = $"{docfolder}/{docfile}";
+                            var pic = string.Format("{0}/{1}", docfolder, docfile);
+                            doctor.SupportiveDocument = pic;
                         }
                     }
 
@@ -410,7 +422,8 @@ namespace HealthSupportSystem.Controllers
                         if (lab.LogoFile != null)
                         {
                             var folder = "~/Content/LabImages";
-                            var file = string.Format("{0}.png", lab.LabID);
+                            var uniqueFileName = Guid.NewGuid().ToString(); 
+                            var file = string.Format("{0}.png", uniqueFileName);
                             var response = FileHelpers.UploadPhoto(lab.LogoFile, folder, file);
                             if (response)
                             {
@@ -461,7 +474,8 @@ namespace HealthSupportSystem.Controllers
                         if (patient.LogoFile != null)
                         {
                             var folder = "~/Content/PatientImages";
-                            var file = string.Format("{0}.png", patient.PatientID);
+                            var uniqueFileName = Guid.NewGuid().ToString(); 
+                            var file = string.Format("{0}.png", uniqueFileName);
                             var response = FileHelpers.UploadPhoto(patient.LogoFile, folder, file);
                             if (response)
                             {
