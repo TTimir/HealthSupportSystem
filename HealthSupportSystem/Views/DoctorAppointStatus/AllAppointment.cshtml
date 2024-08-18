@@ -69,15 +69,11 @@
                             </td>
                             <td>
                                 @{
-                                    if (item.IsChecked == true && item.IsFeeSubmit == true && item.DoctorComment.Length > 0)
+                                    if (item.IsChecked == true && item.IsFeeSubmit == true && item.DoctorComment != null && item.DoctorComment.Length > 0)
                                     {
                                         <h4 class="bold" style="color: forestgreen;">Complete</h4>
                                     }
-                                    else if (item.IsChecked == false && item.IsFeeSubmit == true || item.DoctorComment.Length == 0)
-                                    {
-                                        <h4 class="bold" style="color: red;">Cancel</h4>
-                                    }
-                                    else if (item.IsChecked == false && item.IsFeeSubmit == false && item.DoctorComment.Length == 0)
+                                    else if (item.IsChecked == false && item.IsFeeSubmit == false && (item.DoctorComment == null || item.DoctorComment.Length == 0))
                                     {
                                         <h4 class="bold" style="color: blue;">Pending</h4>
                                     }
@@ -85,7 +81,11 @@
                                     {
                                         <h4 class="bold" style="color: darkorange;">Accepted</h4>
                                     }
-                                    else if (item.IsChecked == false && item.IsFeeSubmit == false && item.DoctorComment.Length > 0)
+                                    else if (item.IsChecked == false && item.IsFeeSubmit == true && item.DoctorComment != null && item.DoctorComment.Length == 0)
+                                    {
+                                        <h4 class="bold" style="color: red;">Cancel</h4>
+                                    }
+                                    else if (item.IsChecked == false && item.IsFeeSubmit == false && item.DoctorComment != null && item.DoctorComment.Length > 0)
                                     {
                                         <h4 class="bold" style="color: darkred;">Rejected</h4>
                                     }
